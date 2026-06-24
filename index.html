@@ -188,9 +188,10 @@
 <section id="hero" class="bg-grid">
   <canvas id="particles" aria-hidden="true"></canvas>
   <div class="hero-bg">
-    <video autoplay muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:cover;opacity:.22;" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:cover;opacity:.42;" aria-hidden="true">
       <source src="hero-reel.mp4" type="video/mp4" />
     </video>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(4,7,15,.25) 0%,rgba(4,7,15,.1) 50%,rgba(4,7,15,.4) 100%);pointer-events:none;"></div>
     <div class="hero-bg-fallback"></div>
   </div>
 
@@ -259,20 +260,14 @@
       </div>
 
       <!-- Floating chips -->
-      <div class="glass float-2" style="position:absolute;top:10%;left:5%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;">
-        Video Ads
+      <div class="glass float-2" style="position:absolute;top:14%;left:50%;transform:translateX(-50%);padding:.65rem 1.25rem;border-radius:999px;font-size:.78rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:.5rem;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#38BDF8;opacity:.8;" aria-hidden="true"></span>Video Ads &amp; Social Reels
       </div>
-      <div class="glass-gold float-3" style="position:absolute;top:20%;right:0%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#FBBF24;font-family:'Lexend',sans-serif;white-space:nowrap;">
-        Social Reels
+      <div class="glass-gold float-3" style="position:absolute;top:50%;left:8%;transform:translateY(-50%);padding:.65rem 1.25rem;border-radius:999px;font-size:.78rem;font-weight:600;color:#FBBF24;font-family:'Lexend',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:.5rem;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#FBBF24;opacity:.8;" aria-hidden="true"></span>TV Commercials
       </div>
-      <div class="glass float" style="position:absolute;bottom:25%;left:0%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;">
-        Display Banners
-      </div>
-      <div class="glass-gold float-2" style="position:absolute;bottom:15%;right:0%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#FBBF24;font-family:'Lexend',sans-serif;white-space:nowrap;">
-        TV Commercials
-      </div>
-      <div class="glass float-3" style="position:absolute;top:70%;left:15%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;">
-        OOH Campaigns
+      <div class="glass float" style="position:absolute;bottom:16%;left:50%;transform:translateX(-50%);padding:.65rem 1.25rem;border-radius:999px;font-size:.78rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:.5rem;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#38BDF8;opacity:.8;" aria-hidden="true"></span>OOH &amp; Display Campaigns
       </div>
     </div>
 
@@ -338,14 +333,11 @@
 
     <!-- Featured video (large) — 16:9 Company Showreel -->
     <div class="reveal reveal-scale" style="margin-bottom:2rem;border-radius:20px;overflow:hidden;position:relative;aspect-ratio:16/9;background:#0B1425;cursor:pointer;" id="featured-video-card" onclick="openModal('','Company Showreel — Zach Global Studio','yt','7F2y_gAbMuo')">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0B1425,#070D1A);display:flex;align-items:center;justify-content:center;" aria-hidden="true">
-        <div style="text-align:center;">
-          <div style="width:80px;height:80px;border-radius:50%;background:rgba(245,158,11,.15);border:2px solid rgba(245,158,11,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
-            <svg viewBox="0 0 24 24" fill="#F59E0B" style="width:32px;height:32px;margin-left:4px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <p style="color:#475569;font-size:.85rem;font-family:'Lexend',sans-serif;">Company Showreel</p>
-        </div>
-      </div>
+      <!-- Autoplay muted YouTube background -->
+      <iframe src="https://www.youtube-nocookie.com/embed/7F2y_gAbMuo?autoplay=1&mute=1&loop=1&playlist=7F2y_gAbMuo&controls=0&rel=0&modestbranding=1&playsinline=1&start=0"
+        allow="autoplay; encrypted-media"
+        style="position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;"
+        aria-hidden="true" tabindex="-1"></iframe>
       <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(4,7,15,.75) 0%,transparent 60%);pointer-events:none;"></div>
       <div style="position:absolute;top:50%;left:5%;transform:translateY(-50%);max-width:480px;">
         <div style="display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);font-size:.7rem;font-weight:700;color:#FBBF24;font-family:'Lexend',sans-serif;margin-bottom:1rem;">
@@ -373,7 +365,7 @@
       <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
         <span style="font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#F59E0B;font-family:'Lexend',sans-serif;">9:16 · Instagram · TikTok · YouTube Shorts</span>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
 
         <div class="video-card reveal" style="aspect-ratio:9/16;background:#0B1425;" onclick="openModal('reel_portrait_1.mp4','Social Reel 01','file')">
           <div style="width:100%;height:100%;background:linear-gradient(135deg,#0B1425,#070D1A);display:flex;align-items:center;justify-content:center;">
@@ -431,15 +423,12 @@
       <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
         <span style="font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#38BDF8;font-family:'Lexend',sans-serif;">21:9 · YouTube &amp; TV Commercials</span>
       </div>
-      <div class="video-card reveal" style="aspect-ratio:21/9;background:#0B1425;" onclick="openModal('reel_ultrawide_1.mp4','TV Commercial','file')">
-        <div style="width:100%;height:100%;background:linear-gradient(135deg,#0B1425,#070D1A);display:flex;align-items:center;justify-content:center;">
-          <div style="text-align:center;">
-            <div style="width:72px;height:72px;border-radius:50%;background:rgba(14,165,233,.1);border:2px solid rgba(14,165,233,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
-              <svg viewBox="0 0 24 24" fill="#38BDF8" style="width:28px;height:28px;margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </div>
-            <p style="color:#475569;font-size:.85rem;font-family:'Lexend',sans-serif;">Ultrawide · TV Commercial</p>
-          </div>
-        </div>
+      <div class="video-card reveal" style="aspect-ratio:21/9;background:#0B1425;" onclick="openModal('','Cinematic TV &amp; YouTube Commercial','yt','7F2y_gAbMuo')">
+        <!-- Autoplay muted YouTube background -->
+        <iframe src="https://www.youtube-nocookie.com/embed/7F2y_gAbMuo?autoplay=1&mute=1&loop=1&playlist=7F2y_gAbMuo&controls=0&rel=0&modestbranding=1&playsinline=1&start=0"
+          allow="autoplay; encrypted-media"
+          style="position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;"
+          aria-hidden="true" tabindex="-1"></iframe>
         <div class="play-btn" style="width:72px;height:72px;" aria-label="Play TV commercial">
           <svg viewBox="0 0 24 24" fill="white" style="width:28px;height:28px;margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </div>
