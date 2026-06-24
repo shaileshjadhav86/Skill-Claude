@@ -98,45 +98,103 @@
     /* ── Hero ────────────────────────────────────────────────── */
     #hero {
       position: relative;
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 12rem 4vw 6rem;
+      height: 100vh;
+      min-height: 620px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 4vw 5rem;
       overflow: hidden;
     }
-    .hero-bg {
+    /* Full-screen brand video background */
+    .hero-video-bg {
       position: absolute; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    /* Multi-layer cinematic overlay */
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
       background:
-        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,.07) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(201,168,76,.04) 0%, transparent 60%);
+        linear-gradient(to top, rgba(8,8,8,1) 0%, rgba(8,8,8,.7) 30%, rgba(8,8,8,.2) 60%, rgba(8,8,8,.5) 100%),
+        linear-gradient(to right, rgba(8,8,8,.6) 0%, transparent 60%);
     }
-    .hero-grid {
-      position: absolute; inset: 0; z-index: 0;
-      background-image:
-        linear-gradient(rgba(201,168,76,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,.04) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+    /* Subtle gold vignette */
+    .hero-vignette {
+      position: absolute; inset: 0; z-index: 2;
+      background: radial-gradient(ellipse 120% 80% at 50% 100%, rgba(201,168,76,.06) 0%, transparent 70%);
     }
-    .hero-content { position: relative; z-index: 1; max-width: 900px; }
-    .hero-eyebrow { margin-bottom: 1.5rem; }
+    /* Scanline texture */
+    .hero-scanlines {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px
+      );
+    }
+    .hero-content { position: relative; z-index: 3; max-width: 820px; }
+
+    /* Logo reveal in hero */
+    .hero-logo-mark {
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeSlideUp .9s cubic-bezier(.16,1,.3,1) .3s forwards;
+    }
+    .hero-logo-mark svg { width: 72px; height: auto; }
+
+    /* Animated eyebrow */
+    .hero-eyebrow {
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .hero-eyebrow .label {
+      display: block;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: slideUp .7s cubic-bezier(.16,1,.3,1) .5s forwards;
+    }
+
+    /* Title with word-by-word animation */
     h1.hero-title {
-      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      font-size: clamp(3.2rem, 7.5vw, 7rem);
       font-weight: 300;
       color: var(--white);
       margin-bottom: 1.5rem;
+      line-height: 1.05;
+      perspective: 600px;
     }
-    h1.hero-title em {
-      font-style: italic;
-      color: var(--gold-light);
+    .hero-title .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(60px) rotateX(-20deg);
+      animation: wordReveal .8s cubic-bezier(.16,1,.3,1) forwards;
     }
+    .hero-title .word.gold { color: var(--gold-light); font-style: italic; }
+    .hero-title .word:nth-child(1) { animation-delay: .7s; }
+    .hero-title .word:nth-child(2) { animation-delay: .85s; }
+    .hero-title .word:nth-child(3) { animation-delay: 1s; }
+    .hero-title .word:nth-child(4) { animation-delay: 1.15s; }
+
+    /* Gold rule line animation */
+    .hero-rule {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      margin-bottom: 1.5rem;
+      animation: expandLine .8s ease 1.5s forwards;
+    }
+
     .hero-sub {
-      font-size: clamp(1rem, 1.6vw, 1.25rem);
-      color: var(--muted);
-      max-width: 540px;
-      margin-bottom: 3rem;
+      font-size: clamp(.95rem, 1.5vw, 1.2rem);
+      color: rgba(224,217,207,.75);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
       font-weight: 300;
+      opacity: 0;
+      animation: fadeSlideUp .7s ease 1.6s forwards;
     }
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+    .hero-ctas {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem;
+      opacity: 0;
+      animation: fadeSlideUp .7s ease 1.8s forwards;
+    }
     .btn-primary {
       font-family: 'Lexend', sans-serif;
       font-size: .85rem;
@@ -167,23 +225,70 @@
       display: inline-flex; align-items: center; gap: .6rem;
     }
     .btn-secondary:hover { border-color: var(--gold); color: var(--gold-light); }
+
     .hero-stats {
       display: flex; gap: 3rem; flex-wrap: wrap;
-      padding-top: 2.5rem;
-      border-top: 1px solid rgba(201,168,76,.12);
+      padding-top: 2rem;
+      border-top: 1px solid rgba(201,168,76,.15);
+      opacity: 0;
+      animation: fadeSlideUp .7s ease 2s forwards;
     }
     .stat-item .stat-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.6rem;
+      font-size: 2.4rem;
       font-weight: 400;
       color: var(--gold-light);
       line-height: 1;
     }
     .stat-item .stat-label {
-      font-size: .78rem;
+      font-size: .75rem;
       color: var(--muted);
       letter-spacing: .06em;
       margin-top: .3rem;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute; bottom: 2rem; right: 4vw; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 2.5s forwards;
+    }
+    .hero-scroll span {
+      font-family: 'Lexend', sans-serif;
+      font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out 3s infinite;
+    }
+
+    /* Keyframes */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(100%); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes wordReveal {
+      from { opacity: 0; transform: translateY(60px) rotateX(-20deg); }
+      to   { opacity: 1; transform: translateY(0) rotateX(0); }
+    }
+    @keyframes expandLine {
+      from { width: 0; }
+      to   { width: 120px; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: .5; }
+      50% { transform: scaleY(1.3); opacity: 1; }
     }
 
     /* ── Marquee ─────────────────────────────────────────────── */
@@ -617,7 +722,25 @@
 
 <!-- ── Navbar ──────────────────────────────────────────────────── -->
 <nav id="navbar">
-  <a href="#hero" class="nav-logo">ZACH GLOBAL <span>/ Studio</span></a>
+  <a href="#hero" class="nav-logo" style="display:flex;align-items:center;gap:.75rem;">
+    <!-- ZG Monogram SVG -->
+    <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#E8C97A"/>
+          <stop offset="50%" stop-color="#C9A84C"/>
+          <stop offset="100%" stop-color="#A0822E"/>
+        </linearGradient>
+      </defs>
+      <!-- Z shape -->
+      <polyline points="12,20 52,20 12,62 52,62" stroke="url(#goldGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <!-- G arc -->
+      <path d="M62,38 A22,22 0 1 0 84,60 L84,52 L72,52" stroke="url(#goldGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <!-- top speed line -->
+      <line x1="55" y1="16" x2="88" y2="16" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+    </svg>
+    <span style="font-family:'Lexend',sans-serif;font-size:.88rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--white);">ZACH GLOBAL <span style="color:var(--gold);font-weight:300;">/ Studio</span></span>
+  </a>
   <div class="nav-links">
     <a href="#portfolio">Work</a>
     <a href="#services">Services</a>
@@ -640,18 +763,50 @@
 
 <!-- ── Hero ────────────────────────────────────────────────────── -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <!-- Brand reveal video as full-screen background -->
+  <video class="hero-video-bg" autoplay muted loop playsinline preload="auto" poster="">
+    <source src="hero-reel.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-scanlines"></div>
+
   <div class="hero-content">
-    <div class="hero-eyebrow label reveal">Premium AI Creative Studio · Dubai</div>
-    <h1 class="hero-title reveal reveal-delay-1">
-      Stories That<br><em>Move People</em>
+    <!-- ZG Logo mark above headline -->
+    <div class="hero-logo-mark">
+      <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heroGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#E8C97A"/>
+            <stop offset="50%" stop-color="#C9A84C"/>
+            <stop offset="100%" stop-color="#A0822E"/>
+          </linearGradient>
+        </defs>
+        <polyline points="12,20 52,20 12,62 52,62" stroke="url(#heroGold)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M62,38 A22,22 0 1 0 84,60 L84,52 L72,52" stroke="url(#heroGold)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <line x1="55" y1="16" x2="92" y2="16" stroke="url(#heroGold)" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+      </svg>
+    </div>
+
+    <div class="hero-eyebrow">
+      <span class="label">Premium AI Creative Studio &nbsp;·&nbsp; Dubai</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="word">Stories</span>&nbsp;
+      <span class="word">That</span><br>
+      <span class="word gold">Move</span>&nbsp;
+      <span class="word gold">People</span>
     </h1>
-    <p class="hero-sub reveal reveal-delay-2">
+
+    <div class="hero-rule"></div>
+
+    <p class="hero-sub">
       We craft cinematic AI-powered video ads for the world's leading brands.
       Share your brief — we deliver world-class creative.
     </p>
-    <div class="hero-ctas reveal reveal-delay-3">
+
+    <div class="hero-ctas">
       <a href="#contact" class="btn-primary">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
         Start a Project
@@ -661,7 +816,8 @@
         View Our Work
       </a>
     </div>
-    <div class="hero-stats reveal reveal-delay-4">
+
+    <div class="hero-stats">
       <div class="stat-item">
         <div class="stat-num"><span data-count="120">0</span>+</div>
         <div class="stat-label">Ads Produced</div>
@@ -679,6 +835,12 @@
         <div class="stat-label">Client Satisfaction</div>
       </div>
     </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
   </div>
 </section>
 
