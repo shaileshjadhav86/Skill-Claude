@@ -3,1018 +3,920 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AdGenius AI by Zach Global — Enterprise Ad Intelligence</title>
-  <meta name="description" content="AI-powered advertising platform by Zach Global FZC. Generate, deploy, and optimize enterprise ad campaigns across every channel." />
+  <title>Zach Global Studio — AI-Crafted Advertising</title>
+  <meta name="description" content="We create stunning AI-powered video ads and campaigns for leading corporations. Share your brief, we deliver world-class creative." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ['Lexend', 'sans-serif'],
-            body: ['Source Sans 3', 'sans-serif'],
-          },
-          colors: {
-            navy: { 950: '#04070F', 900: '#070D1A', 800: '#0B1425', 700: '#101D36', 600: '#162547' },
-            gold: { 400: '#FBBF24', 500: '#F59E0B', 600: '#D97706', 700: '#B45309' },
-            electric: { 400: '#38BDF8', 500: '#0EA5E9', 600: '#0284C7' },
-          },
-          animation: {
-            'fade-up': 'fadeUp 0.6s ease forwards',
-            'pulse-slow': 'pulse 3s ease-in-out infinite',
-            'float': 'float 6s ease-in-out infinite',
-            'glow': 'glow 2s ease-in-out infinite alternate',
-          },
-          keyframes: {
-            fadeUp: { '0%': { opacity: '0', transform: 'translateY(24px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
-            float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
-            glow: { '0%': { boxShadow: '0 0 20px rgba(14,165,233,0.3)' }, '100%': { boxShadow: '0 0 40px rgba(14,165,233,0.6)' } },
-          },
-        }
-      }
-    }
-  </script>
-  <style>
-    * { box-sizing: border-box; }
-    body { background: #04070F; font-family: 'Source Sans 3', sans-serif; color: #E2E8F0; overflow-x: hidden; }
-    h1,h2,h3,h4,h5,h6 { font-family: 'Lexend', sans-serif; }
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
 
-    .glass { background: rgba(11,20,37,0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(56,189,248,0.12); }
-    .glass-gold { background: rgba(11,20,37,0.7); backdrop-filter: blur(16px); border: 1px solid rgba(245,158,11,0.2); }
-    .grad-text { background: linear-gradient(135deg, #38BDF8 0%, #FBBF24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .grad-text-gold { background: linear-gradient(135deg, #FBBF24 0%, #F97316 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .bg-grid { background-image: linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px); background-size: 60px 60px; }
-    .noise::before { content:''; position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events:none; z-index:0; }
-    .glow-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(56,189,248,0.5), rgba(245,158,11,0.5), transparent); }
-    .btn-primary { background: linear-gradient(135deg, #0EA5E9, #0284C7); transition: all 0.2s; box-shadow: 0 0 24px rgba(14,165,233,0.35); }
-    .btn-primary:hover { box-shadow: 0 0 40px rgba(14,165,233,0.6); transform: translateY(-1px); }
-    .btn-gold { background: linear-gradient(135deg, #F59E0B, #D97706); transition: all 0.2s; box-shadow: 0 0 20px rgba(245,158,11,0.3); }
-    .btn-gold:hover { box-shadow: 0 0 40px rgba(245,158,11,0.55); transform: translateY(-1px); }
-    .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
-    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(14,165,233,0.15); }
-    .stat-num { font-variant-numeric: tabular-nums; }
+  <style>
+    :root {
+      --gold: #F59E0B;
+      --gold-light: #FBBF24;
+      --electric: #0EA5E9;
+      --electric-light: #38BDF8;
+      --navy: #04070F;
+      --navy-mid: #070D1A;
+      --navy-card: rgba(11,20,37,0.75);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--navy);
+      color: #CBD5E1;
+      font-family: 'Source Sans 3', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4,h5 { font-family: 'Lexend', sans-serif; line-height: 1.15; }
+
+    /* ── Utilities ── */
+    .grad-text { background: linear-gradient(135deg, #38BDF8 20%, #FBBF24 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .grad-gold { background: linear-gradient(135deg, #FBBF24, #F97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: var(--navy-card); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(56,189,248,0.1); }
+    .glass-gold { background: var(--navy-card); backdrop-filter: blur(18px); border: 1px solid rgba(245,158,11,0.18); }
+    .glow-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(56,189,248,0.4), rgba(245,158,11,0.4), transparent); }
+    .bg-grid { background-image: linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px); background-size: 56px 56px; }
+
+    /* ── Buttons ── */
+    .btn-wa { background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 0 28px rgba(37,211,102,0.35); transition: all .25s; }
+    .btn-wa:hover { box-shadow: 0 0 48px rgba(37,211,102,0.6); transform: translateY(-2px); }
+    .btn-gold { background: linear-gradient(135deg, #F59E0B, #D97706); box-shadow: 0 0 28px rgba(245,158,11,0.35); transition: all .25s; }
+    .btn-gold:hover { box-shadow: 0 0 48px rgba(245,158,11,0.6); transform: translateY(-2px); }
+    .btn-outline { border: 1px solid rgba(56,189,248,0.3); transition: all .25s; }
+    .btn-outline:hover { border-color: rgba(56,189,248,0.7); background: rgba(56,189,248,0.06); transform: translateY(-2px); }
+
+    /* ── Navbar ── */
+    #navbar { transition: background .3s, box-shadow .3s; position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 1.5rem; }
+    #navbar.scrolled { background: rgba(4,7,15,0.96); backdrop-filter: blur(20px); box-shadow: 0 1px 0 rgba(56,189,248,0.08); }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    #mobile-menu.open { max-height: 480px; }
+
+    /* ── Hero ── */
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.18; }
+    .hero-bg-fallback { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(14,165,233,0.12) 0%, transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(245,158,11,0.08) 0%, transparent 55%); }
+
+    /* Particle canvas */
+    #particles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+
+    /* Typewriter cursor */
+    .cursor { display: inline-block; width: 3px; height: 1em; background: #F59E0B; margin-left: 4px; animation: blink .8s step-end infinite; vertical-align: middle; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.up { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-left.up { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-right.up { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(.88); transition: opacity .65s ease, transform .65s ease; }
+    .reveal-scale.up { opacity: 1; transform: scale(1); }
+
+    /* ── Video portfolio ── */
+    .video-card { position: relative; overflow: hidden; border-radius: 16px; cursor: pointer; }
+    .video-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,7,15,.85) 0%, transparent 50%); pointer-events: none; transition: opacity .3s; }
+    .video-card:hover::after { opacity: .6; }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .video-card:hover video { transform: scale(1.04); }
+    .video-card .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 10; width: 60px; height: 60px; border-radius: 50%; background: rgba(245,158,11,0.9); display: flex; align-items: center; justify-content: center; transition: all .25s; }
+    .video-card:hover .play-btn { transform: translate(-50%,-50%) scale(1.15); background: rgba(245,158,11,1); box-shadow: 0 0 30px rgba(245,158,11,0.6); }
+    .video-card .card-info { position: absolute; bottom: 0; left: 0; right: 0; z-index: 10; padding: 1.25rem 1.5rem; }
+
+    /* ── Marquee ── */
+    .marquee-wrap { overflow: hidden; }
+    .marquee-track { display: flex; gap: 3rem; animation: marquee 28s linear infinite; width: max-content; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── Floating badge ── */
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .float { animation: floatY 5s ease-in-out infinite; }
+    .float-2 { animation: floatY 7s ease-in-out infinite; animation-delay: -2s; }
+    .float-3 { animation: floatY 6s ease-in-out infinite; animation-delay: -1s; }
+
+    /* ── Glow pulse ── */
+    @keyframes glowPulse { 0%,100%{box-shadow:0 0 20px rgba(14,165,233,.25)} 50%{box-shadow:0 0 50px rgba(14,165,233,.55)} }
+    .glow-pulse { animation: glowPulse 3s ease-in-out infinite; }
+
+    /* ── Counter ── */
+    .stat-val { font-variant-numeric: tabular-nums; }
+
+    /* ── Video modal ── */
+    #video-modal { position: fixed; inset: 0; z-index: 999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.88); backdrop-filter: blur(8px); }
+    #video-modal.active { display: flex; }
+    #modal-video { width: 90vw; max-width: 900px; border-radius: 12px; outline: none; box-shadow: 0 0 80px rgba(0,0,0,.8); }
+
+    /* ── WhatsApp float ── */
+    #wa-float { position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 90; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform .2s; }
+    #wa-float:hover { transform: scale(1.12); }
+
+    /* ── Process step connector ── */
+    .step-connector { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(245,158,11,.4), rgba(56,189,248,.4)); margin: 0 .5rem; }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
 
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* Nav */
-    #navbar { transition: background 0.3s, box-shadow 0.3s; }
-    #navbar.scrolled { background: rgba(4,7,15,0.95); backdrop-filter: blur(20px); box-shadow: 0 1px 0 rgba(56,189,248,0.1); }
-
-    /* Orbit animation for hero graphic */
-    .orbit { animation: orbit 20s linear infinite; transform-origin: center; }
-    .orbit-2 { animation: orbit 14s linear infinite reverse; transform-origin: center; }
-    @keyframes orbit { from { transform: rotate(0deg) translateX(90px) rotate(0deg); } to { transform: rotate(360deg) translateX(90px) rotate(-360deg); } }
-
-    /* Ticker */
-    .ticker-wrap { overflow: hidden; }
-    .ticker-track { display: flex; gap: 4rem; animation: ticker 30s linear infinite; white-space: nowrap; }
-    .ticker-track:hover { animation-play-state: paused; }
-    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    /* Pricing popular badge pulse */
-    .badge-popular { animation: badgePulse 2s ease-in-out infinite; }
-    @keyframes badgePulse { 0%,100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); } 50% { box-shadow: 0 0 0 6px rgba(245,158,11,0); } }
-
-    /* Mobile menu */
-    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-    #mobile-menu.open { max-height: 480px; }
+    /* Horizontal scroll reel */
+    .reel-scroll { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(245,158,11,.3) transparent; }
+    .reel-scroll::-webkit-scrollbar { height: 4px; }
+    .reel-scroll::-webkit-scrollbar-thumb { background: rgba(245,158,11,.3); border-radius: 2px; }
+    .reel-item { flex: 0 0 320px; scroll-snap-align: start; }
+    @media(min-width:768px){ .reel-item { flex: 0 0 400px; } }
   </style>
 </head>
-<body class="bg-navy-950">
+<body>
 
-<!-- ═══════════════════════════════════ NAVBAR ═══════════════════════════════════ -->
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <!-- Logo -->
-    <div class="flex items-center gap-4">
-      <!-- Back to main site -->
-      <a href="https://zachglobalfzc.com" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer border-r border-slate-800 pr-4" aria-label="Back to Zach Global main site">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5" aria-hidden="true"><path d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav id="navbar">
+  <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="https://zachglobalfzc.com" target="_blank" rel="noopener noreferrer" aria-label="Back to main site"
+        style="display:none;align-items:center;gap:.4rem;font-size:.75rem;color:#64748B;text-decoration:none;border-right:1px solid #1E293B;padding-right:.75rem;transition:color .2s;"
+        onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#64748B'"
+        class="sm-flex">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px" aria-hidden="true"><path d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
         zachglobalfzc.com
       </a>
-      <a href="#" class="flex items-center gap-2 cursor-pointer" aria-label="AdGenius AI Home">
-        <div class="w-8 h-8 rounded-lg btn-primary flex items-center justify-center">
-          <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5 text-white" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-          </svg>
+      <a href="#" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;" aria-label="Zach Global Studio">
+        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#0EA5E9,#0284C7);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:18px;height:18px" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
         </div>
         <div>
-          <span class="font-heading font-700 text-lg text-white tracking-tight">AdGenius<span class="grad-text-gold font-800">AI</span></span>
-          <span class="hidden sm:block text-xs text-slate-600 leading-none -mt-0.5">by Zach Global FZC</span>
+          <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;letter-spacing:-.02em;">Zach Global</span>
+          <span style="font-family:'Lexend',sans-serif;font-weight:800;background:linear-gradient(135deg,#FBBF24,#F97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"> Studio</span>
         </div>
       </a>
     </div>
 
-    <!-- Desktop Nav -->
-    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-      <a href="#features" class="hover:text-white transition-colors duration-200 cursor-pointer">Features</a>
-      <a href="#how-it-works" class="hover:text-white transition-colors duration-200 cursor-pointer">How It Works</a>
-      <a href="#pricing" class="hover:text-white transition-colors duration-200 cursor-pointer">Pricing</a>
-      <a href="#testimonials" class="hover:text-white transition-colors duration-200 cursor-pointer">Clients</a>
+    <div style="display:none;gap:2rem;" class="desktop-nav" id="desk-nav">
+      <a href="#work" style="font-size:.875rem;font-weight:500;color:#94A3B8;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">Our Work</a>
+      <a href="#process" style="font-size:.875rem;font-weight:500;color:#94A3B8;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">Process</a>
+      <a href="#industries" style="font-size:.875rem;font-weight:500;color:#94A3B8;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">Industries</a>
+      <a href="#contact" style="font-size:.875rem;font-weight:500;color:#94A3B8;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">Contact</a>
     </div>
 
-    <!-- CTA -->
-    <div class="hidden md:flex items-center gap-3">
-      <a href="#" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer px-3 py-2">Sign In</a>
-      <a href="#pricing" class="btn-primary cursor-pointer text-white text-sm font-semibold px-5 py-2.5 rounded-lg">Request Demo</a>
+    <div style="display:none;gap:.75rem;align-items:center;" id="desk-cta">
+      <a href="mailto:info@zachglobalfzc.com" class="btn-outline" style="padding:.6rem 1.25rem;border-radius:.75rem;font-size:.8rem;font-weight:600;color:white;text-decoration:none;font-family:'Lexend',sans-serif;">Email Us</a>
+      <a href="https://wa.me/971000000000?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20discuss%20an%20ad%20campaign." target="_blank" rel="noopener noreferrer" class="btn-wa" style="padding:.6rem 1.25rem;border-radius:.75rem;font-size:.8rem;font-weight:600;color:white;text-decoration:none;font-family:'Lexend',sans-serif;display:flex;align-items:center;gap:.4rem;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
     </div>
 
-    <!-- Mobile hamburger -->
-    <button id="menu-btn" class="md:hidden cursor-pointer text-slate-400 hover:text-white p-2 transition-colors duration-200" aria-label="Toggle menu" aria-expanded="false">
-      <svg id="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      <svg id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6 hidden" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12"/></svg>
+    <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false"
+      style="background:none;border:none;cursor:pointer;color:#94A3B8;padding:.5rem;" class="mobile-menu-btn">
+      <svg id="ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;display:none" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12"/></svg>
     </button>
   </div>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-    <div class="max-w-7xl mx-auto mt-3 glass rounded-xl p-4 flex flex-col gap-3 text-sm font-medium text-slate-300">
-      <a href="#features" class="mobile-link hover:text-white transition-colors py-2 cursor-pointer">Features</a>
-      <a href="#how-it-works" class="mobile-link hover:text-white transition-colors py-2 cursor-pointer">How It Works</a>
-      <a href="#pricing" class="mobile-link hover:text-white transition-colors py-2 cursor-pointer">Pricing</a>
-      <a href="#testimonials" class="mobile-link hover:text-white transition-colors py-2 cursor-pointer">Clients</a>
-      <div class="glow-line my-1"></div>
-      <a href="#pricing" class="btn-gold text-white text-center font-semibold px-5 py-3 rounded-lg cursor-pointer">Request Demo</a>
+  <div id="mobile-menu">
+    <div style="max-width:1280px;margin:.75rem auto 0;padding:.25rem;" class="glass" style="border-radius:12px;">
+      <div style="display:flex;flex-direction:column;gap:.25rem;padding:.75rem;">
+        <a href="#work" class="mob-link" style="padding:.7rem 1rem;border-radius:8px;color:#CBD5E1;text-decoration:none;font-size:.9rem;font-weight:500;">Our Work</a>
+        <a href="#process" class="mob-link" style="padding:.7rem 1rem;border-radius:8px;color:#CBD5E1;text-decoration:none;font-size:.9rem;font-weight:500;">Process</a>
+        <a href="#industries" class="mob-link" style="padding:.7rem 1rem;border-radius:8px;color:#CBD5E1;text-decoration:none;font-size:.9rem;font-weight:500;">Industries</a>
+        <a href="#contact" class="mob-link" style="padding:.7rem 1rem;border-radius:8px;color:#CBD5E1;text-decoration:none;font-size:.9rem;font-weight:500;">Contact</a>
+        <div style="height:1px;background:rgba(255,255,255,.07);margin:.25rem 0;"></div>
+        <a href="https://wa.me/971000000000?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20discuss%20an%20ad%20campaign." target="_blank" rel="noopener noreferrer" class="btn-wa mob-link" style="padding:.85rem 1rem;border-radius:10px;color:white;text-decoration:none;font-size:.9rem;font-weight:600;text-align:center;font-family:'Lexend',sans-serif;">WhatsApp Us</a>
+      </div>
     </div>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
-<section class="relative min-h-screen flex flex-col justify-center bg-grid noise pt-24 pb-20 overflow-hidden">
-  <!-- Background glows -->
-  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-electric-500 opacity-10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-  <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gold-500 opacity-8 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero" class="bg-grid">
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="hero-bg"><div class="hero-bg-fallback"></div></div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
-    <!-- Left: Copy -->
-    <div class="reveal" id="hero-copy">
+  <!-- Floating ambient blobs -->
+  <div aria-hidden="true" style="position:absolute;top:15%;left:8%;width:320px;height:320px;background:radial-gradient(circle,rgba(14,165,233,.07),transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div aria-hidden="true" style="position:absolute;bottom:20%;right:8%;width:280px;height:280px;background:radial-gradient(circle,rgba(245,158,11,.06),transparent 70%);border-radius:50%;pointer-events:none;"></div>
+
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:8rem 1.5rem 5rem;display:grid;gap:3rem;align-items:center;" class="hero-grid">
+
+    <!-- Left copy -->
+    <div>
       <!-- Badge -->
-      <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-xs font-semibold text-electric-400 mb-8">
-        <span class="w-2 h-2 rounded-full bg-electric-400 animate-pulse" aria-hidden="true"></span>
-        Trusted by 500+ Fortune 1000 Companies
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:2rem;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;" class="glass">
+        <span style="width:8px;height:8px;border-radius:50%;background:#38BDF8;animation:blink .8s step-end infinite;" aria-hidden="true"></span>
+        AI-Powered Ad Production Studio
       </div>
 
-      <h1 class="font-heading text-5xl lg:text-6xl xl:text-7xl font-800 leading-tight text-white mb-6">
-        The AI That<br/>
-        <span class="grad-text">Creates Ads</span><br/>
-        That Convert
+      <h1 class="reveal" style="font-size:clamp(2.4rem,5.5vw,4.5rem);font-weight:900;color:white;margin-bottom:1.5rem;letter-spacing:-.03em;transition-delay:.1s;">
+        We Craft Ads<br/>That Make<br/><span id="typewriter" class="grad-gold"></span><span class="cursor" aria-hidden="true"></span>
       </h1>
 
-      <p class="text-lg text-slate-400 leading-relaxed max-w-lg mb-10">
-        AdGenius AI generates high-performance advertising campaigns for corporate enterprises — across every channel, in every format, at enterprise scale.
+      <p class="reveal" style="font-size:1.125rem;color:#94A3B8;line-height:1.75;max-width:520px;margin-bottom:2.5rem;transition-delay:.2s;">
+        Zach Global Studio creates <strong style="color:#CBD5E1;">world-class AI-generated video ads and campaigns</strong> exclusively for corporates and enterprises. You brief us — we build, you grow.
       </p>
 
-      <div class="flex flex-col sm:flex-row gap-4 mb-12">
-        <a href="#pricing" class="btn-gold cursor-pointer text-white font-semibold px-8 py-4 rounded-xl text-base text-center">
-          Request a Demo
+      <div class="reveal" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;transition-delay:.3s;">
+        <a href="https://wa.me/971000000000?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20discuss%20an%20ad%20campaign." target="_blank" rel="noopener noreferrer" class="btn-wa"
+          style="display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.75rem;border-radius:.875rem;font-family:'Lexend',sans-serif;font-weight:700;font-size:.95rem;color:white;text-decoration:none;">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Start on WhatsApp
         </a>
-        <a href="#how-it-works" class="cursor-pointer glass text-white font-semibold px-8 py-4 rounded-xl text-base text-center hover:border-electric-400 transition-colors duration-200 flex items-center justify-center gap-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
-          Watch Overview
+        <a href="#work"
+          style="display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.75rem;border-radius:.875rem;font-family:'Lexend',sans-serif;font-weight:600;font-size:.95rem;color:white;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:all .2s;"
+          onmouseover="this.style.borderColor='rgba(56,189,248,.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
+          View Our Work
         </a>
       </div>
 
-      <!-- Trust metrics -->
-      <div class="grid grid-cols-3 gap-6 pt-8 border-t border-slate-800">
-        <div>
-          <div class="font-heading text-3xl font-700 stat-num grad-text-gold" data-count="500">0</div>
-          <div class="text-xs text-slate-500 mt-1">Enterprise Clients</div>
+      <!-- Mini trust row -->
+      <div class="reveal" style="display:flex;flex-wrap:wrap;gap:1.5rem;transition-delay:.4s;">
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#64748B;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" style="width:16px;height:16px" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          100% Custom per Brand
         </div>
-        <div>
-          <div class="font-heading text-3xl font-700 stat-num grad-text">4.8x</div>
-          <div class="text-xs text-slate-500 mt-1">Avg. ROAS Uplift</div>
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#64748B;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" style="width:16px;height:16px" aria-hidden="true"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          48-hr Proposal Turnaround
         </div>
-        <div>
-          <div class="font-heading text-3xl font-700 stat-num grad-text-gold" data-count="98">0</div>
-          <div class="text-xs text-slate-500 mt-1">% Client Retention</div>
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#64748B;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" style="width:16px;height:16px" aria-hidden="true"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Corporate-Only Studio
         </div>
       </div>
     </div>
 
-    <!-- Right: Hero graphic -->
-    <div class="hidden lg:flex items-center justify-center animate-float" aria-hidden="true">
-      <div class="relative w-[460px] h-[460px]">
-        <!-- Center card -->
-        <div class="absolute inset-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 glass rounded-3xl flex flex-col items-center justify-center text-center animate-glow z-10 p-4">
-          <div class="w-14 h-14 btn-primary rounded-2xl flex items-center justify-center mb-3">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7 text-white"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-          </div>
-          <div class="font-heading font-700 text-white text-sm">AI Engine</div>
-          <div class="text-xs text-slate-400 mt-1">Generating…</div>
-          <div class="mt-3 flex gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-electric-400 animate-bounce" style="animation-delay:0ms"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-electric-400 animate-bounce" style="animation-delay:150ms"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-electric-400 animate-bounce" style="animation-delay:300ms"></span>
-          </div>
+    <!-- Right: floating stat cards -->
+    <div aria-hidden="true" style="display:none;position:relative;height:480px;" class="hero-visual" id="hero-visual">
+      <!-- Main reel card -->
+      <div class="glass glow-pulse float" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;padding:1.5rem;border-radius:20px;text-align:center;">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:28px;height:28px" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
         </div>
+        <div style="font-family:'Lexend',sans-serif;font-weight:800;font-size:2rem;color:white;" id="hero-counter">0</div>
+        <div style="font-size:.8rem;color:#64748B;margin-top:.25rem;">Ads Delivered</div>
+      </div>
 
-        <!-- Orbiting chips -->
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div class="orbit">
-            <div class="glass rounded-xl px-3 py-2 text-xs font-semibold text-electric-400 whitespace-nowrap">LinkedIn Ad</div>
-          </div>
-        </div>
-        <div class="absolute inset-0 flex items-center justify-center" style="transform: rotate(72deg)">
-          <div class="orbit" style="animation-delay:-4s">
-            <div class="glass-gold rounded-xl px-3 py-2 text-xs font-semibold text-gold-400 whitespace-nowrap" style="transform: rotate(-72deg)">Display Banner</div>
-          </div>
-        </div>
-        <div class="absolute inset-0 flex items-center justify-center" style="transform: rotate(144deg)">
-          <div class="orbit" style="animation-delay:-8s">
-            <div class="glass rounded-xl px-3 py-2 text-xs font-semibold text-electric-400 whitespace-nowrap" style="transform: rotate(-144deg)">Video Script</div>
-          </div>
-        </div>
-        <div class="absolute inset-0 flex items-center justify-center" style="transform: rotate(216deg)">
-          <div class="orbit" style="animation-delay:-12s">
-            <div class="glass-gold rounded-xl px-3 py-2 text-xs font-semibold text-gold-400 whitespace-nowrap" style="transform: rotate(-216deg)">Search Ad</div>
-          </div>
-        </div>
-        <div class="absolute inset-0 flex items-center justify-center" style="transform: rotate(288deg)">
-          <div class="orbit" style="animation-delay:-16s">
-            <div class="glass rounded-xl px-3 py-2 text-xs font-semibold text-electric-400 whitespace-nowrap" style="transform: rotate(-288deg)">Social Post</div>
-          </div>
-        </div>
-
-        <!-- Outer ring decoration -->
-        <div class="absolute inset-4 rounded-full border border-electric-500 opacity-10"></div>
-        <div class="absolute inset-10 rounded-full border border-gold-500 opacity-8"></div>
+      <!-- Floating chips -->
+      <div class="glass float-2" style="position:absolute;top:10%;left:5%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        Video Ads
+      </div>
+      <div class="glass-gold float-3" style="position:absolute;top:20%;right:0%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#FBBF24;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        Social Reels
+      </div>
+      <div class="glass float" style="position:absolute;bottom:25%;left:0%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        Display Banners
+      </div>
+      <div class="glass-gold float-2" style="position:absolute;bottom:15%;right:0%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#FBBF24;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        TV Commercials
+      </div>
+      <div class="glass float-3" style="position:absolute;top:70%;left:15%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        OOH Campaigns
       </div>
     </div>
+
+  </div>
+
+  <!-- Scroll indicator -->
+  <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:2;" aria-hidden="true">
+    <span style="font-size:.7rem;color:#334155;letter-spacing:.1em;text-transform:uppercase;font-family:'Lexend',sans-serif;">Scroll</span>
+    <div style="width:1px;height:40px;background:linear-gradient(to bottom,rgba(245,158,11,.6),transparent);animation:floatY 2s ease-in-out infinite;"></div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════ LOGO TICKER ═══════════════════════════════════ -->
-<div class="py-12 border-y border-slate-800 bg-navy-900">
-  <div class="max-w-7xl mx-auto px-4 mb-6 text-center">
-    <p class="text-xs font-semibold uppercase tracking-widest text-slate-600">Powering advertising at the world's leading corporations</p>
+<!-- ══════════════════ CLIENT MARQUEE ══════════════════ -->
+<div style="padding:2.5rem 0;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);background:rgba(7,13,26,.6);overflow:hidden;">
+  <div style="text-align:center;margin-bottom:1.25rem;">
+    <span style="font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#334155;font-family:'Lexend',sans-serif;">Campaigns crafted for industries including</span>
   </div>
-  <div class="ticker-wrap" aria-label="Client logos">
-    <div class="ticker-track" aria-hidden="true">
-      <!-- Logos repeated twice for seamless loop -->
-      <template id="logo-tpl">
-        <div class="flex items-center gap-2 text-slate-600 font-heading font-700 text-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 opacity-40"><rect width="24" height="24" rx="4"/></svg>
-          NexaCorp
-        </div>
-        <div class="flex items-center gap-2 text-slate-600 font-heading font-700 text-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 opacity-40"><circle cx="12" cy="12" r="11"/></svg>
-          VantaGroup
-        </div>
-        <div class="flex items-center gap-2 text-slate-600 font-heading font-700 text-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 opacity-40"><polygon points="12 2 22 20 2 20"/></svg>
-          Meridian Inc.
-        </div>
-        <div class="flex items-center gap-2 text-slate-600 font-heading font-700 text-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 opacity-40"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
-          Stratix Partners
-        </div>
-        <div class="flex items-center gap-2 text-slate-600 font-heading font-700 text-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 opacity-40"><ellipse cx="12" cy="12" rx="11" ry="7"/></svg>
-          ZenithWave
-        </div>
-        <div class="flex items-center gap-2 text-slate-600 font-heading font-700 text-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 opacity-40"><path d="M12 2L2 22h20L12 2z"/></svg>
-          Apex Dynamics
-        </div>
-        <div class="flex items-center gap-2 text-slate-600 font-heading font-700 text-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 opacity-40"><rect width="24" height="24" rx="12"/></svg>
-          ClarionTech
-        </div>
-        <div class="flex items-center gap-2 text-slate-600 font-heading font-700 text-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 opacity-40"><path d="M3 12h18M12 3v18"/></svg>
-          OmniReach Co.
-        </div>
-      </template>
+  <div class="marquee-wrap" aria-label="Industries served">
+    <div class="marquee-track" aria-hidden="true" id="marquee-track">
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">FMCG &amp; Retail</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Real Estate</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Hospitality &amp; Tourism</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Healthcare</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Financial Services</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Automotive</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Technology</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Education</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Fashion &amp; Luxury</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Agriculture &amp; Food</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════ FEATURES ═══════════════════════════════════ -->
-<section id="features" class="py-28 bg-grid relative overflow-hidden">
-  <div class="absolute top-0 left-0 right-0 h-px glow-line" aria-hidden="true"></div>
+<!-- ══════════════════ OUR WORK — VIDEO PORTFOLIO ══════════════════ -->
+<section id="work" style="padding:7rem 0;position:relative;overflow:hidden;" class="bg-grid">
+  <div style="position:absolute;top:0;left:0;right:0;" class="glow-line" aria-hidden="true"></div>
 
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-20 reveal">
-      <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-xs font-semibold text-gold-400 mb-6">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        Enterprise Capabilities
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+
+    <!-- Section header -->
+    <div style="text-align:center;margin-bottom:4rem;" class="reveal">
+      <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:1.5rem;font-size:.75rem;font-weight:600;color:#F59E0B;font-family:'Lexend',sans-serif;" class="glass-gold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Our AI Ad Portfolio
       </div>
-      <h2 class="font-heading text-4xl lg:text-5xl font-700 text-white mb-5">
-        Every Ad Format.<br/>One Intelligent Platform.
+      <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:white;margin-bottom:1rem;">
+        Ads We've Built.<br/><span class="grad-text">Results That Speak.</span>
       </h2>
-      <p class="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
-        From brief to live campaign in minutes. AdGenius AI handles creative generation, brand compliance, and multi-channel deployment so your team focuses on strategy.
+      <p style="font-size:1.05rem;color:#64748B;max-width:560px;margin:0 auto;line-height:1.7;">
+        Every campaign below was created by our team using cutting-edge AI tools — briefed by a corporate client, delivered as a complete creative package.
       </p>
     </div>
 
-    <!-- Feature grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- Feature 1 -->
-      <div class="glass card-hover cursor-default rounded-2xl p-8 reveal">
-        <div class="w-12 h-12 btn-primary rounded-xl flex items-center justify-center mb-6">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6 text-white" aria-hidden="true"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <!-- Featured video (large) -->
+    <div class="reveal reveal-scale" style="margin-bottom:2rem;border-radius:20px;overflow:hidden;position:relative;aspect-ratio:16/7;background:#0B1425;cursor:pointer;" id="featured-video-card" onclick="openModal('https://www.w3schools.com/html/mov_bbb.mp4','Featured Campaign — Product Launch Reel')">
+      <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;opacity:.85;" aria-hidden="true">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+      </video>
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(4,7,15,.75) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:absolute;top:50%;left:5%;transform:translateY(-50%);max-width:480px;">
+        <div style="display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);font-size:.7rem;font-weight:700;color:#FBBF24;font-family:'Lexend',sans-serif;margin-bottom:1rem;">
+          ★ Featured Campaign
         </div>
-        <h3 class="font-heading font-600 text-white text-xl mb-3">AI-Powered Ad Generation</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Generate copy, visuals, and video scripts trained on billions of high-performing ads. Outputs are on-brand and optimized by industry vertical.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs px-3 py-1 rounded-full bg-electric-500 bg-opacity-10 text-electric-400 border border-electric-500 border-opacity-20">Copywriting</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-electric-500 bg-opacity-10 text-electric-400 border border-electric-500 border-opacity-20">Visuals</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-electric-500 bg-opacity-10 text-electric-400 border border-electric-500 border-opacity-20">Video</span>
+        <h3 style="font-size:clamp(1.4rem,3vw,2.2rem);font-weight:800;color:white;margin-bottom:.75rem;line-height:1.2;">Global Product Launch<br/>Video Campaign</h3>
+        <p style="font-size:.9rem;color:#94A3B8;margin-bottom:1.25rem;line-height:1.6;">Full AI-produced 60-second hero ad for a multinational FMCG brand. Delivered in 5 languages.</p>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+          <span style="font-size:.72rem;padding:.3rem .75rem;border-radius:999px;background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);color:#38BDF8;">Video</span>
+          <span style="font-size:.72rem;padding:.3rem .75rem;border-radius:999px;background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);color:#38BDF8;">Multilingual</span>
+          <span style="font-size:.72rem;padding:.3rem .75rem;border-radius:999px;background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);color:#38BDF8;">FMCG</span>
+        </div>
+      </div>
+      <!-- Play button -->
+      <div style="position:absolute;top:50%;right:8%;transform:translateY(-50%);width:72px;height:72px;border-radius:50%;background:rgba(245,158,11,.9);display:flex;align-items:center;justify-content:center;transition:all .25s;box-shadow:0 0 40px rgba(245,158,11,.4);"
+        onmouseover="this.style.transform='translateY(-50%) scale(1.12)';this.style.boxShadow='0 0 60px rgba(245,158,11,.7)'"
+        onmouseout="this.style.transform='translateY(-50%) scale(1)';this.style.boxShadow='0 0 40px rgba(245,158,11,.4)'"
+        aria-label="Play featured campaign video">
+        <svg viewBox="0 0 24 24" fill="white" style="width:28px;height:28px;margin-left:3px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+    </div>
+
+    <!-- Portfolio grid 3-col -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-bottom:2rem;">
+
+      <!-- Card 1 -->
+      <div class="video-card reveal" style="aspect-ratio:9/14;background:#0B1425;" onclick="openModal('https://www.w3schools.com/html/mov_bbb.mp4','Social Reel — Real Estate Brand')">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;" aria-hidden="true">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+        </video>
+        <div class="play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" style="width:22px;height:22px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="card-info">
+          <div style="display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap;">
+            <span style="font-size:.65rem;padding:.25rem .6rem;border-radius:999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.2);color:#FBBF24;font-family:'Lexend',sans-serif;font-weight:600;">Instagram Reel</span>
+          </div>
+          <h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;margin-bottom:.25rem;">Luxury Real Estate Reel</h4>
+          <p style="font-size:.78rem;color:#94A3B8;">30-sec vertical video for property launch campaign</p>
         </div>
       </div>
 
-      <!-- Feature 2 -->
-      <div class="glass card-hover cursor-default rounded-2xl p-8 reveal">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-gradient-to-br from-gold-500 to-gold-700">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6 text-white" aria-hidden="true"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <!-- Card 2 -->
+      <div class="video-card reveal" style="aspect-ratio:9/14;background:#0B1425;transition-delay:.1s;" onclick="openModal('https://www.w3schools.com/html/mov_bbb.mp4','Brand TVC — Hospitality')">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;" aria-hidden="true">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+        </video>
+        <div class="play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" style="width:22px;height:22px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </div>
-        <h3 class="font-heading font-600 text-white text-xl mb-3">Multi-Platform Deployment</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Publish simultaneously to LinkedIn, Google, Meta, programmatic display, CTV, and OOH — all sized and formatted automatically per platform spec.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">Google Ads</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">LinkedIn</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">Meta</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">CTV</span>
-        </div>
-      </div>
-
-      <!-- Feature 3 -->
-      <div class="glass card-hover cursor-default rounded-2xl p-8 reveal">
-        <div class="w-12 h-12 btn-primary rounded-xl flex items-center justify-center mb-6">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6 text-white" aria-hidden="true"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-        </div>
-        <h3 class="font-heading font-600 text-white text-xl mb-3">Real-Time Analytics</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Unified performance dashboard across all channels. AI-driven attribution, ROAS tracking, and automated optimization recommendations delivered daily.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs px-3 py-1 rounded-full bg-electric-500 bg-opacity-10 text-electric-400 border border-electric-500 border-opacity-20">Attribution</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-electric-500 bg-opacity-10 text-electric-400 border border-electric-500 border-opacity-20">ROAS</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-electric-500 bg-opacity-10 text-electric-400 border border-electric-500 border-opacity-20">Forecasting</span>
+        <div class="card-info">
+          <div style="display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap;">
+            <span style="font-size:.65rem;padding:.25rem .6rem;border-radius:999px;background:rgba(14,165,233,.12);border:1px solid rgba(14,165,233,.2);color:#38BDF8;font-family:'Lexend',sans-serif;font-weight:600;">TV Commercial</span>
+          </div>
+          <h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;margin-bottom:.25rem;">Hotel Brand TVC</h4>
+          <p style="font-size:.78rem;color:#94A3B8;">45-sec broadcast-quality AI commercial for 5-star hospitality brand</p>
         </div>
       </div>
 
-      <!-- Feature 4 -->
-      <div class="glass card-hover cursor-default rounded-2xl p-8 reveal">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-gradient-to-br from-gold-500 to-gold-700">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6 text-white" aria-hidden="true"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+      <!-- Card 3 -->
+      <div class="video-card reveal" style="aspect-ratio:9/14;background:#0B1425;transition-delay:.2s;" onclick="openModal('https://www.w3schools.com/html/mov_bbb.mp4','Product Ad — FMCG')">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;" aria-hidden="true">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+        </video>
+        <div class="play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" style="width:22px;height:22px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </div>
-        <h3 class="font-heading font-600 text-white text-xl mb-3">Brand Intelligence Engine</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Upload brand guidelines once. The AI enforces tone, visual identity, legal disclaimers, and compliance rules across every creative — automatically.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">Brand Safety</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">Compliance</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">Style Guide</span>
-        </div>
-      </div>
-
-      <!-- Feature 5 -->
-      <div class="glass card-hover cursor-default rounded-2xl p-8 reveal">
-        <div class="w-12 h-12 btn-primary rounded-xl flex items-center justify-center mb-6">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6 text-white" aria-hidden="true"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-        </div>
-        <h3 class="font-heading font-600 text-white text-xl mb-3">Audience Segmentation AI</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Automatically build and activate high-intent audience segments using first-party data, lookalike modeling, and AI-predicted intent signals.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs px-3 py-1 rounded-full bg-electric-500 bg-opacity-10 text-electric-400 border border-electric-500 border-opacity-20">1P Data</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-electric-500 bg-opacity-10 text-electric-400 border border-electric-500 border-opacity-20">Lookalike</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-electric-500 bg-opacity-10 text-electric-400 border border-electric-500 border-opacity-20">Intent</span>
-        </div>
-      </div>
-
-      <!-- Feature 6 -->
-      <div class="glass card-hover cursor-default rounded-2xl p-8 reveal">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-gradient-to-br from-gold-500 to-gold-700">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6 text-white" aria-hidden="true"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-        </div>
-        <h3 class="font-heading font-600 text-white text-xl mb-3">Enterprise-Grade Security</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">SOC 2 Type II, ISO 27001, GDPR and CCPA compliant. Role-based access, SSO, audit logs, and dedicated private cloud deployments available.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">SOC 2</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">GDPR</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-gold-500 bg-opacity-10 text-gold-400 border border-gold-500 border-opacity-20">SSO</span>
+        <div class="card-info">
+          <div style="display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap;">
+            <span style="font-size:.65rem;padding:.25rem .6rem;border-radius:999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.2);color:#FBBF24;font-family:'Lexend',sans-serif;font-weight:600;">Product Ad</span>
+          </div>
+          <h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;margin-bottom:.25rem;">FMCG Product Showcase</h4>
+          <p style="font-size:.78rem;color:#94A3B8;">AI-generated product hero video with dynamic motion graphics</p>
         </div>
       </div>
 
     </div>
-  </div>
-</section>
 
-<!-- ═══════════════════════════════════ HOW IT WORKS ═══════════════════════════════════ -->
-<section id="how-it-works" class="py-28 bg-navy-900 relative overflow-hidden">
-  <div class="absolute inset-0 bg-grid opacity-30" aria-hidden="true"></div>
-
-  <div class="relative z-10 max-w-7xl mx-auto px-4">
-    <div class="text-center mb-20 reveal">
-      <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-xs font-semibold text-electric-400 mb-6">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-        The Process
+    <!-- Horizontal scroll reel — more work -->
+    <div class="reveal" style="margin-top:3rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+        <h3 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.1rem;color:white;">More Campaigns</h3>
+        <span style="font-size:.75rem;color:#334155;">← Scroll →</span>
       </div>
-      <h2 class="font-heading text-4xl lg:text-5xl font-700 text-white mb-5">Campaign Live in 4 Steps</h2>
-      <p class="text-slate-400 text-lg max-w-xl mx-auto">From brief to published campaign — AdGenius AI compresses weeks of creative production into minutes.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-      <!-- Connecting line desktop -->
-      <div class="hidden lg:block absolute top-14 left-1/4 right-1/4 h-px bg-gradient-to-r from-electric-500 to-gold-500 opacity-30 z-0" style="left:12.5%;right:12.5%" aria-hidden="true"></div>
-
-      <!-- Step 1 -->
-      <div class="relative reveal">
-        <div class="glass rounded-2xl p-6 text-center h-full">
-          <div class="w-12 h-12 btn-primary rounded-full flex items-center justify-center mx-auto mb-5 font-heading font-700 text-white text-lg">1</div>
-          <h3 class="font-heading font-600 text-white text-lg mb-3">Brief the AI</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Input your product, audience, budget, and goals. Upload existing brand assets. Takes under 5 minutes.</p>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="relative reveal" style="transition-delay:0.1s">
-        <div class="glass rounded-2xl p-6 text-center h-full">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-5 font-heading font-700 text-white text-lg bg-gradient-to-br from-gold-500 to-gold-700">2</div>
-          <h3 class="font-heading font-600 text-white text-lg mb-3">AI Generates Creatives</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">The engine produces dozens of copy variants, visuals, and video scripts — all brand-compliant and platform-optimized.</p>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="relative reveal" style="transition-delay:0.2s">
-        <div class="glass rounded-2xl p-6 text-center h-full">
-          <div class="w-12 h-12 btn-primary rounded-full flex items-center justify-center mx-auto mb-5 font-heading font-700 text-white text-lg">3</div>
-          <h3 class="font-heading font-600 text-white text-lg mb-3">Review & Approve</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Your team reviews in a collaborative workspace. Edit, comment, or approve with one click. Full version history.</p>
-        </div>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="relative reveal" style="transition-delay:0.3s">
-        <div class="glass rounded-2xl p-6 text-center h-full">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-5 font-heading font-700 text-white text-lg bg-gradient-to-br from-gold-500 to-gold-700">4</div>
-          <h3 class="font-heading font-600 text-white text-lg mb-3">Launch & Optimize</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Deploy across all channels simultaneously. AI monitors performance and auto-optimizes bids and creative rotation.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════ STATS BANNER ═══════════════════════════════════ -->
-<section class="py-20 relative overflow-hidden" style="background: linear-gradient(135deg, #0B1425 0%, #070D1A 50%, #0B1425 100%);">
-  <div class="absolute inset-0" aria-hidden="true">
-    <div class="absolute top-0 left-0 right-0 h-px glow-line"></div>
-    <div class="absolute bottom-0 left-0 right-0 h-px glow-line"></div>
-  </div>
-  <div class="relative z-10 max-w-7xl mx-auto px-4">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-      <div class="reveal">
-        <div class="font-heading text-5xl font-800 grad-text mb-2 stat-num" data-count="2">0</div>
-        <div class="text-slate-400 text-sm">Billion+ Ads Analyzed</div>
-      </div>
-      <div class="reveal" style="transition-delay:0.1s">
-        <div class="font-heading text-5xl font-800 grad-text-gold mb-2">73%</div>
-        <div class="text-slate-400 text-sm">Avg. Cost-Per-Click Reduction</div>
-      </div>
-      <div class="reveal" style="transition-delay:0.2s">
-        <div class="font-heading text-5xl font-800 grad-text mb-2 stat-num" data-count="14">0</div>
-        <div class="text-slate-400 text-sm">Industries Served</div>
-      </div>
-      <div class="reveal" style="transition-delay:0.3s">
-        <div class="font-heading text-5xl font-800 grad-text-gold mb-2">4.8x</div>
-        <div class="text-slate-400 text-sm">Average ROAS Improvement</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════ TESTIMONIALS ═══════════════════════════════════ -->
-<section id="testimonials" class="py-28 bg-grid relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-20 reveal">
-      <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-xs font-semibold text-gold-400 mb-6">
-        <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-gold-400" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-        Client Results
-      </div>
-      <h2 class="font-heading text-4xl lg:text-5xl font-700 text-white mb-5">Trusted by Enterprise Leaders</h2>
-      <p class="text-slate-400 text-lg max-w-xl mx-auto">Hear from the CMOs and marketing directors who've transformed their advertising with AdGenius AI.</p>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <!-- Testimonial 1 -->
-      <div class="glass-gold card-hover cursor-default rounded-2xl p-8 reveal flex flex-col">
-        <div class="flex mb-4" aria-label="5 out of 5 stars">
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-        </div>
-        <blockquote class="text-slate-300 text-sm leading-relaxed mb-6 flex-1">
-          "We cut our campaign production time by 80% and saw a 5.2x ROAS improvement in Q1. AdGenius AI is the only platform that actually understands enterprise brand complexity."
-        </blockquote>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-electric-500 to-electric-600 flex items-center justify-center font-heading font-700 text-white text-sm" aria-hidden="true">RK</div>
-          <div>
-            <div class="font-heading font-600 text-white text-sm">Rachel Kim</div>
-            <div class="text-slate-500 text-xs">CMO, NexaCorp Global</div>
-          </div>
-          <div class="ml-auto">
-            <div class="glass-gold rounded-lg px-3 py-1 text-xs font-semibold text-gold-400">+5.2x ROAS</div>
+      <div class="reel-scroll" role="list">
+        <!-- Reel items — replace video src with your actual ads -->
+        <div class="reel-item" role="listitem">
+          <div class="video-card" style="aspect-ratio:16/10;background:#0B1425;" onclick="openModal('https://www.w3schools.com/html/mov_bbb.mp4','LinkedIn Ad Series')">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;" aria-hidden="true"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"/></video>
+            <div class="play-btn" style="width:44px;height:44px;" aria-label="Play video"><svg viewBox="0 0 24 24" fill="white" style="width:16px;height:16px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <div class="card-info"><h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:.9rem;color:white;">LinkedIn B2B Ad Series</h4><p style="font-size:.72rem;color:#94A3B8;">Corporate LinkedIn campaign · 6-part series</p></div>
           </div>
         </div>
-      </div>
-
-      <!-- Testimonial 2 -->
-      <div class="glass-gold card-hover cursor-default rounded-2xl p-8 reveal flex flex-col" style="transition-delay:0.1s">
-        <div class="flex mb-4" aria-label="5 out of 5 stars">
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-        </div>
-        <blockquote class="text-slate-300 text-sm leading-relaxed mb-6 flex-1">
-          "The brand compliance engine is a game-changer for a regulated industry like ours. Every ad auto-passes legal review. We've launched 3x more campaigns with the same team."
-        </blockquote>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-700 flex items-center justify-center font-heading font-700 text-white text-sm" aria-hidden="true">MP</div>
-          <div>
-            <div class="font-heading font-600 text-white text-sm">Marcus Patel</div>
-            <div class="text-slate-500 text-xs">VP Marketing, Stratix Partners</div>
-          </div>
-          <div class="ml-auto">
-            <div class="glass-gold rounded-lg px-3 py-1 text-xs font-semibold text-gold-400">3x Output</div>
+        <div class="reel-item" role="listitem">
+          <div class="video-card" style="aspect-ratio:16/10;background:#0B1425;" onclick="openModal('https://www.w3schools.com/html/mov_bbb.mp4','Automotive Campaign')">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;" aria-hidden="true"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"/></video>
+            <div class="play-btn" style="width:44px;height:44px;" aria-label="Play video"><svg viewBox="0 0 24 24" fill="white" style="width:16px;height:16px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <div class="card-info"><h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:.9rem;color:white;">Automotive Launch Ad</h4><p style="font-size:.72rem;color:#94A3B8;">60-sec cinematic AI vehicle ad</p></div>
           </div>
         </div>
-      </div>
-
-      <!-- Testimonial 3 -->
-      <div class="glass-gold card-hover cursor-default rounded-2xl p-8 reveal flex flex-col" style="transition-delay:0.2s">
-        <div class="flex mb-4" aria-label="5 out of 5 stars">
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F59E0B" class="w-4 h-4" aria-hidden="true"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-        </div>
-        <blockquote class="text-slate-300 text-sm leading-relaxed mb-6 flex-1">
-          "AdGenius AI's audience segmentation capabilities are beyond anything we've tested. Our cost-per-qualified-lead dropped 67% in the first month. Exceptional enterprise tooling."
-        </blockquote>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-electric-400 to-electric-600 flex items-center justify-center font-heading font-700 text-white text-sm" aria-hidden="true">SW</div>
-          <div>
-            <div class="font-heading font-600 text-white text-sm">Sarah Weston</div>
-            <div class="text-slate-500 text-xs">Chief Growth Officer, ZenithWave</div>
+        <div class="reel-item" role="listitem">
+          <div class="video-card" style="aspect-ratio:16/10;background:#0B1425;" onclick="openModal('https://www.w3schools.com/html/mov_bbb.mp4','Fashion Brand Reel')">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;" aria-hidden="true"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"/></video>
+            <div class="play-btn" style="width:44px;height:44px;" aria-label="Play video"><svg viewBox="0 0 24 24" fill="white" style="width:16px;height:16px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <div class="card-info"><h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:.9rem;color:white;">Fashion Brand Reel</h4><p style="font-size:.72rem;color:#94A3B8;">Luxury fashion Instagram + TikTok set</p></div>
           </div>
-          <div class="ml-auto">
-            <div class="glass-gold rounded-lg px-3 py-1 text-xs font-semibold text-gold-400">-67% CPL</div>
+        </div>
+        <div class="reel-item" role="listitem">
+          <div class="video-card" style="aspect-ratio:16/10;background:#0B1425;" onclick="openModal('https://www.w3schools.com/html/mov_bbb.mp4','Healthcare Campaign')">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;" aria-hidden="true"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"/></video>
+            <div class="play-btn" style="width:44px;height:44px;" aria-label="Play video"><svg viewBox="0 0 24 24" fill="white" style="width:16px;height:16px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <div class="card-info"><h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:.9rem;color:white;">Healthcare Awareness Ad</h4><p style="font-size:.72rem;color:#94A3B8;">Branded healthcare content · 3-video set</p></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ═══════════════════════════════════ PRICING ═══════════════════════════════════ -->
-<section id="pricing" class="py-28 bg-navy-900 relative overflow-hidden">
-  <div class="absolute inset-0 bg-grid opacity-30" aria-hidden="true"></div>
-  <div class="absolute top-0 left-0 right-0 h-px glow-line" aria-hidden="true"></div>
-
-  <div class="relative z-10 max-w-7xl mx-auto px-4">
-    <div class="text-center mb-16 reveal">
-      <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-xs font-semibold text-electric-400 mb-6">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        Enterprise Pricing
-      </div>
-      <h2 class="font-heading text-4xl lg:text-5xl font-700 text-white mb-5">Pricing Built for Scale</h2>
-      <p class="text-slate-400 text-lg max-w-xl mx-auto">Flexible plans for teams of every size. All plans include onboarding, dedicated support, and a 30-day performance guarantee.</p>
-
-      <!-- Toggle -->
-      <div class="inline-flex items-center gap-3 glass rounded-full p-1 mt-8">
-        <button id="monthly-btn" class="px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 bg-electric-600 text-white cursor-pointer" aria-pressed="true">Monthly</button>
-        <button id="annual-btn" class="px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-white cursor-pointer" aria-pressed="false">
-          Annual
-          <span class="ml-2 text-xs bg-gold-500 text-white px-2 py-0.5 rounded-full">Save 25%</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-6 items-stretch">
-
-      <!-- Starter -->
-      <div class="glass card-hover rounded-2xl p-8 reveal flex flex-col">
-        <div class="mb-6">
-          <div class="font-heading font-600 text-electric-400 text-sm uppercase tracking-wider mb-2">Starter</div>
-          <div class="flex items-end gap-2 mb-1">
-            <span class="font-heading font-800 text-white text-5xl price-display" data-monthly="4,900" data-annual="3,675">$4,900</span>
-            <span class="text-slate-400 text-sm mb-2">/mo</span>
-          </div>
-          <div class="text-slate-500 text-sm">Billed monthly · Up to 5 users</div>
-        </div>
-        <ul class="space-y-3 mb-8 flex-1" role="list">
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            50 AI-generated ads / month
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            3 channels (Google, Meta, LinkedIn)
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Brand Intelligence Engine
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Standard analytics dashboard
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Email + chat support
-          </li>
-        </ul>
-        <a href="#" class="glass cursor-pointer text-white font-semibold px-6 py-3 rounded-xl text-center text-sm hover:border-electric-400 transition-colors duration-200">
-          Get Started
-        </a>
-      </div>
-
-      <!-- Professional — Popular -->
-      <div class="relative card-hover rounded-2xl p-8 reveal flex flex-col" style="background: linear-gradient(135deg, rgba(14,165,233,0.12) 0%, rgba(245,158,11,0.08) 100%); border: 1px solid rgba(245,158,11,0.4); transition-delay:0.1s">
-        <!-- Popular badge -->
-        <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-          <div class="badge-popular bg-gradient-to-r from-gold-500 to-gold-600 text-white text-xs font-700 px-5 py-1.5 rounded-full font-heading whitespace-nowrap">Most Popular</div>
-        </div>
-
-        <div class="mb-6 mt-2">
-          <div class="font-heading font-600 text-gold-400 text-sm uppercase tracking-wider mb-2">Professional</div>
-          <div class="flex items-end gap-2 mb-1">
-            <span class="font-heading font-800 text-white text-5xl price-display" data-monthly="12,900" data-annual="9,675">$12,900</span>
-            <span class="text-slate-400 text-sm mb-2">/mo</span>
-          </div>
-          <div class="text-slate-500 text-sm">Billed monthly · Up to 25 users</div>
-        </div>
-        <ul class="space-y-3 mb-8 flex-1" role="list">
-          <li class="flex items-start gap-3 text-sm text-slate-200">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Unlimited AI-generated ads
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-200">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            All 8+ channels incl. CTV & OOH
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-200">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Advanced audience segmentation AI
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-200">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Real-time ROAS & attribution
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-200">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Priority 24/7 support + CSM
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-200">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            SSO + SAML integration
-          </li>
-        </ul>
-        <a href="#" class="btn-gold cursor-pointer text-white font-semibold px-6 py-3 rounded-xl text-center text-sm">
-          Request Demo
-        </a>
-      </div>
-
-      <!-- Enterprise -->
-      <div class="glass card-hover rounded-2xl p-8 reveal flex flex-col" style="transition-delay:0.2s">
-        <div class="mb-6">
-          <div class="font-heading font-600 text-electric-400 text-sm uppercase tracking-wider mb-2">Enterprise</div>
-          <div class="flex items-end gap-2 mb-1">
-            <span class="font-heading font-800 text-white text-4xl">Custom</span>
-          </div>
-          <div class="text-slate-500 text-sm">Unlimited users · Private cloud</div>
-        </div>
-        <ul class="space-y-3 mb-8 flex-1" role="list">
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Everything in Professional
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Private cloud / on-premise deploy
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Custom AI model fine-tuning
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            SOC 2, ISO 27001, HIPAA compliance
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            Dedicated AI training team
-          </li>
-          <li class="flex items-start gap-3 text-sm text-slate-300">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-            99.99% SLA uptime guarantee
-          </li>
-        </ul>
-        <a href="#" class="glass cursor-pointer text-white font-semibold px-6 py-3 rounded-xl text-center text-sm hover:border-electric-400 transition-colors duration-200">
-          Contact Sales
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Trust badges -->
-    <div class="mt-14 flex flex-wrap items-center justify-center gap-6 reveal">
-      <div class="flex items-center gap-2 glass rounded-full px-4 py-2 text-xs text-slate-400">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        SOC 2 Type II
-      </div>
-      <div class="flex items-center gap-2 glass rounded-full px-4 py-2 text-xs text-slate-400">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        ISO 27001
-      </div>
-      <div class="flex items-center gap-2 glass rounded-full px-4 py-2 text-xs text-slate-400">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-        GDPR Compliant
-      </div>
-      <div class="flex items-center gap-2 glass rounded-full px-4 py-2 text-xs text-slate-400">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        99.99% Uptime SLA
-      </div>
-      <div class="flex items-center gap-2 glass rounded-full px-4 py-2 text-xs text-slate-400">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-        30-Day Guarantee
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════ CTA ═══════════════════════════════════ -->
-<section class="py-28 relative overflow-hidden">
-  <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(14,165,233,0.08) 0%, rgba(245,158,11,0.04) 50%, transparent 70%)" aria-hidden="true"></div>
-  <div class="absolute top-0 left-0 right-0 h-px glow-line" aria-hidden="true"></div>
-
-  <div class="relative z-10 max-w-4xl mx-auto px-4 text-center reveal">
-    <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-xs font-semibold text-gold-400 mb-8">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-      Schedule Your Demo
-    </div>
-
-    <h2 class="font-heading text-4xl lg:text-6xl font-800 text-white mb-6 leading-tight">
-      Ready to Transform<br/>Your <span class="grad-text">Ad Strategy?</span>
-    </h2>
-
-    <p class="text-slate-400 text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-      Join 500+ enterprise marketing teams that have accelerated growth with AdGenius AI. Get a personalized demo in 24 hours.
+    <!-- Upload note -->
+    <p style="text-align:center;margin-top:2rem;font-size:.8rem;color:#1E293B;font-style:italic;">
+      Videos above are placeholders. Replace with your actual AI-generated ad creatives.
     </p>
 
-    <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto mb-8" novalidate aria-label="Demo request form">
-      <label for="cta-email" class="sr-only">Work email address</label>
-      <input
-        id="cta-email"
-        type="email"
-        placeholder="Enter your work email"
-        autocomplete="email"
-        class="flex-1 glass rounded-xl px-5 py-4 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-electric-500 focus:border-transparent transition-all duration-200"
-        aria-required="true"
-      />
-      <button type="submit" class="btn-gold cursor-pointer text-white font-semibold px-8 py-4 rounded-xl text-sm whitespace-nowrap">
-        Book a Demo
-      </button>
-    </form>
-
-    <p class="text-slate-600 text-xs">No credit card required · Response within 24 hours · Cancel anytime</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════ -->
-<footer class="bg-navy-950 border-t border-slate-800 pt-16 pb-8">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
-      <!-- Brand -->
-      <div class="col-span-2 lg:col-span-2">
-        <div class="flex items-center gap-2 mb-4">
-          <div class="w-8 h-8 rounded-lg btn-primary flex items-center justify-center">
-            <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5 text-white" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <span class="font-heading font-700 text-lg text-white tracking-tight">AdGenius<span class="grad-text-gold font-800">AI</span></span>
+<!-- ══════════════════ STATS ══════════════════ -->
+<div style="padding:5rem 0;background:linear-gradient(135deg,rgba(11,20,37,.8),rgba(7,13,26,.9));border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);">
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem;" class="stats-grid">
+    <div class="reveal" style="text-align:center;">
+      <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:3rem;margin-bottom:.4rem;" class="grad-gold stat-val" data-count="120">0</div>
+      <div style="font-size:.875rem;color:#475569;">Campaigns Delivered</div>
+    </div>
+    <div class="reveal" style="text-align:center;transition-delay:.1s;">
+      <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:3rem;margin-bottom:.4rem;" class="grad-text stat-val" data-count="48">0</div>
+      <div style="font-size:.875rem;color:#475569;">Hour Proposal Turnaround</div>
+    </div>
+    <div class="reveal" style="text-align:center;transition-delay:.2s;">
+      <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:3rem;margin-bottom:.4rem;" class="grad-gold stat-val" data-count="14">0</div>
+      <div style="font-size:.875rem;color:#475569;">Industries Served</div>
+    </div>
+    <div class="reveal" style="text-align:center;transition-delay:.3s;">
+      <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:3rem;margin-bottom:.4rem;" class="grad-text">100%</div>
+      <div style="font-size:.875rem;color:#475569;">Custom per Brief</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ HOW IT WORKS ══════════════════ -->
+<section id="process" style="padding:7rem 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;" class="bg-grid" aria-hidden="true" style="opacity:.4;"></div>
+
+  <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+    <div style="text-align:center;margin-bottom:4.5rem;" class="reveal">
+      <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:1.5rem;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;" class="glass">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px" aria-hidden="true"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        How It Works
+      </div>
+      <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:white;margin-bottom:1rem;">
+        Simple. Fast. <span class="grad-text">Stunning.</span>
+      </h2>
+      <p style="font-size:1.05rem;color:#64748B;max-width:500px;margin:0 auto;">No platform to learn. No subscriptions. Just brief us and we take it from there.</p>
+    </div>
+
+    <!-- Steps -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;position:relative;">
+
+      <div class="reveal glass" style="border-radius:20px;padding:2rem 1.75rem;text-align:center;position:relative;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-family:'Lexend',sans-serif;font-weight:800;font-size:1.2rem;color:white;">1</div>
+        <div style="position:absolute;top:.75rem;right:.75rem;font-size:1.75rem;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.2)" stroke-width="1" style="width:36px;height:36px"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
         </div>
-        <p class="text-slate-500 text-sm leading-relaxed max-w-xs mb-6">
-          The enterprise AI advertising platform that turns strategy into performance at scale.
-        </p>
-        <div class="flex gap-3">
-          <a href="#" aria-label="LinkedIn" class="w-9 h-9 glass rounded-lg flex items-center justify-center text-slate-500 hover:text-electric-400 hover:border-electric-500 transition-all duration-200 cursor-pointer">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="#" aria-label="Twitter / X" class="w-9 h-9 glass rounded-lg flex items-center justify-center text-slate-500 hover:text-electric-400 hover:border-electric-500 transition-all duration-200 cursor-pointer">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a href="#" aria-label="YouTube" class="w-9 h-9 glass rounded-lg flex items-center justify-center text-slate-500 hover:text-gold-400 hover:border-gold-500 transition-all duration-200 cursor-pointer">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          </a>
+        <h3 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;margin-bottom:.75rem;">Share Your Brief</h3>
+        <p style="font-size:.875rem;color:#64748B;line-height:1.65;">Contact us via <strong style="color:#94A3B8;">WhatsApp or email</strong> with your product, audience, goals and any brand assets.</p>
+      </div>
+
+      <div class="reveal glass" style="border-radius:20px;padding:2rem 1.75rem;text-align:center;transition-delay:.12s;position:relative;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#0EA5E9,#0284C7);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-family:'Lexend',sans-serif;font-weight:800;font-size:1.2rem;color:white;">2</div>
+        <div style="position:absolute;top:.75rem;right:.75rem;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,.2)" stroke-width="1" style="width:36px;height:36px"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
         </div>
+        <h3 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;margin-bottom:.75rem;">We Send a Proposal</h3>
+        <p style="font-size:.875rem;color:#64748B;line-height:1.65;">Within <strong style="color:#94A3B8;">48 hours</strong> you receive a full creative proposal: concept, format, timeline and pricing.</p>
       </div>
 
-      <!-- Product -->
-      <div>
-        <h4 class="font-heading font-600 text-white text-sm mb-4">Product</h4>
-        <ul class="space-y-3 text-sm text-slate-500">
-          <li><a href="#features" class="hover:text-white transition-colors cursor-pointer">Features</a></li>
-          <li><a href="#pricing" class="hover:text-white transition-colors cursor-pointer">Pricing</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Integrations</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Changelog</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Roadmap</a></li>
-        </ul>
+      <div class="reveal glass" style="border-radius:20px;padding:2rem 1.75rem;text-align:center;transition-delay:.24s;position:relative;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-family:'Lexend',sans-serif;font-weight:800;font-size:1.2rem;color:white;">3</div>
+        <div style="position:absolute;top:.75rem;right:.75rem;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.2)" stroke-width="1" style="width:36px;height:36px"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <h3 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;margin-bottom:.75rem;">We Produce the Ads</h3>
+        <p style="font-size:.875rem;color:#64748B;line-height:1.65;">Our AI production team crafts your campaign — video, copy, motion graphics — fully on-brand and ready to publish.</p>
       </div>
 
-      <!-- Company -->
-      <div>
-        <h4 class="font-heading font-600 text-white text-sm mb-4">Company</h4>
-        <ul class="space-y-3 text-sm text-slate-500">
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">About Us</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Careers</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Press</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Blog</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Contact</a></li>
-        </ul>
+      <div class="reveal glass" style="border-radius:20px;padding:2rem 1.75rem;text-align:center;transition-delay:.36s;position:relative;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#0EA5E9,#0284C7);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-family:'Lexend',sans-serif;font-weight:800;font-size:1.2rem;color:white;">4</div>
+        <div style="position:absolute;top:.75rem;right:.75rem;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,.2)" stroke-width="1" style="width:36px;height:36px"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h3 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;margin-bottom:.75rem;">You Receive &amp; Launch</h3>
+        <p style="font-size:.875rem;color:#64748B;line-height:1.65;">Receive final deliverables in all formats needed. We also support with platform setup and launch if required.</p>
       </div>
 
-      <!-- Legal -->
-      <div>
-        <h4 class="font-heading font-600 text-white text-sm mb-4">Legal</h4>
-        <ul class="space-y-3 text-sm text-slate-500">
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Privacy Policy</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Terms of Service</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Security</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Cookie Policy</a></li>
-          <li><a href="#" class="hover:text-white transition-colors cursor-pointer">GDPR</a></li>
-        </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ INDUSTRIES ══════════════════ -->
+<section id="industries" style="padding:7rem 0;background:rgba(7,13,26,.7);">
+  <div style="position:absolute;inset:0;" class="glow-line" aria-hidden="true"></div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="reveal">
+      <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:1.5rem;font-size:.75rem;font-weight:600;color:#F59E0B;font-family:'Lexend',sans-serif;" class="glass-gold">Industries</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:1rem;">We Speak <span class="grad-gold">Every Industry's</span> Language</h2>
+      <p style="font-size:1rem;color:#64748B;max-width:480px;margin:0 auto;">Our AI production team is briefed on sector-specific tone, compliance needs and audience behaviour.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;">
+      <!-- Industry cards -->
+      <div class="glass-gold reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(245,158,11,.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">FMCG &amp; Retail</span>
+      </div>
+
+      <div class="glass reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''" style="transition-delay:.05s">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Real Estate</span>
+      </div>
+
+      <div class="glass-gold reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''" style="transition-delay:.1s">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Hospitality &amp; Tourism</span>
+      </div>
+
+      <div class="glass reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''" style="transition-delay:.15s">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Healthcare</span>
+      </div>
+
+      <div class="glass-gold reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''" style="transition-delay:.2s">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Financial Services</span>
+      </div>
+
+      <div class="glass reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''" style="transition-delay:.25s">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Automotive</span>
+      </div>
+
+      <div class="glass-gold reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''" style="transition-delay:.3s">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a1 1 0 01-1-1V6a1 1 0 011-1h14a1 1 0 011 1v1m1 9v2a1 1 0 01-1 1h-1"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Technology</span>
+      </div>
+
+      <div class="glass reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''" style="transition-delay:.35s">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Education</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CTA / CONTACT ══════════════════ -->
+<section id="contact" style="padding:7rem 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,165,233,.06) 0%,rgba(245,158,11,.04) 50%,transparent 70%);pointer-events:none;" aria-hidden="true"></div>
+  <div style="position:absolute;top:0;left:0;right:0;" class="glow-line" aria-hidden="true"></div>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 1.5rem;text-align:center;" class="reveal">
+    <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:1.75rem;font-size:.75rem;font-weight:600;color:#F59E0B;font-family:'Lexend',sans-serif;" class="glass-gold">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px" aria-hidden="true"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+      Get in Touch
+    </div>
+
+    <h2 style="font-size:clamp(2.2rem,5vw,4rem);font-weight:900;color:white;margin-bottom:1.25rem;letter-spacing:-.03em;line-height:1.1;">
+      Ready to Create Ads<br/>That <span class="grad-text">Stop the Scroll?</span>
+    </h2>
+
+    <p style="font-size:1.1rem;color:#64748B;max-width:560px;margin:0 auto 3rem;line-height:1.75;">
+      Share your campaign brief with us — we'll review it and send back a <strong style="color:#94A3B8;">personalised proposal within 48 hours.</strong> No commitments, no platform signups.
+    </p>
+
+    <!-- Two CTA options -->
+    <div style="display:flex;flex-wrap:wrap;gap:1.25rem;justify-content:center;margin-bottom:3rem;">
+      <a href="https://wa.me/971000000000?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20discuss%20an%20advertising%20campaign%20for%20my%20company." target="_blank" rel="noopener noreferrer" class="btn-wa"
+        style="display:inline-flex;align-items:center;gap:.75rem;padding:1.1rem 2.25rem;border-radius:1rem;font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us Your Brief
+      </a>
+
+      <a href="mailto:info@zachglobalfzc.com?subject=Ad%20Campaign%20Enquiry&body=Hi%20Zach%20Global%20Studio%2C%0A%0AI%27d%20like%20to%20discuss%20an%20advertising%20campaign.%0A%0ACompany%3A%20%0AProduct%2FService%3A%20%0ATarget%20Audience%3A%20%0ABudget%20Range%3A%20%0ATimeline%3A%20%0A%0AThank%20you" class="btn-gold"
+        style="display:inline-flex;align-items:center;gap:.75rem;padding:1.1rem 2.25rem;border-radius:1rem;font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Email Your Brief
+      </a>
+    </div>
+
+    <!-- Contact detail cards -->
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+      <div class="glass" style="border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        <span style="font-size:.875rem;color:#94A3B8;">info@zachglobalfzc.com</span>
+      </div>
+      <div class="glass" style="border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;">
+        <svg viewBox="0 0 24 24" fill="#25D366" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span style="font-size:.875rem;color:#94A3B8;">WhatsApp: +971 XX XXX XXXX</span>
+      </div>
+      <div class="glass" style="border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <span style="font-size:.875rem;color:#94A3B8;">Dubai, UAE · FZC</span>
       </div>
     </div>
 
-    <div class="glow-line mb-8" aria-hidden="true"></div>
+    <p style="margin-top:2rem;font-size:.78rem;color:#1E293B;">Response within 24 hours · No commitment required · 100% confidential brief</p>
+  </div>
+</section>
 
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
-      <p>&copy; 2026 <a href="https://zachglobalfzc.com" target="_blank" rel="noopener noreferrer" class="hover:text-slate-400 transition-colors cursor-pointer">Zach Global FZC</a>. All rights reserved.</p>
-      <p>
-        <a href="https://zachglobalfzc.com" target="_blank" rel="noopener noreferrer" class="hover:text-slate-400 transition-colors cursor-pointer">zachglobalfzc.com</a>
-        &nbsp;·&nbsp; info@zachglobalfzc.com
-      </p>
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer style="background:#04070F;border-top:1px solid rgba(255,255,255,.05);padding:3rem 1.5rem 2rem;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;">
+    <div>
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;">
+        <div style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#0EA5E9,#0284C7);display:flex;align-items:center;justify-content:center;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:16px;height:16px"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:.95rem;color:white;">Zach Global <span style="background:linear-gradient(135deg,#FBBF24,#F97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Studio</span></span>
+      </div>
+      <p style="font-size:.78rem;color:#334155;">AI Ad Production · Dubai, UAE</p>
     </div>
+
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+      <a href="#work" style="font-size:.8rem;color:#334155;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#334155'">Our Work</a>
+      <a href="#process" style="font-size:.8rem;color:#334155;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#334155'">Process</a>
+      <a href="https://zachglobalfzc.com" target="_blank" rel="noopener noreferrer" style="font-size:.8rem;color:#334155;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#334155'">Main Site</a>
+      <a href="mailto:info@zachglobalfzc.com" style="font-size:.8rem;color:#334155;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#334155'">Contact</a>
+    </div>
+
+    <p style="font-size:.75rem;color:#1E293B;">&copy; 2026 <a href="https://zachglobalfzc.com" target="_blank" rel="noopener noreferrer" style="color:#1E293B;text-decoration:none;">Zach Global FZC</a>. All rights reserved.</p>
   </div>
 </footer>
 
-<!-- ═══════════════════════════════════ JAVASCRIPT ═══════════════════════════════════ -->
+<!-- ══════════════════ VIDEO MODAL ══════════════════ -->
+<div id="video-modal" role="dialog" aria-modal="true" aria-label="Video player" onclick="closeModal(event)">
+  <div style="position:relative;width:90vw;max-width:900px;">
+    <button onclick="closeModal()" aria-label="Close video"
+      style="position:absolute;top:-2.5rem;right:0;background:none;border:none;cursor:pointer;color:#94A3B8;font-size:1.5rem;line-height:1;padding:.25rem .5rem;transition:color .2s;"
+      onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">✕</button>
+    <div id="modal-title" style="position:absolute;top:-2.25rem;left:0;font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#64748B;"></div>
+    <video id="modal-video" controls style="width:100%;border-radius:12px;outline:none;box-shadow:0 0 80px rgba(0,0,0,.8);" aria-label="Campaign video"></video>
+  </div>
+</div>
+
+<!-- ══════════════════ WHATSAPP FLOAT ══════════════════ -->
+<a id="wa-float" href="https://wa.me/971000000000?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20enquire%20about%20an%20ad%20campaign." target="_blank" rel="noopener noreferrer" class="btn-wa" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" style="width:28px;height:28px" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ══════════════════ JAVASCRIPT ══════════════════ -->
 <script>
-  // ── Ticker duplicate ──
-  (function() {
-    const tpl = document.getElementById('logo-tpl');
-    const track = document.querySelector('.ticker-track');
-    if (tpl && track) {
-      const html = tpl.innerHTML;
-      track.innerHTML = html + html; // duplicate for seamless loop
+// ── Responsive show/hide nav elements ──
+(function() {
+  function applyResponsive() {
+    const w = window.innerWidth;
+    const deskNav = document.getElementById('desk-nav');
+    const deskCta = document.getElementById('desk-cta');
+    const heroVisual = document.getElementById('hero-visual');
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const backLinks = document.querySelectorAll('.sm-flex');
+
+    if (w >= 768) {
+      deskNav.style.display = 'flex';
+      deskCta.style.display = 'flex';
+      menuBtn.style.display = 'none';
+      backLinks.forEach(el => el.style.display = 'flex');
+    } else {
+      deskNav.style.display = 'none';
+      deskCta.style.display = 'none';
+      menuBtn.style.display = 'block';
+      backLinks.forEach(el => el.style.display = 'none');
     }
-  })();
-
-  // ── Navbar scroll ──
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
-
-  // ── Mobile menu ──
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('icon-open');
-  const iconClose = document.getElementById('icon-close');
-  let menuOpen = false;
-
-  menuBtn.addEventListener('click', () => {
-    menuOpen = !menuOpen;
-    mobileMenu.classList.toggle('open', menuOpen);
-    iconOpen.classList.toggle('hidden', menuOpen);
-    iconClose.classList.toggle('hidden', !menuOpen);
-    menuBtn.setAttribute('aria-expanded', menuOpen);
-  });
-
-  document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => {
-      menuOpen = false;
-      mobileMenu.classList.remove('open');
-      iconOpen.classList.remove('hidden');
-      iconClose.classList.add('hidden');
-      menuBtn.setAttribute('aria-expanded', false);
-    });
-  });
-
-  // ── Intersection Observer for reveal ──
-  const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => observer.observe(el));
-
-  // ── Animated counters ──
-  function animateCount(el, target, duration) {
-    const start = performance.now();
-    const isDecimal = String(target).includes('.');
-    function update(now) {
-      const t = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - t, 3);
-      const val = Math.round(ease * target);
-      el.textContent = val.toLocaleString() + (el.dataset.suffix || '');
-      if (t < 1) requestAnimationFrame(update);
+    if (w >= 1024) {
+      heroVisual.style.display = 'flex';
+      document.querySelector('.hero-grid').style.gridTemplateColumns = '1fr 1fr';
+    } else {
+      heroVisual.style.display = 'none';
+      document.querySelector('.hero-grid').style.gridTemplateColumns = '1fr';
     }
-    requestAnimationFrame(update);
+    if (w >= 768) {
+      document.querySelector('.stats-grid').style.gridTemplateColumns = 'repeat(4,1fr)';
+    } else {
+      document.querySelector('.stats-grid').style.gridTemplateColumns = 'repeat(2,1fr)';
+    }
+  }
+  applyResponsive();
+  window.addEventListener('resize', applyResponsive);
+})();
+
+// ── Navbar scroll ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 50), {passive:true});
+
+// ── Mobile menu ──
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const icoOpen = document.getElementById('ico-open');
+const icoClose = document.getElementById('ico-close');
+let menuOpen = false;
+menuBtn.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.classList.toggle('open', menuOpen);
+  icoOpen.style.display = menuOpen ? 'none' : 'block';
+  icoClose.style.display = menuOpen ? 'block' : 'none';
+  menuBtn.setAttribute('aria-expanded', menuOpen);
+});
+document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
+  menuOpen = false; mobileMenu.classList.remove('open');
+  icoOpen.style.display = 'block'; icoClose.style.display = 'none';
+  menuBtn.setAttribute('aria-expanded', false);
+}));
+
+// ── Scroll reveal ──
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); ro.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => ro.observe(el));
+
+// ── Animated counters ──
+function countUp(el, target, duration) {
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target).toLocaleString();
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const cro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const t = parseInt(e.target.dataset.count);
+      if (!isNaN(t)) countUp(e.target, t, 1600);
+      cro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => cro.observe(el));
+
+// Hero counter special
+const heroCounter = document.getElementById('hero-counter');
+if (heroCounter) countUp(heroCounter, 120, 2200);
+
+// ── Typewriter ──
+const words = ['Convert', 'Captivate', 'Go Viral', 'Build Brands', 'Drive Sales'];
+let wi = 0, ci = 0, deleting = false;
+const tw = document.getElementById('typewriter');
+function typeLoop() {
+  const word = words[wi];
+  if (!deleting) {
+    tw.textContent = word.slice(0, ++ci);
+    if (ci === word.length) { deleting = true; setTimeout(typeLoop, 1600); return; }
+    setTimeout(typeLoop, 80);
+  } else {
+    tw.textContent = word.slice(0, --ci);
+    if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(typeLoop, 300); return; }
+    setTimeout(typeLoop, 45);
+  }
+}
+typeLoop();
+
+// ── Particle canvas ──
+(function() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - .5) * .35;
+      this.vy = (Math.random() - .5) * .35;
+      this.r = Math.random() * 1.5 + .3;
+      this.alpha = Math.random() * .4 + .1;
+      this.color = Math.random() > .5 ? '56,189,248' : '245,158,11';
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
+      ctx.fill();
+    }
   }
 
-  const countObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const el = e.target;
-        const target = parseInt(el.dataset.count, 10);
-        if (!isNaN(target)) animateCount(el, target, 1800);
-        countObserver.unobserve(el);
+  for (let i = 0; i < 90; i++) particles.push(new Particle());
+
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 110) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(56,189,248,${(.06 * (1 - dist/110))})`;
+          ctx.lineWidth = .5;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
       }
-    });
-  }, { threshold: 0.5 });
-
-  document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
-
-  // ── Pricing toggle ──
-  const monthlyBtn = document.getElementById('monthly-btn');
-  const annualBtn = document.getElementById('annual-btn');
-  const priceDisplays = document.querySelectorAll('.price-display');
-  let isAnnual = false;
-
-  function updatePrices(annual) {
-    priceDisplays.forEach(el => {
-      const val = annual ? el.dataset.annual : el.dataset.monthly;
-      el.textContent = val ? '$' + val : el.textContent;
-    });
+    }
   }
 
-  monthlyBtn.addEventListener('click', () => {
-    if (isAnnual) {
-      isAnnual = false;
-      updatePrices(false);
-      monthlyBtn.classList.add('bg-electric-600', 'text-white');
-      monthlyBtn.classList.remove('text-slate-400');
-      annualBtn.classList.remove('bg-electric-600', 'text-white');
-      annualBtn.classList.add('text-slate-400');
-      monthlyBtn.setAttribute('aria-pressed', 'true');
-      annualBtn.setAttribute('aria-pressed', 'false');
-    }
-  });
-
-  annualBtn.addEventListener('click', () => {
-    if (!isAnnual) {
-      isAnnual = true;
-      updatePrices(true);
-      annualBtn.classList.add('bg-electric-600', 'text-white');
-      annualBtn.classList.remove('text-slate-400');
-      monthlyBtn.classList.remove('bg-electric-600', 'text-white');
-      monthlyBtn.classList.add('text-slate-400');
-      annualBtn.setAttribute('aria-pressed', 'true');
-      monthlyBtn.setAttribute('aria-pressed', 'false');
-    }
-  });
-
-  // ── CTA form ──
-  const ctaForm = document.querySelector('form[aria-label="Demo request form"]');
-  if (ctaForm) {
-    ctaForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = ctaForm.querySelector('input[type="email"]');
-      const btn = ctaForm.querySelector('button[type="submit"]');
-      if (!input.value || !input.value.includes('@')) {
-        input.focus();
-        input.style.borderColor = '#EF4444';
-        input.setAttribute('aria-invalid', 'true');
-        return;
-      }
-      btn.textContent = 'Request Sent!';
-      btn.disabled = true;
-      btn.style.opacity = '0.7';
-      input.value = '';
-    });
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawLines();
+    requestAnimationFrame(animate);
   }
+  animate();
+})();
 
-  // Trigger hero reveal immediately
-  document.getElementById('hero-copy')?.classList.add('visible');
+// ── Marquee duplicate ──
+(function() {
+  const track = document.getElementById('marquee-track');
+  if (track) track.innerHTML += track.innerHTML;
+})();
+
+// ── Video Modal ──
+function openModal(src, title) {
+  const modal = document.getElementById('video-modal');
+  const video = document.getElementById('modal-video');
+  const titleEl = document.getElementById('modal-title');
+  video.src = src;
+  if (titleEl) titleEl.textContent = title || '';
+  modal.classList.add('active');
+  video.play();
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('video-modal') && !e.target.closest('button[onclick]')) return;
+  const modal = document.getElementById('video-modal');
+  const video = document.getElementById('modal-video');
+  modal.classList.remove('active');
+  video.pause();
+  video.src = '';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal({}); });
+// Fix close button
+document.querySelector('#video-modal button').addEventListener('click', () => closeModal({}));
 </script>
 
 </body>
