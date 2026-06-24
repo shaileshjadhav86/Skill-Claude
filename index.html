@@ -1,1205 +1,932 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zach Global Studio — We Create. Brands Captivate.</title>
-  <meta name="description" content="Premium AI-powered creative production studio. We craft cinematic video ads for leading corporations. Share your brief — we deliver world-class creative." />
+  <title>Zach Global Studio — AI-Crafted Advertising</title>
+  <meta name="description" content="We create stunning AI-powered video ads and campaigns for leading corporations. Share your brief, we deliver world-class creative." />
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lexend:wght@300;400;500;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
+
   <style>
-    /* ── Tokens ──────────────────────────────────────────────── */
     :root {
-      --black:      #080808;
-      --surface:    #111111;
-      --surface2:   #181818;
-      --gold:       #C9A84C;
-      --gold-light: #E8C97A;
-      --gold-dim:   rgba(201,168,76,.18);
-      --text:       #E0D9CF;
-      --muted:      #7A7268;
-      --white:      #F5F0E8;
+      --gold: #F59E0B;
+      --gold-light: #FBBF24;
+      --electric: #0EA5E9;
+      --electric-light: #38BDF8;
+      --navy: #04070F;
+      --navy-mid: #070D1A;
+      --navy-card: rgba(11,20,37,0.75);
     }
-
-    /* ── Reset ───────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { font-size: 16px; }
     body {
-      background: var(--black);
-      color: var(--text);
+      background: var(--navy);
+      color: #CBD5E1;
       font-family: 'Source Sans 3', sans-serif;
-      font-weight: 300;
-      line-height: 1.7;
       overflow-x: hidden;
+      line-height: 1.6;
     }
-    img, video { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
+    h1,h2,h3,h4,h5 { font-family: 'Lexend', sans-serif; line-height: 1.15; }
 
-    /* ── Typography ──────────────────────────────────────────── */
-    .font-display { font-family: 'Cormorant Garamond', serif; }
-    .font-ui      { font-family: 'Lexend', sans-serif; }
-    h1,h2,h3,h4  { font-family: 'Cormorant Garamond', serif; font-weight: 400; line-height: 1.1; }
-    .label {
-      font-family: 'Lexend', sans-serif;
-      font-size: .72rem;
-      font-weight: 500;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
+    /* ── Utilities ── */
+    .grad-text { background: linear-gradient(135deg, #38BDF8 20%, #FBBF24 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .grad-gold { background: linear-gradient(135deg, #FBBF24, #F97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: var(--navy-card); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(56,189,248,0.1); }
+    .glass-gold { background: var(--navy-card); backdrop-filter: blur(18px); border: 1px solid rgba(245,158,11,0.18); }
+    .glow-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(56,189,248,0.4), rgba(245,158,11,0.4), transparent); }
+    .bg-grid { background-image: linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px); background-size: 56px 56px; }
 
-    /* ── Navbar ──────────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.25rem 4vw;
-      transition: background .4s, backdrop-filter .4s;
-    }
-    nav.scrolled {
-      background: rgba(8,8,8,.88);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(201,168,76,.12);
-    }
-    .nav-logo {
-      font-family: 'Lexend', sans-serif;
-      font-size: .9rem;
-      font-weight: 600;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--white);
-    }
-    .nav-logo span { color: var(--gold); font-weight: 300; }
-    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
-    .nav-links a {
-      font-family: 'Lexend', sans-serif;
-      font-size: .8rem;
-      font-weight: 400;
-      letter-spacing: .08em;
-      color: var(--muted);
-      transition: color .25s;
-    }
-    .nav-links a:hover { color: var(--gold-light); }
-    .btn-nav {
-      font-family: 'Lexend', sans-serif;
-      font-size: .78rem;
-      font-weight: 500;
-      letter-spacing: .1em;
-      padding: .55rem 1.5rem;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      border-radius: 2px;
-      transition: background .25s, color .25s;
-    }
-    .btn-nav:hover { background: var(--gold); color: var(--black); }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .nav-toggle span { width: 24px; height: 1px; background: var(--white); transition: .3s; }
+    /* ── Buttons ── */
+    .btn-wa { background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 0 28px rgba(37,211,102,0.35); transition: all .25s; }
+    .btn-wa:hover { box-shadow: 0 0 48px rgba(37,211,102,0.6); transform: translateY(-2px); }
+    .btn-gold { background: linear-gradient(135deg, #F59E0B, #D97706); box-shadow: 0 0 28px rgba(245,158,11,0.35); transition: all .25s; }
+    .btn-gold:hover { box-shadow: 0 0 48px rgba(245,158,11,0.6); transform: translateY(-2px); }
+    .btn-outline { border: 1px solid rgba(56,189,248,0.3); transition: all .25s; }
+    .btn-outline:hover { border-color: rgba(56,189,248,0.7); background: rgba(56,189,248,0.06); transform: translateY(-2px); }
 
-    /* ── Hero ────────────────────────────────────────────────── */
-    #hero {
-      position: relative;
-      height: 100vh;
-      min-height: 620px;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 9rem 4vw 5rem;
-      overflow: hidden;
-    }
-    .hero-video-bg {
-      position: absolute; inset: 0; z-index: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0; z-index: 1;
-      background:
-        linear-gradient(to top, rgba(8,8,8,.98) 0%, rgba(8,8,8,.6) 40%, rgba(8,8,8,.25) 70%, rgba(8,8,8,.55) 100%),
-        linear-gradient(to right, rgba(8,8,8,.7) 0%, rgba(8,8,8,.1) 65%, transparent 100%);
-    }
-    .hero-vignette {
-      position: absolute; inset: 0; z-index: 2;
-      background: radial-gradient(ellipse 120% 80% at 50% 100%, rgba(201,168,76,.05) 0%, transparent 70%);
-    }
-    .hero-scanlines {
-      position: absolute; inset: 0; z-index: 2; pointer-events: none;
-      background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.025) 2px, rgba(0,0,0,.025) 4px);
-    }
-    .hero-content {
-      position: relative; z-index: 3; max-width: 760px;
-    }
+    /* ── Navbar ── */
+    #navbar { transition: background .3s, box-shadow .3s; position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 1.5rem; }
+    #navbar.scrolled { background: rgba(4,7,15,0.96); backdrop-filter: blur(20px); box-shadow: 0 1px 0 rgba(56,189,248,0.08); }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    #mobile-menu.open { max-height: 480px; }
 
-    /* Eyebrow — static, fades in */
-    .hero-eyebrow {
-      margin-bottom: 1.2rem;
-      overflow: hidden;
-    }
-    .hero-eyebrow .label {
-      display: block;
-      opacity: 0;
-      animation: swipeUp .65s cubic-bezier(.22,1,.36,1) .3s forwards;
+    /* ── Hero ── */
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.18; }
+    .hero-bg-fallback { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(14,165,233,0.12) 0%, transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(245,158,11,0.08) 0%, transparent 55%); }
+
+    /* Particle canvas */
+    #particles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+
+    /* Typewriter cursor */
+    .cursor { display: inline-block; width: 3px; height: 1em; background: #F59E0B; margin-left: 4px; animation: blink .8s step-end infinite; vertical-align: middle; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.up { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-left.up { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-right.up { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(.88); transition: opacity .65s ease, transform .65s ease; }
+    .reveal-scale.up { opacity: 1; transform: scale(1); }
+
+    /* ── Video portfolio ── */
+    .video-card { position: relative; overflow: hidden; border-radius: 16px; cursor: pointer; }
+    .video-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,7,15,.85) 0%, transparent 50%); pointer-events: none; transition: opacity .3s; }
+    .video-card:hover::after { opacity: .6; }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .video-card:hover video { transform: scale(1.04); }
+    .video-card .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 10; width: 60px; height: 60px; border-radius: 50%; background: rgba(245,158,11,0.9); display: flex; align-items: center; justify-content: center; transition: all .25s; }
+    .video-card:hover .play-btn { transform: translate(-50%,-50%) scale(1.15); background: rgba(245,158,11,1); box-shadow: 0 0 30px rgba(245,158,11,0.6); }
+    .video-card .card-info { position: absolute; bottom: 0; left: 0; right: 0; z-index: 10; padding: 1.25rem 1.5rem; }
+
+    /* ── Marquee ── */
+    .marquee-wrap { overflow: hidden; }
+    .marquee-track { display: flex; gap: 3rem; animation: marquee 28s linear infinite; width: max-content; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── Floating badge ── */
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .float { animation: floatY 5s ease-in-out infinite; }
+    .float-2 { animation: floatY 7s ease-in-out infinite; animation-delay: -2s; }
+    .float-3 { animation: floatY 6s ease-in-out infinite; animation-delay: -1s; }
+
+    /* ── Glow pulse ── */
+    @keyframes glowPulse { 0%,100%{box-shadow:0 0 20px rgba(14,165,233,.25)} 50%{box-shadow:0 0 50px rgba(14,165,233,.55)} }
+    .glow-pulse { animation: glowPulse 3s ease-in-out infinite; }
+
+    /* ── Counter ── */
+    .stat-val { font-variant-numeric: tabular-nums; }
+
+    /* ── Video modal ── */
+    #video-modal { position: fixed; inset: 0; z-index: 999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.88); backdrop-filter: blur(8px); }
+    #video-modal.active { display: flex; }
+    #modal-video { width: 90vw; max-width: 900px; border-radius: 12px; outline: none; box-shadow: 0 0 80px rgba(0,0,0,.8); }
+
+    /* ── WhatsApp float ── */
+    #wa-float { position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 90; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform .2s; }
+    #wa-float:hover { transform: scale(1.12); }
+
+    /* ── Process step connector ── */
+    .step-connector { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(245,158,11,.4), rgba(56,189,248,.4)); margin: 0 .5rem; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
 
-    /* Headline — each line clips and swipes up independently */
-    h1.hero-title {
-      font-size: clamp(3rem, 7vw, 6.5rem);
-      font-weight: 300;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-      line-height: 1.08;
-    }
-    .title-line {
-      display: block;
-      overflow: hidden;
-    }
-    .title-line span {
-      display: block;
-      opacity: 0;
-      transform: translateY(100%);
-      animation: swipeUp .75s cubic-bezier(.22,1,.36,1) forwards;
-    }
-    .title-line:nth-child(1) span { animation-delay: .55s; }
-    .title-line:nth-child(2) span { animation-delay: .75s; color: var(--gold-light); font-style: italic; }
-
-    /* Gold rule */
-    .hero-rule {
-      width: 0; height: 1px;
-      background: linear-gradient(to right, var(--gold), transparent);
-      margin-bottom: 1.5rem;
-      animation: expandLine .7s ease 1.15s forwards;
-    }
-
-    /* Sub + CTAs — swipe up with delay */
-    .hero-sub {
-      font-size: clamp(.95rem, 1.4vw, 1.15rem);
-      color: rgba(224,217,207,.75);
-      max-width: 500px;
-      margin-bottom: 2.5rem;
-      font-weight: 300;
-      opacity: 0;
-      animation: swipeUp .65s cubic-bezier(.22,1,.36,1) 1.25s forwards;
-    }
-    .hero-ctas {
-      display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;
-      opacity: 0;
-      animation: swipeUp .65s cubic-bezier(.22,1,.36,1) 1.45s forwards;
-    }
-    .btn-primary {
-      font-family: 'Lexend', sans-serif;
-      font-size: .85rem;
-      font-weight: 500;
-      letter-spacing: .1em;
-      padding: .9rem 2.5rem;
-      background: var(--gold);
-      color: var(--black);
-      border: none;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: background .25s, transform .2s;
-      display: inline-flex; align-items: center; gap: .6rem;
-    }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .btn-secondary {
-      font-family: 'Lexend', sans-serif;
-      font-size: .85rem;
-      font-weight: 400;
-      letter-spacing: .1em;
-      padding: .9rem 2.5rem;
-      background: transparent;
-      color: var(--text);
-      border: 1px solid rgba(201,168,76,.3);
-      border-radius: 2px;
-      cursor: pointer;
-      transition: border-color .25s, color .25s;
-      display: inline-flex; align-items: center; gap: .6rem;
-    }
-    .btn-secondary:hover { border-color: var(--gold); color: var(--gold-light); }
-
-    .hero-stats {
-      display: flex; gap: 3rem; flex-wrap: wrap;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(201,168,76,.15);
-      opacity: 0;
-      animation: swipeUp .65s cubic-bezier(.22,1,.36,1) 1.65s forwards;
-    }
-    .stat-item .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.4rem;
-      font-weight: 400;
-      color: var(--gold-light);
-      line-height: 1;
-    }
-    .stat-item .stat-label {
-      font-size: .75rem;
-      color: var(--muted);
-      letter-spacing: .06em;
-      margin-top: .3rem;
-    }
-
-    /* Scroll indicator */
-    .hero-scroll {
-      position: absolute; bottom: 2rem; right: 4vw; z-index: 3;
-      display: flex; flex-direction: column; align-items: center; gap: .5rem;
-      opacity: 0;
-      animation: fadeIn 1s ease 2.5s forwards;
-    }
-    .hero-scroll span {
-      font-family: 'Lexend', sans-serif;
-      font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--muted);
-      writing-mode: vertical-rl;
-    }
-    .hero-scroll-line {
-      width: 1px; height: 50px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scrollPulse 2s ease-in-out 3s infinite;
-    }
-
-    /* Keyframes */
-    @keyframes swipeUp {
-      from { opacity: 0; transform: translateY(100%); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes expandLine {
-      from { width: 0; }
-      to   { width: 120px; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
-    }
-    @keyframes scrollPulse {
-      0%, 100% { transform: scaleY(1); opacity: .5; }
-      50% { transform: scaleY(1.3); opacity: 1; }
-    }
-
-    /* ── Marquee ─────────────────────────────────────────────── */
-    .marquee-wrap {
-      overflow: hidden;
-      padding: 1.5rem 0;
-      border-top: 1px solid rgba(201,168,76,.1);
-      border-bottom: 1px solid rgba(201,168,76,.1);
-      background: rgba(201,168,76,.03);
-    }
-    .marquee-track {
-      display: flex; gap: 3rem; width: max-content;
-      animation: marquee 28s linear infinite;
-    }
-    .marquee-track span {
-      font-family: 'Lexend', sans-serif;
-      font-size: .75rem;
-      font-weight: 300;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .marquee-track span.dot { color: var(--gold); font-size: 1rem; }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    /* ── Section shell ───────────────────────────────────────── */
-    section { padding: 7rem 4vw; }
-    .section-header { margin-bottom: 4rem; }
-    .section-header h2 {
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      font-weight: 300;
-      color: var(--white);
-      margin-top: .75rem;
-    }
-    .section-header p {
-      margin-top: 1rem;
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 560px;
-    }
-
-    /* ── Video Portfolio ─────────────────────────────────────── */
-    #portfolio { background: var(--surface); }
-
-    /* 16:9 featured */
-    .reel-16-9 {
-      aspect-ratio: 16 / 9;
-      width: 100%;
-      background: var(--black);
-      border-radius: 4px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-    }
-    /* 9:16 portrait grid */
-    .portrait-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .reel-9-16 {
-      aspect-ratio: 9 / 16;
-      background: var(--black);
-      border-radius: 4px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-    }
-    /* 21:9 ultrawide */
-    .reel-21-9 {
-      aspect-ratio: 21 / 9;
-      width: 100%;
-      background: var(--black);
-      border-radius: 4px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      margin-top: 1rem;
-    }
-    /* Shared reel styles */
-    .reel-cover {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 1rem;
-      transition: opacity .3s;
-    }
-    .reel-cover:hover .play-btn { transform: scale(1.1); }
-    .play-btn {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: rgba(201,168,76,.18);
-      border: 1.5px solid var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      transition: transform .25s, background .25s;
-    }
-    .play-btn svg { width: 22px; height: 22px; fill: var(--gold-light); margin-left: 3px; }
-    .reel-cover:hover .play-btn { background: rgba(201,168,76,.3); }
-    .reel-label {
-      font-family: 'Lexend', sans-serif;
-      font-size: .72rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .format-label {
-      display: inline-flex; align-items: center; gap: .5rem;
-      font-family: 'Lexend', sans-serif;
-      font-size: .72rem;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: .6rem;
-    }
-    .format-label::before {
-      content: '';
-      width: 20px; height: 1px;
-      background: var(--gold);
-    }
-    .reel-section-block { margin-top: 4rem; }
-    .reel-section-block h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: .5rem;
-    }
-    .reel-section-block p {
-      font-size: .9rem;
-      color: var(--muted);
-      margin-bottom: 1.25rem;
-    }
-
-    /* ── Services ────────────────────────────────────────────── */
-    #services { background: var(--black); }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(201,168,76,.08);
-      border: 1px solid rgba(201,168,76,.08);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .service-card {
-      background: var(--black);
-      padding: 2.5rem;
-      transition: background .3s;
-    }
-    .service-card:hover { background: rgba(201,168,76,.04); }
-    .service-icon {
-      width: 44px; height: 44px;
-      border-radius: 2px;
-      background: var(--gold-dim);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.5rem;
-    }
-    .service-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
-    .service-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: .75rem;
-    }
-    .service-card p { font-size: .9rem; color: var(--muted); line-height: 1.7; }
-
-    /* ── Why Us ──────────────────────────────────────────────── */
-    #why { background: var(--surface); }
-    .why-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-    .why-list { display: flex; flex-direction: column; gap: 2.5rem; }
-    .why-item { display: flex; gap: 1.5rem; }
-    .why-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      opacity: .5;
-      padding-top: .2rem;
-      min-width: 28px;
-    }
-    .why-item h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: .4rem;
-    }
-    .why-item p { font-size: .9rem; color: var(--muted); }
-    .why-stats-card {
-      background: var(--black);
-      border: 1px solid rgba(201,168,76,.15);
-      border-radius: 4px;
-      padding: 2.5rem;
-      display: flex; flex-direction: column; gap: 2rem;
-      position: sticky; top: 8rem;
-    }
-    .wstat { border-bottom: 1px solid rgba(201,168,76,.08); padding-bottom: 1.5rem; }
-    .wstat:last-child { border-bottom: none; padding-bottom: 0; }
-    .wstat .num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--gold-light);
-      line-height: 1;
-    }
-    .wstat .desc { font-size: .85rem; color: var(--muted); margin-top: .3rem; }
-
-    /* ── Contact ─────────────────────────────────────────────── */
-    #contact { background: var(--black); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .contact-info p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      max-width: 440px;
-    }
-    .contact-detail {
-      display: flex; gap: 1rem; align-items: flex-start;
-      margin-bottom: 1.5rem;
-    }
-    .contact-detail-icon {
-      width: 40px; height: 40px;
-      border-radius: 2px;
-      border: 1px solid rgba(201,168,76,.2);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .contact-detail-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
-    .contact-detail-body .detail-type {
-      font-size: .72rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: .2rem;
-      font-family: 'Lexend', sans-serif;
-    }
-    .contact-detail-body a {
-      font-size: 1rem;
-      color: var(--text);
-      transition: color .25s;
-    }
-    .contact-detail-body a:hover { color: var(--gold-light); }
-    .contact-cta-block {
-      background: var(--surface);
-      border: 1px solid rgba(201,168,76,.12);
-      border-radius: 4px;
-      padding: 3rem;
-    }
-    .contact-cta-block h3 {
-      font-size: 2.2rem;
-      font-weight: 300;
-      color: var(--white);
-      margin-bottom: 1rem;
-    }
-    .contact-cta-block p { font-size: .95rem; color: var(--muted); margin-bottom: 2rem; }
-    .cta-buttons { display: flex; flex-direction: column; gap: 1rem; }
-    .btn-whatsapp {
-      font-family: 'Lexend', sans-serif;
-      font-size: .85rem;
-      font-weight: 500;
-      letter-spacing: .08em;
-      padding: 1rem 2rem;
-      background: #25D366;
-      color: #fff;
-      border: none;
-      border-radius: 2px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: .75rem;
-      transition: opacity .25s, transform .2s;
-    }
-    .btn-whatsapp:hover { opacity: .9; transform: translateY(-2px); }
-    .btn-email {
-      font-family: 'Lexend', sans-serif;
-      font-size: .85rem;
-      font-weight: 400;
-      letter-spacing: .08em;
-      padding: 1rem 2rem;
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid var(--gold);
-      border-radius: 2px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: .75rem;
-      transition: background .25s, color .25s;
-    }
-    .btn-email:hover { background: var(--gold); color: var(--black); }
-
-    /* ── Footer ──────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid rgba(201,168,76,.1);
-      padding: 3rem 4vw;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-    }
-    .footer-logo {
-      font-family: 'Lexend', sans-serif;
-      font-size: .85rem;
-      font-weight: 600;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--white);
-    }
-    .footer-logo span { color: var(--gold); font-weight: 300; }
-    footer p { font-size: .8rem; color: var(--muted); }
-    .footer-link {
-      font-size: .8rem;
-      color: var(--muted);
-      letter-spacing: .06em;
-      transition: color .25s;
-    }
-    .footer-link:hover { color: var(--gold-light); }
-
-    /* ── Video Modal ─────────────────────────────────────────── */
-    #modal {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(0,0,0,.92);
-      backdrop-filter: blur(12px);
-      align-items: center; justify-content: center;
-    }
-    #modal.open { display: flex; }
-    .modal-inner {
-      position: relative;
-      width: min(90vw, 1100px);
-    }
-    .modal-inner.portrait { width: min(50vw, 400px); }
-    .modal-inner.ultrawide { width: min(95vw, 1400px); }
-    #modal-frame-wrap {
-      width: 100%;
-      position: relative;
-    }
-    #modal-frame-wrap.ar-16-9 { aspect-ratio: 16/9; }
-    #modal-frame-wrap.ar-9-16 { aspect-ratio: 9/16; }
-    #modal-frame-wrap.ar-21-9 { aspect-ratio: 21/9; }
-    #modal-frame-wrap iframe,
-    #modal-frame-wrap video {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      border: none; border-radius: 4px;
-    }
-    .modal-close {
-      position: absolute; top: -2.5rem; right: 0;
-      background: none; border: none; cursor: pointer;
-      font-family: 'Lexend', sans-serif;
-      font-size: .78rem; letter-spacing: .1em;
-      color: var(--muted);
-      transition: color .2s;
-    }
-    .modal-close:hover { color: var(--gold-light); }
-
-    /* ── WhatsApp FAB ────────────────────────────────────────── */
-    .fab {
-      position: fixed; bottom: 2rem; right: 2rem; z-index: 90;
-      width: 56px; height: 56px; border-radius: 50%;
-      background: #25D366;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 24px rgba(37,211,102,.3);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .fab:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(37,211,102,.4); }
-    .fab svg { width: 26px; height: 26px; fill: #fff; }
-
-    /* ── Scroll Reveal ───────────────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .reveal.revealed { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-    .reveal-delay-4 { transition-delay: .4s; }
-    .reveal-delay-5 { transition-delay: .5s; }
-
-    /* ── Responsive ──────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .portrait-grid { grid-template-columns: 1fr 1fr; }
-      .why-stats-card { position: static; }
-    }
-    @media (max-width: 640px) {
-      nav { padding: 1rem 5vw; }
-      .nav-links { display: none; }
-      .nav-toggle { display: flex; }
-      section { padding: 5rem 5vw; }
-      .services-grid { grid-template-columns: 1fr; }
-      .portrait-grid { grid-template-columns: 1fr; }
-      .hero-stats { gap: 1.5rem; }
-    }
-    .mobile-menu {
-      display: none;
-      position: fixed; inset: 0; z-index: 99;
-      background: rgba(8,8,8,.97);
-      flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 2.5rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 300;
-      color: var(--white);
-      transition: color .2s;
-    }
-    .mobile-menu a:hover { color: var(--gold-light); }
-    .mobile-menu-close {
-      position: absolute; top: 1.5rem; right: 5vw;
-      background: none; border: none;
-      font-size: 1.5rem; color: var(--muted); cursor: pointer;
-    }
+    /* Horizontal scroll reel */
+    .reel-scroll { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(245,158,11,.3) transparent; }
+    .reel-scroll::-webkit-scrollbar { height: 4px; }
+    .reel-scroll::-webkit-scrollbar-thumb { background: rgba(245,158,11,.3); border-radius: 2px; }
+    .reel-item { flex: 0 0 320px; scroll-snap-align: start; }
+    @media(min-width:768px){ .reel-item { flex: 0 0 400px; } }
   </style>
 </head>
 <body>
 
-<!-- ── Navbar ──────────────────────────────────────────────────── -->
+<!-- ══════════════════ NAVBAR ══════════════════ -->
 <nav id="navbar">
-  <a href="#hero" class="nav-logo" style="display:flex;align-items:center;gap:.75rem;">
-    <!-- ZG Monogram SVG -->
-    <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#E8C97A"/>
-          <stop offset="50%" stop-color="#C9A84C"/>
-          <stop offset="100%" stop-color="#A0822E"/>
-        </linearGradient>
-      </defs>
-      <!-- Z shape -->
-      <polyline points="12,20 52,20 12,62 52,62" stroke="url(#goldGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <!-- G arc -->
-      <path d="M62,38 A22,22 0 1 0 84,60 L84,52 L72,52" stroke="url(#goldGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <!-- top speed line -->
-      <line x1="55" y1="16" x2="88" y2="16" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
-    </svg>
-    <span style="font-family:'Lexend',sans-serif;font-size:.88rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--white);">ZACH GLOBAL <span style="color:var(--gold);font-weight:300;">/ Studio</span></span>
-  </a>
-  <div class="nav-links">
-    <a href="#portfolio">Work</a>
-    <a href="#services">Services</a>
-    <a href="#why">About</a>
-    <a href="#contact" class="btn-nav">Start a Project</a>
+  <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="https://zachglobalfzc.com" target="_blank" rel="noopener noreferrer" aria-label="Back to main site"
+        style="display:none;align-items:center;gap:.4rem;font-size:.75rem;color:#64748B;text-decoration:none;border-right:1px solid #1E293B;padding-right:.75rem;transition:color .2s;"
+        onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#64748B'"
+        class="sm-flex">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px" aria-hidden="true"><path d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        zachglobalfzc.com
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;" aria-label="Zach Global Studio">
+        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#0EA5E9,#0284C7);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:18px;height:18px" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div>
+          <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;letter-spacing:-.02em;">Zach Global</span>
+          <span style="font-family:'Lexend',sans-serif;font-weight:800;background:linear-gradient(135deg,#FBBF24,#F97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"> Studio</span>
+        </div>
+      </a>
+    </div>
+
+    <div style="display:none;gap:2rem;" class="desktop-nav" id="desk-nav">
+      <a href="#work" style="font-size:.875rem;font-weight:500;color:#94A3B8;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">Our Work</a>
+      <a href="#process" style="font-size:.875rem;font-weight:500;color:#94A3B8;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">Process</a>
+      <a href="#industries" style="font-size:.875rem;font-weight:500;color:#94A3B8;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">Industries</a>
+      <a href="#contact" style="font-size:.875rem;font-weight:500;color:#94A3B8;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">Contact</a>
+    </div>
+
+    <div style="display:none;gap:.75rem;align-items:center;" id="desk-cta">
+      <a href="mailto:studio@zachglobalfzc.com" class="btn-outline" style="padding:.6rem 1.25rem;border-radius:.75rem;font-size:.8rem;font-weight:600;color:white;text-decoration:none;font-family:'Lexend',sans-serif;">Email Us</a>
+      <a href="https://wa.me/971551383940?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20discuss%20an%20ad%20campaign." target="_blank" rel="noopener noreferrer" class="btn-wa" style="padding:.6rem 1.25rem;border-radius:.75rem;font-size:.8rem;font-weight:600;color:white;text-decoration:none;font-family:'Lexend',sans-serif;display:flex;align-items:center;gap:.4rem;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false"
+      style="background:none;border:none;cursor:pointer;color:#94A3B8;padding:.5rem;" class="mobile-menu-btn">
+      <svg id="ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;display:none" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+
+  <div id="mobile-menu">
+    <div style="max-width:1280px;margin:.75rem auto 0;padding:.25rem;" class="glass" style="border-radius:12px;">
+      <div style="display:flex;flex-direction:column;gap:.25rem;padding:.75rem;">
+        <a href="#work" class="mob-link" style="padding:.7rem 1rem;border-radius:8px;color:#CBD5E1;text-decoration:none;font-size:.9rem;font-weight:500;">Our Work</a>
+        <a href="#process" class="mob-link" style="padding:.7rem 1rem;border-radius:8px;color:#CBD5E1;text-decoration:none;font-size:.9rem;font-weight:500;">Process</a>
+        <a href="#industries" class="mob-link" style="padding:.7rem 1rem;border-radius:8px;color:#CBD5E1;text-decoration:none;font-size:.9rem;font-weight:500;">Industries</a>
+        <a href="#contact" class="mob-link" style="padding:.7rem 1rem;border-radius:8px;color:#CBD5E1;text-decoration:none;font-size:.9rem;font-weight:500;">Contact</a>
+        <div style="height:1px;background:rgba(255,255,255,.07);margin:.25rem 0;"></div>
+        <a href="https://wa.me/971551383940?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20discuss%20an%20ad%20campaign." target="_blank" rel="noopener noreferrer" class="btn-wa mob-link" style="padding:.85rem 1rem;border-radius:10px;color:white;text-decoration:none;font-size:.9rem;font-weight:600;text-align:center;font-family:'Lexend',sans-serif;">WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
 </nav>
 
-<!-- Mobile menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" id="menuClose">✕</button>
-  <a href="#portfolio" onclick="closeMobileMenu()">Work</a>
-  <a href="#services" onclick="closeMobileMenu()">Services</a>
-  <a href="#why" onclick="closeMobileMenu()">About</a>
-  <a href="#contact" onclick="closeMobileMenu()" style="color:var(--gold)">Start a Project</a>
-</div>
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero" class="bg-grid">
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="hero-bg"><div class="hero-bg-fallback"></div></div>
 
-<!-- ── Hero ────────────────────────────────────────────────────── -->
-<section id="hero">
-  <!-- Brand reveal video as full-screen background -->
-  <video class="hero-video-bg" autoplay muted loop playsinline preload="auto" poster="">
-    <source src="hero-reel.mp4" type="video/mp4" />
-  </video>
-  <div class="hero-overlay"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-scanlines"></div>
+  <!-- Floating ambient blobs -->
+  <div aria-hidden="true" style="position:absolute;top:15%;left:8%;width:320px;height:320px;background:radial-gradient(circle,rgba(14,165,233,.07),transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div aria-hidden="true" style="position:absolute;bottom:20%;right:8%;width:280px;height:280px;background:radial-gradient(circle,rgba(245,158,11,.06),transparent 70%);border-radius:50%;pointer-events:none;"></div>
 
-  <div class="hero-content">
-    <div class="hero-eyebrow">
-      <span class="label">Premium AI Creative Studio &nbsp;·&nbsp; Dubai</span>
-    </div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:8rem 1.5rem 5rem;display:grid;gap:3rem;align-items:center;" class="hero-grid">
 
-    <h1 class="hero-title">
-      <span class="title-line"><span>Stories That</span></span>
-      <span class="title-line"><span>Move People</span></span>
-    </h1>
-
-    <div class="hero-rule"></div>
-
-    <p class="hero-sub">
-      We craft cinematic AI-powered video ads for the world's leading brands.
-      Share your brief — we deliver world-class creative.
-    </p>
-
-    <div class="hero-ctas">
-      <a href="#contact" class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        Start a Project
-      </a>
-      <a href="#portfolio" class="btn-secondary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-        View Our Work
-      </a>
-    </div>
-
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num"><span data-count="120">0</span>+</div>
-        <div class="stat-label">Ads Produced</div>
+    <!-- Left copy -->
+    <div>
+      <!-- Badge -->
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:2rem;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;" class="glass">
+        <span style="width:8px;height:8px;border-radius:50%;background:#38BDF8;animation:blink .8s step-end infinite;" aria-hidden="true"></span>
+        AI-Powered Ad Production Studio
       </div>
-      <div class="stat-item">
-        <div class="stat-num"><span data-count="40">0</span>+</div>
-        <div class="stat-label">Brand Partners</div>
+
+      <h1 class="reveal" style="font-size:clamp(2.4rem,5.5vw,4.5rem);font-weight:900;color:white;margin-bottom:1.5rem;letter-spacing:-.03em;transition-delay:.1s;">
+        We Craft Ads<br/>That Make<br/><span id="typewriter" class="grad-gold"></span><span class="cursor" aria-hidden="true"></span>
+      </h1>
+
+      <p class="reveal" style="font-size:1.125rem;color:#94A3B8;line-height:1.75;max-width:520px;margin-bottom:2.5rem;transition-delay:.2s;">
+        Zach Global Studio creates <strong style="color:#CBD5E1;">world-class AI-generated video ads and campaigns</strong> exclusively for corporates and enterprises. You brief us — we build, you grow.
+      </p>
+
+      <div class="reveal" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;transition-delay:.3s;">
+        <a href="https://wa.me/971551383940?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20discuss%20an%20ad%20campaign." target="_blank" rel="noopener noreferrer" class="btn-wa"
+          style="display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.75rem;border-radius:.875rem;font-family:'Lexend',sans-serif;font-weight:700;font-size:.95rem;color:white;text-decoration:none;">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Start on WhatsApp
+        </a>
+        <a href="#work"
+          style="display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.75rem;border-radius:.875rem;font-family:'Lexend',sans-serif;font-weight:600;font-size:.95rem;color:white;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:all .2s;"
+          onmouseover="this.style.borderColor='rgba(56,189,248,.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
+          View Our Work
+        </a>
       </div>
-      <div class="stat-item">
-        <div class="stat-num"><span data-count="15">0</span>+</div>
-        <div class="stat-label">Industries Served</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span data-count="98">0</span>%</div>
-        <div class="stat-label">Client Satisfaction</div>
+
+      <!-- Mini trust row -->
+      <div class="reveal" style="display:flex;flex-wrap:wrap;gap:1.5rem;transition-delay:.4s;">
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#64748B;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" style="width:16px;height:16px" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          100% Custom per Brand
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#64748B;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" style="width:16px;height:16px" aria-hidden="true"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          48-hr Proposal Turnaround
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#64748B;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" style="width:16px;height:16px" aria-hidden="true"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Corporate-Only Studio
+        </div>
       </div>
     </div>
+
+    <!-- Right: floating stat cards -->
+    <div aria-hidden="true" style="display:none;position:relative;height:480px;" class="hero-visual" id="hero-visual">
+      <!-- Main reel card -->
+      <div class="glass glow-pulse float" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;padding:1.5rem;border-radius:20px;text-align:center;">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:28px;height:28px" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div style="font-family:'Lexend',sans-serif;font-weight:800;font-size:2rem;color:white;" id="hero-counter">0</div>
+        <div style="font-size:.8rem;color:#64748B;margin-top:.25rem;">Ads Delivered</div>
+      </div>
+
+      <!-- Floating chips -->
+      <div class="glass float-2" style="position:absolute;top:10%;left:5%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        Video Ads
+      </div>
+      <div class="glass-gold float-3" style="position:absolute;top:20%;right:0%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#FBBF24;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        Social Reels
+      </div>
+      <div class="glass float" style="position:absolute;bottom:25%;left:0%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        Display Banners
+      </div>
+      <div class="glass-gold float-2" style="position:absolute;bottom:15%;right:0%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#FBBF24;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        TV Commercials
+      </div>
+      <div class="glass float-3" style="position:absolute;top:70%;left:15%;padding:.6rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;white-space:nowrap;">
+        OOH Campaigns
+      </div>
+    </div>
+
   </div>
 
   <!-- Scroll indicator -->
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    <span>Scroll</span>
+  <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:2;" aria-hidden="true">
+    <span style="font-size:.7rem;color:#334155;letter-spacing:.1em;text-transform:uppercase;font-family:'Lexend',sans-serif;">Scroll</span>
+    <div style="width:1px;height:40px;background:linear-gradient(to bottom,rgba(245,158,11,.6),transparent);animation:floatY 2s ease-in-out infinite;"></div>
   </div>
 </section>
 
-<!-- ── Industry Marquee ─────────────────────────────────────────── -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span>Real Estate</span><span class="dot">·</span>
-    <span>Luxury Retail</span><span class="dot">·</span>
-    <span>Finance & Banking</span><span class="dot">·</span>
-    <span>Hospitality</span><span class="dot">·</span>
-    <span>Automotive</span><span class="dot">·</span>
-    <span>Healthcare</span><span class="dot">·</span>
-    <span>Technology</span><span class="dot">·</span>
-    <span>FMCG</span><span class="dot">·</span>
-    <span>Fashion</span><span class="dot">·</span>
-    <span>E-Commerce</span><span class="dot">·</span>
-    <span>Education</span><span class="dot">·</span>
-    <span>Government</span><span class="dot">·</span>
-    <!-- duplicate for seamless loop -->
-    <span>Real Estate</span><span class="dot">·</span>
-    <span>Luxury Retail</span><span class="dot">·</span>
-    <span>Finance & Banking</span><span class="dot">·</span>
-    <span>Hospitality</span><span class="dot">·</span>
-    <span>Automotive</span><span class="dot">·</span>
-    <span>Healthcare</span><span class="dot">·</span>
-    <span>Technology</span><span class="dot">·</span>
-    <span>FMCG</span><span class="dot">·</span>
-    <span>Fashion</span><span class="dot">·</span>
-    <span>E-Commerce</span><span class="dot">·</span>
-    <span>Education</span><span class="dot">·</span>
-    <span>Government</span><span class="dot">·</span>
+<!-- ══════════════════ CLIENT MARQUEE ══════════════════ -->
+<div style="padding:2.5rem 0;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);background:rgba(7,13,26,.6);overflow:hidden;">
+  <div style="text-align:center;margin-bottom:1.25rem;">
+    <span style="font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#334155;font-family:'Lexend',sans-serif;">Campaigns crafted for industries including</span>
+  </div>
+  <div class="marquee-wrap" aria-label="Industries served">
+    <div class="marquee-track" aria-hidden="true" id="marquee-track">
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">FMCG &amp; Retail</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Real Estate</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Hospitality &amp; Tourism</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Healthcare</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Financial Services</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Automotive</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Technology</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Education</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Fashion &amp; Luxury</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+      <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:#1E293B;">Agriculture &amp; Food</span>
+      <span style="color:#1E293B;font-size:1.2rem;" aria-hidden="true">·</span>
+    </div>
   </div>
 </div>
 
-<!-- ── Portfolio ───────────────────────────────────────────────── -->
-<section id="portfolio">
-  <div class="section-header reveal">
-    <div class="label">Our Work</div>
-    <h2>Cinematic Ads<br>Built for Every Screen</h2>
-    <p>From boardroom presentations to social feeds — every format, every platform, every audience.</p>
-  </div>
+<!-- ══════════════════ OUR WORK — VIDEO PORTFOLIO ══════════════════ -->
+<section id="work" style="padding:7rem 0;position:relative;overflow:hidden;" class="bg-grid">
+  <div style="position:absolute;top:0;left:0;right:0;" class="glow-line" aria-hidden="true"></div>
 
-  <!-- 16:9 Company Showreel -->
-  <div class="reel-section-block reveal">
-    <div class="format-label">16 : 9 · Company Showreel</div>
-    <h3>Our Story in Motion</h3>
-    <p>Widescreen cinematic reel — ideal for presentations, YouTube, and broadcast.</p>
-    <div class="reel-16-9" data-yt="REPLACE_WITH_YOUR_YOUTUBE_VIDEO_ID" data-ar="16-9">
-      <div class="reel-cover">
-        <div class="play-btn">
-          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-        <span class="reel-label">Play Showreel</span>
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+
+    <!-- Section header -->
+    <div style="text-align:center;margin-bottom:4rem;" class="reveal">
+      <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:1.5rem;font-size:.75rem;font-weight:600;color:#F59E0B;font-family:'Lexend',sans-serif;" class="glass-gold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Our AI Ad Portfolio
       </div>
+      <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:white;margin-bottom:1rem;">
+        Ads We've Built.<br/><span class="grad-text">Results That Speak.</span>
+      </h2>
+      <p style="font-size:1.05rem;color:#64748B;max-width:560px;margin:0 auto;line-height:1.7;">
+        Every campaign below was created by our team using cutting-edge AI tools — briefed by a corporate client, delivered as a complete creative package.
+      </p>
     </div>
-  </div>
 
-  <!-- 9:16 Portrait Grid -->
-  <div class="reel-section-block reveal">
-    <div class="format-label">9 : 16 · Social &amp; Short-Form</div>
-    <h3>Instagram · TikTok · YouTube Shorts</h3>
-    <p>Vertical-first storytelling built to stop the scroll.</p>
-    <div class="portrait-grid">
-      <div class="reel-9-16" data-src="reel_portrait_1.mp4" data-ar="9-16">
-        <div class="reel-cover">
-          <div class="play-btn">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    <!-- Featured video (large) — 16:9 Company Showreel -->
+    <div class="reveal reveal-scale" style="margin-bottom:2rem;border-radius:20px;overflow:hidden;position:relative;aspect-ratio:16/9;background:#0B1425;cursor:pointer;" id="featured-video-card" onclick="openModal('','Featured Campaign — Company Showreel','yt','REPLACE_WITH_YOUR_YOUTUBE_VIDEO_ID')">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0B1425,#070D1A);display:flex;align-items:center;justify-content:center;" aria-hidden="true">
+        <div style="text-align:center;">
+          <div style="width:80px;height:80px;border-radius:50%;background:rgba(245,158,11,.15);border:2px solid rgba(245,158,11,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+            <svg viewBox="0 0 24 24" fill="#F59E0B" style="width:32px;height:32px;margin-left:4px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           </div>
-          <span class="reel-label">Reel 01</span>
+          <p style="color:#475569;font-size:.85rem;font-family:'Lexend',sans-serif;">Company Showreel</p>
         </div>
       </div>
-      <div class="reel-9-16" data-src="reel_portrait_2.mp4" data-ar="9-16">
-        <div class="reel-cover">
-          <div class="play-btn">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(4,7,15,.75) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:absolute;top:50%;left:5%;transform:translateY(-50%);max-width:480px;">
+        <div style="display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);font-size:.7rem;font-weight:700;color:#FBBF24;font-family:'Lexend',sans-serif;margin-bottom:1rem;">
+          ★ Featured · 16:9 Showreel
+        </div>
+        <h3 style="font-size:clamp(1.4rem,3vw,2.2rem);font-weight:800;color:white;margin-bottom:.75rem;line-height:1.2;">Zach Global Studio<br/>Company Showreel</h3>
+        <p style="font-size:.9rem;color:#94A3B8;margin-bottom:1.25rem;line-height:1.6;">Our full cinematic AI production reel — the story of how we craft world-class ads for leading brands.</p>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+          <span style="font-size:.72rem;padding:.3rem .75rem;border-radius:999px;background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);color:#38BDF8;">16:9</span>
+          <span style="font-size:.72rem;padding:.3rem .75rem;border-radius:999px;background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);color:#38BDF8;">YouTube</span>
+          <span style="font-size:.72rem;padding:.3rem .75rem;border-radius:999px;background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);color:#38BDF8;">Broadcast</span>
+        </div>
+      </div>
+      <!-- Play button -->
+      <div style="position:absolute;top:50%;right:8%;transform:translateY(-50%);width:72px;height:72px;border-radius:50%;background:rgba(245,158,11,.9);display:flex;align-items:center;justify-content:center;transition:all .25s;box-shadow:0 0 40px rgba(245,158,11,.4);"
+        onmouseover="this.style.transform='translateY(-50%) scale(1.12)';this.style.boxShadow='0 0 60px rgba(245,158,11,.7)'"
+        onmouseout="this.style.transform='translateY(-50%) scale(1)';this.style.boxShadow='0 0 40px rgba(245,158,11,.4)'"
+        aria-label="Play showreel">
+        <svg viewBox="0 0 24 24" fill="white" style="width:28px;height:28px;margin-left:3px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+    </div>
+
+    <!-- 9:16 Portrait Grid — Instagram / TikTok / Shorts -->
+    <div style="margin-bottom:2rem;">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
+        <span style="font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#F59E0B;font-family:'Lexend',sans-serif;">9:16 · Instagram · TikTok · YouTube Shorts</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">
+
+        <div class="video-card reveal" style="aspect-ratio:9/16;background:#0B1425;" onclick="openModal('reel_portrait_1.mp4','Social Reel 01','file')">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#0B1425,#070D1A);display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.3)" stroke-width="1" style="width:48px;height:48px"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
           </div>
-          <span class="reel-label">Reel 02</span>
-        </div>
-      </div>
-      <div class="reel-9-16" data-src="reel_portrait_3.mp4" data-ar="9-16">
-        <div class="reel-cover">
-          <div class="play-btn">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <div class="play-btn" aria-label="Play reel 01">
+            <svg viewBox="0 0 24 24" fill="white" style="width:22px;height:22px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           </div>
-          <span class="reel-label">Reel 03</span>
+          <div class="card-info">
+            <div style="display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap;">
+              <span style="font-size:.65rem;padding:.25rem .6rem;border-radius:999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.2);color:#FBBF24;font-family:'Lexend',sans-serif;font-weight:600;">Instagram Reel</span>
+            </div>
+            <h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;margin-bottom:.25rem;">Social Reel 01</h4>
+            <p style="font-size:.78rem;color:#94A3B8;">Vertical short-form ad · Replace with your reel</p>
+          </div>
+        </div>
+
+        <div class="video-card reveal" style="aspect-ratio:9/16;background:#0B1425;transition-delay:.1s;" onclick="openModal('reel_portrait_2.mp4','Social Reel 02','file')">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#0B1425,#070D1A);display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,.3)" stroke-width="1" style="width:48px;height:48px"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <div class="play-btn" aria-label="Play reel 02">
+            <svg viewBox="0 0 24 24" fill="white" style="width:22px;height:22px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <div class="card-info">
+            <div style="display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap;">
+              <span style="font-size:.65rem;padding:.25rem .6rem;border-radius:999px;background:rgba(14,165,233,.12);border:1px solid rgba(14,165,233,.2);color:#38BDF8;font-family:'Lexend',sans-serif;font-weight:600;">TikTok Ad</span>
+            </div>
+            <h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;margin-bottom:.25rem;">Social Reel 02</h4>
+            <p style="font-size:.78rem;color:#94A3B8;">Vertical short-form ad · Replace with your reel</p>
+          </div>
+        </div>
+
+        <div class="video-card reveal" style="aspect-ratio:9/16;background:#0B1425;transition-delay:.2s;" onclick="openModal('reel_portrait_3.mp4','Social Reel 03','file')">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#0B1425,#070D1A);display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.3)" stroke-width="1" style="width:48px;height:48px"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <div class="play-btn" aria-label="Play reel 03">
+            <svg viewBox="0 0 24 24" fill="white" style="width:22px;height:22px;margin-left:2px" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <div class="card-info">
+            <div style="display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap;">
+              <span style="font-size:.65rem;padding:.25rem .6rem;border-radius:999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.2);color:#FBBF24;font-family:'Lexend',sans-serif;font-weight:600;">YT Shorts</span>
+            </div>
+            <h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;margin-bottom:.25rem;">Social Reel 03</h4>
+            <p style="font-size:.78rem;color:#94A3B8;">Vertical short-form ad · Replace with your reel</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 21:9 Ultrawide — TV / YouTube Commercial -->
+    <div style="margin-bottom:2rem;">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
+        <span style="font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#38BDF8;font-family:'Lexend',sans-serif;">21:9 · YouTube &amp; TV Commercials</span>
+      </div>
+      <div class="video-card reveal" style="aspect-ratio:21/9;background:#0B1425;" onclick="openModal('reel_ultrawide_1.mp4','TV Commercial','file')">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#0B1425,#070D1A);display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;">
+            <div style="width:72px;height:72px;border-radius:50%;background:rgba(14,165,233,.1);border:2px solid rgba(14,165,233,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+              <svg viewBox="0 0 24 24" fill="#38BDF8" style="width:28px;height:28px;margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p style="color:#475569;font-size:.85rem;font-family:'Lexend',sans-serif;">Ultrawide · TV Commercial</p>
+          </div>
+        </div>
+        <div class="play-btn" style="width:72px;height:72px;" aria-label="Play TV commercial">
+          <svg viewBox="0 0 24 24" fill="white" style="width:28px;height:28px;margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="card-info">
+          <div style="display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap;">
+            <span style="font-size:.65rem;padding:.25rem .6rem;border-radius:999px;background:rgba(14,165,233,.12);border:1px solid rgba(14,165,233,.2);color:#38BDF8;font-family:'Lexend',sans-serif;font-weight:600;">21:9 Ultrawide</span>
+            <span style="font-size:.65rem;padding:.25rem .6rem;border-radius:999px;background:rgba(14,165,233,.12);border:1px solid rgba(14,165,233,.2);color:#38BDF8;font-family:'Lexend',sans-serif;font-weight:600;">TV Commercial</span>
+          </div>
+          <h4 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.1rem;color:white;margin-bottom:.25rem;">Cinematic TV &amp; YouTube Commercial</h4>
+          <p style="font-size:.78rem;color:#94A3B8;">Full-width cinematic format · Replace with your commercial</p>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- 21:9 Ultrawide -->
-  <div class="reel-section-block reveal">
-    <div class="format-label">21 : 9 · Ultrawide Commercial</div>
-    <h3>YouTube &amp; TV Commercials</h3>
-    <p>Cinematic ultrawide format — the ultimate canvas for brand storytelling.</p>
-    <div class="reel-21-9" data-src="reel_ultrawide_1.mp4" data-ar="21-9">
-      <div class="reel-cover">
-        <div class="play-btn">
-          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-        <span class="reel-label">Play Commercial</span>
+  </div>
+</section>
+
+<!-- ══════════════════ STATS ══════════════════ -->
+<div style="padding:5rem 0;background:linear-gradient(135deg,rgba(11,20,37,.8),rgba(7,13,26,.9));border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);">
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem;" class="stats-grid">
+    <div class="reveal" style="text-align:center;">
+      <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:3rem;margin-bottom:.4rem;" class="grad-gold stat-val" data-count="120">0</div>
+      <div style="font-size:.875rem;color:#475569;">Campaigns Delivered</div>
+    </div>
+    <div class="reveal" style="text-align:center;transition-delay:.1s;">
+      <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:3rem;margin-bottom:.4rem;" class="grad-text stat-val" data-count="48">0</div>
+      <div style="font-size:.875rem;color:#475569;">Hour Proposal Turnaround</div>
+    </div>
+    <div class="reveal" style="text-align:center;transition-delay:.2s;">
+      <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:3rem;margin-bottom:.4rem;" class="grad-gold stat-val" data-count="14">0</div>
+      <div style="font-size:.875rem;color:#475569;">Industries Served</div>
+    </div>
+    <div class="reveal" style="text-align:center;transition-delay:.3s;">
+      <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:3rem;margin-bottom:.4rem;" class="grad-text">100%</div>
+      <div style="font-size:.875rem;color:#475569;">Custom per Brief</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ HOW IT WORKS ══════════════════ -->
+<section id="process" style="padding:7rem 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;" class="bg-grid" aria-hidden="true" style="opacity:.4;"></div>
+
+  <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+    <div style="text-align:center;margin-bottom:4.5rem;" class="reveal">
+      <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:1.5rem;font-size:.75rem;font-weight:600;color:#38BDF8;font-family:'Lexend',sans-serif;" class="glass">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px" aria-hidden="true"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        How It Works
       </div>
+      <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:white;margin-bottom:1rem;">
+        Simple. Fast. <span class="grad-text">Stunning.</span>
+      </h2>
+      <p style="font-size:1.05rem;color:#64748B;max-width:500px;margin:0 auto;">No platform to learn. No subscriptions. Just brief us and we take it from there.</p>
+    </div>
+
+    <!-- Steps -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;position:relative;">
+
+      <div class="reveal glass" style="border-radius:20px;padding:2rem 1.75rem;text-align:center;position:relative;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-family:'Lexend',sans-serif;font-weight:800;font-size:1.2rem;color:white;">1</div>
+        <div style="position:absolute;top:.75rem;right:.75rem;font-size:1.75rem;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.2)" stroke-width="1" style="width:36px;height:36px"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;margin-bottom:.75rem;">Share Your Brief</h3>
+        <p style="font-size:.875rem;color:#64748B;line-height:1.65;">Contact us via <strong style="color:#94A3B8;">WhatsApp or email</strong> with your product, audience, goals and any brand assets.</p>
+      </div>
+
+      <div class="reveal glass" style="border-radius:20px;padding:2rem 1.75rem;text-align:center;transition-delay:.12s;position:relative;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#0EA5E9,#0284C7);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-family:'Lexend',sans-serif;font-weight:800;font-size:1.2rem;color:white;">2</div>
+        <div style="position:absolute;top:.75rem;right:.75rem;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,.2)" stroke-width="1" style="width:36px;height:36px"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h3 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;margin-bottom:.75rem;">We Send a Proposal</h3>
+        <p style="font-size:.875rem;color:#64748B;line-height:1.65;">Within <strong style="color:#94A3B8;">48 hours</strong> you receive a full creative proposal: concept, format, timeline and pricing.</p>
+      </div>
+
+      <div class="reveal glass" style="border-radius:20px;padding:2rem 1.75rem;text-align:center;transition-delay:.24s;position:relative;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-family:'Lexend',sans-serif;font-weight:800;font-size:1.2rem;color:white;">3</div>
+        <div style="position:absolute;top:.75rem;right:.75rem;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.2)" stroke-width="1" style="width:36px;height:36px"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <h3 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;margin-bottom:.75rem;">We Produce the Ads</h3>
+        <p style="font-size:.875rem;color:#64748B;line-height:1.65;">Our AI production team crafts your campaign — video, copy, motion graphics — fully on-brand and ready to publish.</p>
+      </div>
+
+      <div class="reveal glass" style="border-radius:20px;padding:2rem 1.75rem;text-align:center;transition-delay:.36s;position:relative;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#0EA5E9,#0284C7);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-family:'Lexend',sans-serif;font-weight:800;font-size:1.2rem;color:white;">4</div>
+        <div style="position:absolute;top:.75rem;right:.75rem;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,.2)" stroke-width="1" style="width:36px;height:36px"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h3 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.05rem;color:white;margin-bottom:.75rem;">You Receive &amp; Launch</h3>
+        <p style="font-size:.875rem;color:#64748B;line-height:1.65;">Receive final deliverables in all formats needed. We also support with platform setup and launch if required.</p>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ── Services ─────────────────────────────────────────────────── -->
-<section id="services">
-  <div class="section-header reveal">
-    <div class="label">What We Do</div>
-    <h2>End-to-End Creative<br>Production</h2>
-    <p>From concept to final delivery — we handle every frame, every second, every detail.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
-      </div>
-      <h3>Brand Commercials</h3>
-      <p>Full-production TV and digital commercials that position your brand as a category leader. From script to screen.</p>
+<!-- ══════════════════ INDUSTRIES ══════════════════ -->
+<section id="industries" style="padding:7rem 0;background:rgba(7,13,26,.7);">
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="reveal">
+      <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:1.5rem;font-size:.75rem;font-weight:600;color:#F59E0B;font-family:'Lexend',sans-serif;" class="glass-gold">Industries</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:1rem;">We Speak <span class="grad-gold">Every Industry's</span> Language</h2>
+      <p style="font-size:1rem;color:#64748B;max-width:480px;margin:0 auto;">Our AI production team is briefed on sector-specific tone, compliance needs and audience behaviour.</p>
     </div>
-    <div class="service-card reveal reveal-delay-1">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96C1 8.12 1 12 1 12s0 3.88.46 5.58a2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95C23 15.88 23 12 23 12s0-3.88-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="var(--black)"/></svg>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;">
+      <div class="glass-gold reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(245,158,11,.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">FMCG &amp; Retail</span>
       </div>
-      <h3>Social Media Ads</h3>
-      <p>Scroll-stopping vertical and square format ads engineered for Instagram, TikTok, YouTube Shorts, and Reels.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+
+      <div class="glass reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Real Estate</span>
       </div>
-      <h3>Product Showcase</h3>
-      <p>Photorealistic 3D and AI-rendered product videos that highlight every detail, texture, and feature of your offering.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-3">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+
+      <div class="glass-gold reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Hospitality &amp; Tourism</span>
       </div>
-      <h3>Campaign Strategy</h3>
-      <p>We go beyond production — building cohesive multi-channel campaigns with narrative arcs that convert audiences into customers.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-4">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+
+      <div class="glass reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Healthcare</span>
       </div>
-      <h3>Event &amp; Launch Films</h3>
-      <p>Cinematic short films for product launches, brand anniversaries, and corporate events. Premium storytelling on deadline.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-5">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+
+      <div class="glass-gold reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Financial Services</span>
       </div>
-      <h3>AI Brand Identity</h3>
-      <p>Visual identity systems, motion graphics, and brand assets built with AI precision — consistent, scalable, iconic.</p>
+
+      <div class="glass reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Automotive</span>
+      </div>
+
+      <div class="glass-gold reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a1 1 0 01-1-1V6a1 1 0 011-1h14a1 1 0 011 1v1m1 9v2a1 1 0 01-1 1h-1"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Technology</span>
+      </div>
+
+      <div class="glass reveal" style="border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.85rem;cursor:default;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#CBD5E1;">Education</span>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ── Why Us ────────────────────────────────────────────────────── -->
-<section id="why">
-  <div class="section-header reveal">
-    <div class="label">Why Zach Global Studio</div>
-    <h2>Where AI Craft<br>Meets Cinematic Vision</h2>
-  </div>
-  <div class="why-grid">
-    <div class="why-list">
-      <div class="why-item reveal">
-        <div class="why-num">01</div>
-        <div>
-          <h4>AI-Native Production</h4>
-          <p>We don't bolt AI onto traditional production. Our entire pipeline — from ideation to final render — is built AI-first, delivering results impossible at any other studio.</p>
-        </div>
+<!-- ══════════════════ CTA / CONTACT ══════════════════ -->
+<section id="contact" style="padding:7rem 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,165,233,.06) 0%,rgba(245,158,11,.04) 50%,transparent 70%);pointer-events:none;" aria-hidden="true"></div>
+  <div style="position:absolute;top:0;left:0;right:0;" class="glow-line" aria-hidden="true"></div>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 1.5rem;text-align:center;" class="reveal">
+    <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;margin-bottom:1.75rem;font-size:.75rem;font-weight:600;color:#F59E0B;font-family:'Lexend',sans-serif;" class="glass-gold">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px" aria-hidden="true"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+      Get in Touch
+    </div>
+
+    <h2 style="font-size:clamp(2.2rem,5vw,4rem);font-weight:900;color:white;margin-bottom:1.25rem;letter-spacing:-.03em;line-height:1.1;">
+      Ready to Create Ads<br/>That <span class="grad-text">Stop the Scroll?</span>
+    </h2>
+
+    <p style="font-size:1.1rem;color:#64748B;max-width:560px;margin:0 auto 3rem;line-height:1.75;">
+      Share your campaign brief with us — we'll review it and send back a <strong style="color:#94A3B8;">personalised proposal within 48 hours.</strong> No commitments, no platform signups.
+    </p>
+
+    <!-- Two CTA options -->
+    <div style="display:flex;flex-wrap:wrap;gap:1.25rem;justify-content:center;margin-bottom:3rem;">
+      <a href="https://wa.me/971551383940?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20discuss%20an%20advertising%20campaign%20for%20my%20company." target="_blank" rel="noopener noreferrer" class="btn-wa"
+        style="display:inline-flex;align-items:center;gap:.75rem;padding:1.1rem 2.25rem;border-radius:1rem;font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us Your Brief
+      </a>
+
+      <a href="mailto:studio@zachglobalfzc.com?subject=Ad%20Campaign%20Enquiry&body=Hi%20Zach%20Global%20Studio%2C%0A%0AI%27d%20like%20to%20discuss%20an%20advertising%20campaign.%0A%0ACompany%3A%20%0AProduct%2FService%3A%20%0ATarget%20Audience%3A%20%0ABudget%20Range%3A%20%0ATimeline%3A%20%0A%0AThank%20you" class="btn-gold"
+        style="display:inline-flex;align-items:center;gap:.75rem;padding:1.1rem 2.25rem;border-radius:1rem;font-family:'Lexend',sans-serif;font-weight:700;font-size:1rem;color:white;text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Email Your Brief
+      </a>
+    </div>
+
+    <!-- Contact detail cards -->
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+      <div class="glass" style="border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        <span style="font-size:.875rem;color:#94A3B8;">studio@zachglobalfzc.com</span>
       </div>
-      <div class="why-item reveal reveal-delay-1">
-        <div class="why-num">02</div>
-        <div>
-          <h4>Cinematic Quality at Scale</h4>
-          <p>Apple-grade visual polish, Pixar-calibre storytelling, film-studio production values — deployed at the speed and economics of a digital agency.</p>
-        </div>
+      <div class="glass" style="border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;">
+        <svg viewBox="0 0 24 24" fill="#25D366" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span style="font-size:.875rem;color:#94A3B8;">WhatsApp: +971 55 138 3940</span>
       </div>
-      <div class="why-item reveal reveal-delay-2">
-        <div class="why-num">03</div>
-        <div>
-          <h4>Brief-to-Delivery in Days</h4>
-          <p>Traditional production houses take months. We deliver broadcast-ready creative in days — without sacrificing an atom of quality.</p>
-        </div>
-      </div>
-      <div class="why-item reveal reveal-delay-3">
-        <div class="why-num">04</div>
-        <div>
-          <h4>Fully Bespoke</h4>
-          <p>Every ad is built from scratch for your brand, your audience, your objectives. No templates. No recycled assets. Pure original creative.</p>
-        </div>
-      </div>
-      <div class="why-item reveal reveal-delay-4">
-        <div class="why-num">05</div>
-        <div>
-          <h4>Dubai's Creative Frontier</h4>
-          <p>Born in the UAE, operating globally. We understand the cultural nuances of the Middle East and the ambitions of brands targeting world markets.</p>
-        </div>
+      <div class="glass" style="border-radius:14px;padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <span style="font-size:.875rem;color:#94A3B8;">Dubai, UAE · FZC</span>
       </div>
     </div>
-    <div class="why-stats-card reveal">
-      <div class="wstat">
-        <div class="num"><span data-count="10">0</span>×</div>
-        <div class="desc">Faster than traditional production</div>
-      </div>
-      <div class="wstat">
-        <div class="num"><span data-count="70">0</span>%</div>
-        <div class="desc">Lower cost vs. conventional studios</div>
-      </div>
-      <div class="wstat">
-        <div class="num"><span data-count="48">0</span>h</div>
-        <div class="desc">Average brief-to-first-concept turnaround</div>
-      </div>
-      <div class="wstat" style="border-bottom:none;padding-bottom:0">
-        <div class="num" style="font-size:1.6rem;color:var(--gold)">Apple · Pixar · Film</div>
-        <div class="desc">The three pillars of our visual language</div>
-      </div>
-    </div>
+
+    <p style="margin-top:2rem;font-size:.78rem;color:#1E293B;">Response within 24 hours · No commitment required · 100% confidential brief</p>
   </div>
 </section>
 
-<!-- ── Contact ──────────────────────────────────────────────────── -->
-<section id="contact">
-  <div class="section-header reveal">
-    <div class="label">Get In Touch</div>
-    <h2>Ready to Create<br>Something Remarkable?</h2>
-  </div>
-  <div class="contact-grid">
-    <div class="contact-info reveal">
-      <p>Share your brief with us. We'll review your requirements and come back with a tailored proposal — no obligation, no templates.</p>
-      <div class="contact-detail">
-        <div class="contact-detail-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer style="background:#04070F;border-top:1px solid rgba(255,255,255,.05);padding:3rem 1.5rem 2rem;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;">
+    <div>
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;">
+        <div style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#0EA5E9,#0284C7);display:flex;align-items:center;justify-content:center;" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:16px;height:16px"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
         </div>
-        <div class="contact-detail-body">
-          <div class="detail-type">WhatsApp</div>
-          <a href="https://wa.me/971551383940" target="_blank">+971 55 138 3940</a>
-        </div>
+        <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:.95rem;color:white;">Zach Global <span style="background:linear-gradient(135deg,#FBBF24,#F97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Studio</span></span>
       </div>
-      <div class="contact-detail">
-        <div class="contact-detail-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div class="contact-detail-body">
-          <div class="detail-type">Email</div>
-          <a href="mailto:studio@zachglobalfzc.com">studio@zachglobalfzc.com</a>
-        </div>
-      </div>
-      <div class="contact-detail">
-        <div class="contact-detail-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </div>
-        <div class="contact-detail-body">
-          <div class="detail-type">Main Website</div>
-          <a href="https://zachglobalfzc.com" target="_blank">zachglobalfzc.com</a>
-        </div>
-      </div>
+      <p style="font-size:.78rem;color:#334155;">AI Ad Production · Dubai, UAE</p>
     </div>
-    <div class="contact-cta-block reveal reveal-delay-2">
-      <h3>Let's Build Your<br>Next Campaign</h3>
-      <p>Tell us about your brand, your audience, and the story you want to tell. We'll take it from there.</p>
-      <div class="cta-buttons">
-        <a href="https://wa.me/971551383940" target="_blank" class="btn-whatsapp">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          Message on WhatsApp
-        </a>
-        <a href="mailto:studio@zachglobalfzc.com" class="btn-email">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Send an Email
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ── Footer ───────────────────────────────────────────────────── -->
-<footer>
-  <a href="https://zachglobalfzc.com" class="footer-logo">ZACH GLOBAL <span>/ Studio</span></a>
-  <p>© 2025 Zach Global FZC. All rights reserved. · Dubai, UAE</p>
-  <a href="https://zachglobalfzc.com" class="footer-link">zachglobalfzc.com ↗</a>
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+      <a href="#work" style="font-size:.8rem;color:#334155;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#334155'">Our Work</a>
+      <a href="#process" style="font-size:.8rem;color:#334155;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#334155'">Process</a>
+      <a href="https://zachglobalfzc.com" target="_blank" rel="noopener noreferrer" style="font-size:.8rem;color:#334155;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#334155'">Main Site</a>
+      <a href="mailto:studio@zachglobalfzc.com" style="font-size:.8rem;color:#334155;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#334155'">Contact</a>
+    </div>
+
+    <p style="font-size:.75rem;color:#1E293B;">&copy; 2026 <a href="https://zachglobalfzc.com" target="_blank" rel="noopener noreferrer" style="color:#1E293B;text-decoration:none;">Zach Global FZC</a>. All rights reserved.</p>
+  </div>
 </footer>
 
-<!-- ── Video Modal ──────────────────────────────────────────────── -->
-<div id="modal">
-  <div class="modal-inner" id="modalInner">
-    <button class="modal-close" id="modalClose">✕ CLOSE</button>
-    <div id="modal-frame-wrap">
-      <!-- iframe or video injected by JS -->
-    </div>
+<!-- ══════════════════ VIDEO MODAL ══════════════════ -->
+<div id="video-modal" role="dialog" aria-modal="true" aria-label="Video player" onclick="closeModal(event)">
+  <div style="position:relative;width:90vw;max-width:960px;" id="modal-container">
+    <button id="modal-close-btn" aria-label="Close video"
+      style="position:absolute;top:-2.5rem;right:0;background:none;border:none;cursor:pointer;color:#94A3B8;font-size:1.5rem;line-height:1;padding:.25rem .5rem;transition:color .2s;"
+      onmouseover="this.style.color='white'" onmouseout="this.style.color='#94A3B8'">✕</button>
+    <div id="modal-title" style="position:absolute;top:-2.25rem;left:0;font-family:'Lexend',sans-serif;font-weight:600;font-size:.875rem;color:#64748B;"></div>
+    <div id="modal-content" style="width:100%;border-radius:12px;overflow:hidden;box-shadow:0 0 80px rgba(0,0,0,.8);"></div>
   </div>
 </div>
 
-<!-- ── WhatsApp FAB ─────────────────────────────────────────────── -->
-<a href="https://wa.me/971551383940" target="_blank" class="fab" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+<!-- ══════════════════ WHATSAPP FLOAT ══════════════════ -->
+<a id="wa-float" href="https://wa.me/971551383940?text=Hi%20Zach%20Global%20Studio%2C%20I%27d%20like%20to%20enquire%20about%20an%20ad%20campaign." target="_blank" rel="noopener noreferrer" class="btn-wa" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" style="width:28px;height:28px" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<!-- ══════════════════ JAVASCRIPT ══════════════════ -->
 <script>
-/* ── Navbar scroll ────────────────────────────────────────── */
+// ── Responsive show/hide nav elements ──
+(function() {
+  function applyResponsive() {
+    const w = window.innerWidth;
+    const deskNav = document.getElementById('desk-nav');
+    const deskCta = document.getElementById('desk-cta');
+    const heroVisual = document.getElementById('hero-visual');
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const backLinks = document.querySelectorAll('.sm-flex');
+
+    if (w >= 768) {
+      deskNav.style.display = 'flex';
+      deskCta.style.display = 'flex';
+      menuBtn.style.display = 'none';
+      backLinks.forEach(el => el.style.display = 'flex');
+    } else {
+      deskNav.style.display = 'none';
+      deskCta.style.display = 'none';
+      menuBtn.style.display = 'block';
+      backLinks.forEach(el => el.style.display = 'none');
+    }
+    if (w >= 1024) {
+      heroVisual.style.display = 'flex';
+      document.querySelector('.hero-grid').style.gridTemplateColumns = '1fr 1fr';
+    } else {
+      heroVisual.style.display = 'none';
+      document.querySelector('.hero-grid').style.gridTemplateColumns = '1fr';
+    }
+    if (w >= 768) {
+      document.querySelector('.stats-grid').style.gridTemplateColumns = 'repeat(4,1fr)';
+    } else {
+      document.querySelector('.stats-grid').style.gridTemplateColumns = 'repeat(2,1fr)';
+    }
+  }
+  applyResponsive();
+  window.addEventListener('resize', applyResponsive);
+})();
+
+// ── Navbar scroll ──
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 50), {passive:true});
+
+// ── Mobile menu ──
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const icoOpen = document.getElementById('ico-open');
+const icoClose = document.getElementById('ico-close');
+let menuOpen = false;
+menuBtn.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.classList.toggle('open', menuOpen);
+  icoOpen.style.display = menuOpen ? 'none' : 'block';
+  icoClose.style.display = menuOpen ? 'block' : 'none';
+  menuBtn.setAttribute('aria-expanded', menuOpen);
 });
+document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
+  menuOpen = false; mobileMenu.classList.remove('open');
+  icoOpen.style.display = 'block'; icoClose.style.display = 'none';
+  menuBtn.setAttribute('aria-expanded', false);
+}));
 
-/* ── Mobile menu ──────────────────────────────────────────── */
-document.getElementById('navToggle').addEventListener('click', () => {
-  document.getElementById('mobileMenu').classList.add('open');
-});
-document.getElementById('menuClose').addEventListener('click', closeMobileMenu);
-function closeMobileMenu() {
-  document.getElementById('mobileMenu').classList.remove('open');
-}
+// ── Scroll reveal ──
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); ro.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => ro.observe(el));
 
-/* ── Scroll reveal ────────────────────────────────────────── */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-/* ── Animated counters ────────────────────────────────────── */
-function animateCounter(el) {
-  const target = +el.dataset.count;
-  const duration = 1600;
+// ── Animated counters ──
+function countUp(el, target, duration) {
   const start = performance.now();
-  const step = (now) => {
-    const t = Math.min((now - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - t, 3);
-    el.textContent = Math.round(ease * target);
-    if (t < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target).toLocaleString();
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 }
-const counterObs = new IntersectionObserver((entries) => {
+const cro = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      animateCounter(e.target);
-      counterObs.unobserve(e.target);
+      const t = parseInt(e.target.dataset.count);
+      if (!isNaN(t)) countUp(e.target, t, 1600);
+      cro.unobserve(e.target);
     }
   });
 }, { threshold: 0.5 });
-document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
+document.querySelectorAll('[data-count]').forEach(el => cro.observe(el));
 
-/* ── Video Modal ──────────────────────────────────────────── */
-const modal = document.getElementById('modal');
-const modalInner = document.getElementById('modalInner');
-const frameWrap = document.getElementById('modal-frame-wrap');
+const heroCounter = document.getElementById('hero-counter');
+if (heroCounter) countUp(heroCounter, 120, 2200);
 
-function openModal(ytId, src, ar) {
-  frameWrap.innerHTML = '';
-  frameWrap.className = 'ar-' + (ar || '16-9');
-
-  if (ar === '9-16') {
-    modalInner.className = 'modal-inner portrait';
-  } else if (ar === '21-9') {
-    modalInner.className = 'modal-inner ultrawide';
+// ── Typewriter ──
+const words = ['Convert', 'Captivate', 'Go Viral', 'Build Brands', 'Drive Sales'];
+let wi = 0, ci = 0, deleting = false;
+const tw = document.getElementById('typewriter');
+function typeLoop() {
+  const word = words[wi];
+  if (!deleting) {
+    tw.textContent = word.slice(0, ++ci);
+    if (ci === word.length) { deleting = true; setTimeout(typeLoop, 1600); return; }
+    setTimeout(typeLoop, 80);
   } else {
-    modalInner.className = 'modal-inner';
+    tw.textContent = word.slice(0, --ci);
+    if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(typeLoop, 300); return; }
+    setTimeout(typeLoop, 45);
+  }
+}
+typeLoop();
+
+// ── Particle canvas ──
+(function() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - .5) * .35;
+      this.vy = (Math.random() - .5) * .35;
+      this.r = Math.random() * 1.5 + .3;
+      this.alpha = Math.random() * .4 + .1;
+      this.color = Math.random() > .5 ? '56,189,248' : '245,158,11';
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
+      ctx.fill();
+    }
   }
 
-  if (ytId) {
+  for (let i = 0; i < 90; i++) particles.push(new Particle());
+
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 110) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(56,189,248,${(.06 * (1 - dist/110))})`;
+          ctx.lineWidth = .5;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawLines();
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+// ── Marquee duplicate ──
+(function() {
+  const track = document.getElementById('marquee-track');
+  if (track) track.innerHTML += track.innerHTML;
+})();
+
+// ── Video Modal (supports YouTube embed + direct file) ──
+function openModal(src, title, type, ytId) {
+  const modal = document.getElementById('video-modal');
+  const content = document.getElementById('modal-content');
+  const titleEl = document.getElementById('modal-title');
+  if (titleEl) titleEl.textContent = title || '';
+
+  content.innerHTML = '';
+
+  if (type === 'yt' && ytId && ytId !== 'REPLACE_WITH_YOUR_YOUTUBE_VIDEO_ID') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'position:relative;aspect-ratio:16/9;width:100%;';
     const iframe = document.createElement('iframe');
     iframe.src = 'https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1&rel=0';
     iframe.allow = 'autoplay; fullscreen; encrypted-media';
     iframe.allowFullscreen = true;
-    frameWrap.appendChild(iframe);
-  } else if (src) {
-    const vid = document.createElement('video');
-    vid.src = src;
-    vid.controls = true;
-    vid.autoplay = true;
-    vid.style.borderRadius = '4px';
-    frameWrap.appendChild(vid);
+    iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:12px;';
+    wrap.appendChild(iframe);
+    content.appendChild(wrap);
+  } else if (type === 'file' && src) {
+    const video = document.createElement('video');
+    video.src = src;
+    video.controls = true;
+    video.autoplay = true;
+    video.style.cssText = 'width:100%;display:block;border-radius:12px;';
+    content.appendChild(video);
+  } else {
+    content.innerHTML = '<div style="padding:3rem;text-align:center;color:#64748B;font-family:\'Lexend\',sans-serif;">Video coming soon — replace placeholder with your content.</div>';
   }
-  modal.classList.add('open');
+
+  modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
-function closeModal() {
-  modal.classList.remove('open');
-  frameWrap.innerHTML = '';
+function closeModal(e) {
+  if (e && e.type === 'click' && e.target !== document.getElementById('video-modal') && !e.target.closest('#modal-close-btn')) return;
+  const modal = document.getElementById('video-modal');
+  const content = document.getElementById('modal-content');
+  modal.classList.remove('active');
+  content.innerHTML = '';
   document.body.style.overflow = '';
 }
-
-document.querySelectorAll('[data-yt], [data-src]').forEach(el => {
-  el.addEventListener('click', () => {
-    openModal(el.dataset.yt, el.dataset.src, el.dataset.ar);
-  });
-});
-document.getElementById('modalClose').addEventListener('click', closeModal);
-modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal({}); });
+document.getElementById('modal-close-btn').addEventListener('click', () => closeModal({}));
 </script>
+
 </body>
 </html>
