@@ -367,7 +367,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
 
-        <div class="video-card reveal" style="aspect-ratio:9/16;background:#0B1425;" onclick="openModal('reel_portrait_1.mp4','Social Reel 01','file')">
+        <div class="video-card reveal" style="aspect-ratio:9/16;background:#0B1425;" onclick="openModal('13VbVvfDU6rHPGz3djdGgKP8cS_ay_kZs','Social Reel 01','gdrive',null,'9/16')">
           <div style="width:100%;height:100%;background:linear-gradient(135deg,#0B1425,#070D1A);display:flex;align-items:center;justify-content:center;">
             <svg viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.3)" stroke-width="1" style="width:48px;height:48px"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
           </div>
@@ -868,7 +868,7 @@ typeLoop();
 })();
 
 // ── Video Modal (supports YouTube embed + direct file) ──
-function openModal(src, title, type, ytId) {
+function openModal(src, title, type, ytId, aspect) {
   const modal = document.getElementById('video-modal');
   const content = document.getElementById('modal-content');
   const titleEl = document.getElementById('modal-title');
@@ -878,7 +878,8 @@ function openModal(src, title, type, ytId) {
 
   if (type === 'gdrive' && src) {
     const wrap = document.createElement('div');
-    wrap.style.cssText = 'position:relative;aspect-ratio:16/9;width:100%;';
+    const ar = aspect || '16/9';
+    wrap.style.cssText = 'position:relative;aspect-ratio:' + ar + ';width:100%;max-height:90vh;margin:0 auto;';
     const iframe = document.createElement('iframe');
     iframe.src = 'https://drive.google.com/file/d/' + src + '/preview';
     iframe.allow = 'autoplay; fullscreen; encrypted-media';
