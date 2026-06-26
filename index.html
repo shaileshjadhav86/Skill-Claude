@@ -426,13 +426,11 @@
     <canvas id="particles-canvas" class="absolute inset-0 w-full h-full" style="z-index:1;pointer-events:none;opacity:0.6"></canvas>
 
     <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
-      <p class="section-label mb-6 reveal" style="transition-delay:0.1s">Dubai · AI Ad Production Studio</p>
 
       <div style="position:relative">
-        <h1 id="hero-headline" class="hero-h1 text-white mb-6" aria-label="Ads That Stop the Scroll. Made by AI.">
-          <span class="scramble-line" id="sline-1"></span>
-          <span class="scramble-line grad-gold" id="sline-2" style="-webkit-text-fill-color:transparent;background:linear-gradient(135deg,#FBBF24,#F97316);-webkit-background-clip:text;background-clip:text"></span>
-          <span class="scramble-line" id="sline-3"></span>
+        <h1 id="hero-headline" class="hero-h1 text-white mb-6" aria-label="Ads That Stop the Scroll.">
+          <span style="display:block">Ads That</span>
+          <span class="scramble-line grad-gold" id="sline-2" style="-webkit-text-fill-color:transparent;background:linear-gradient(135deg,#FBBF24,#F97316);-webkit-background-clip:text;background-clip:text;min-height:1.15em"></span>
         </h1>
         <div class="hero-shimmer-sweep" id="hero-sweep"></div>
       </div>
@@ -1014,84 +1012,105 @@
     btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
   });
 
-  // ── Hero scramble reveal ──
+  // -- Hero cycling scramble --
   (function() {
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
-    const lines = [
-      { id: 'sline-1', text: 'Ads That' },
-      { id: 'sline-2', text: 'Stop the Scroll.' },
-      { id: 'sline-3', text: 'Made by AI.' }
+    const PHRASES = [
+      'Stop the Scroll.',
+      'Captivate the Audience.',
+      'Convert.',
+      'Create Impact.',
+      'Drive Real Results.'
     ];
+    const el = document.getElementById('sline-2');
+    if (!el) return;
 
-    function buildLine(el, text) {
+    function randChar() { return CHARS[Math.random() * CHARS.length | 0]; }
+
+    function buildSpans(text) {
       el.innerHTML = '';
-      return Array.from(text).map(ch => {
-        const span = document.createElement('span');
-        span.className = 'scramble-char';
-        span.textContent = ch === ' ' ? ' ' : CHAR_FOR(ch);
-        el.appendChild(span);
-        return { span, final: ch };
+      const spans = Array.from(text).map(ch => {
+        const s = document.createElement('span');
+        s.className = 'scramble-char';
+        s.textContent = ch;
+        el.appendChild(s);
+        return { s, ch };
       });
+      const cur = document.createElement('span');
+      cur.className = 'scramble-cursor';
+      cur.id = 'sc-cursor';
+      el.appendChild(cur);
+      return spans;
     }
 
-    function CHAR_FOR(ch) { return ch === ' ' ? ' ' : CHARS[Math.floor(Math.random() * CHARS.length)]; }
-
-    function scrambleLine(chars, startDelay, onDone) {
-      const totalDuration = 900; // ms per line
-      const stagger = totalDuration / chars.length;
-      chars.forEach(({ span, final }, i) => {
-        if (final === ' ') { span.textContent = ' '; return; }
-        const resolveAt = startDelay + i * stagger;
-        const scrambleEnd = resolveAt + 220;
-
-        // Scramble loop
-        let scrambleTimer;
-        function scrambleLoop() {
-          span.classList.add('scrambling');
-          span.textContent = CHAR_FOR(final);
-          scrambleTimer = setTimeout(scrambleLoop, 55);
-        }
-        setTimeout(scrambleLoop, Math.max(0, resolveAt - 300));
-
-        // Resolve to final character
+    function scrambleTo(text, onDone) {
+      const spans = buildSpans(text);
+      const stagger = Math.min(800 / spans.length, 55);
+      let resolved = 0;
+      const total = spans.filter(({ch}) => ch !== ' ').length || 1;
+      spans.forEach(({ s, ch }, i) => {
+        if (ch === ' ') return;
+        const resolveDelay = i * stagger + 180;
+        let timer;
+        const loop = () => { s.classList.add('scrambling'); s.textContent = randChar(); timer = setTimeout(loop, 48); };
+        setTimeout(loop, Math.max(0, resolveDelay - 260));
         setTimeout(() => {
-          clearTimeout(scrambleTimer);
-          span.classList.remove('scrambling');
-          span.textContent = final;
-          span.classList.add('done');
-          if (i === chars.length - 1 && onDone) onDone();
-        }, scrambleEnd);
+          clearTimeout(timer);
+          s.classList.remove('scrambling');
+          s.textContent = ch;
+          resolved++;
+          if (resolved === total) {
+            const cur = document.getElementById('sc-cursor');
+            if (cur) cur.remove();
+            if (onDone) onDone();
+          }
+        }, resolveDelay + 180);
       });
     }
 
-    // Build all lines immediately (invisible via opacity on parent)
-    const builtLines = lines.map(({ id, text }) => {
-      const el = document.getElementById(id);
-      return el ? buildLine(el, text) : [];
+    function scrambleOut(onDone) {
+      const spans = Array.from(el.querySelectorAll('.scramble-char'));
+      if (!spans.length) { onDone && onDone(); return; }
+      const stagger = Math.min(350 / spans.length, 38);
+      let done = 0;
+      spans.forEach((s, i) => {
+        setTimeout(() => {
+          let t = setInterval(() => { s.textContent = randChar(); }, 40);
+          s.classList.add('scrambling');
+          setTimeout(() => {
+            clearInterval(t); s.style.opacity = '0'; done++;
+            if (done === spans.length) onDone && onDone();
+          }, 200);
+        }, i * stagger);
+      });
+    }
+
+    let phraseIndex = 0;
+
+    function cycle() {
+      scrambleTo(PHRASES[phraseIndex], () => {
+        setTimeout(() => {
+          scrambleOut(() => {
+            phraseIndex = (phraseIndex + 1) % PHRASES.length;
+            setTimeout(cycle, 100);
+          });
+        }, 2200);
+      });
+    }
+
+    // Initial phrase + shimmer sweep after it lands
+    scrambleTo(PHRASES[0], () => {
+      const sweep = document.getElementById('hero-sweep');
+      if (sweep) { sweep.classList.add('run'); }
+      phraseIndex = 1;
+      setTimeout(() => {
+        scrambleOut(() => setTimeout(cycle, 100));
+      }, 2200);
     });
 
-    // Add blinking cursor to line 3
-    const line3El = document.getElementById('sline-3');
-    const cur = document.createElement('span');
-    cur.className = 'scramble-cursor';
-    line3El && line3El.appendChild(cur);
-
-    // Stagger lines
-    const lineDelays = [180, 580, 980];
-    builtLines.forEach((chars, li) => {
-      const isLast = li === builtLines.length - 1;
-      scrambleLine(chars, lineDelays[li], isLast ? () => {
-        // Remove cursor
-        cur.remove();
-        // Trigger shimmer sweep
-        const sweep = document.getElementById('hero-sweep');
-        if (sweep) { sweep.classList.add('run'); }
-      } : null);
-    });
-
-    // Trigger reveal class elements after a short delay
-    document.querySelectorAll('.reveal').forEach(el => {
-      setTimeout(() => el.classList.add('visible'), 350);
+    // Trigger reveal class elements
+    document.querySelectorAll('.reveal').forEach(e => {
+      setTimeout(() => e.classList.add('visible'), 350);
     });
   })();
 
