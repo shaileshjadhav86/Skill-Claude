@@ -120,6 +120,51 @@
     }
     .split-word.revealed { transform: translateY(0); opacity: 1; }
 
+    /* ── Scramble headline ── */
+    #hero-headline {
+      position: relative;
+      overflow: visible;
+    }
+    .scramble-line {
+      display: block;
+      overflow: hidden;
+      position: relative;
+    }
+    .scramble-char {
+      display: inline-block;
+      min-width: 0.3em;
+      transition: color 0.08s;
+    }
+    .scramble-char.scrambling { color: rgba(245,158,11,0.45); }
+    .scramble-char.done-gold { color: transparent; }
+
+    /* shimmer sweep over headline */
+    .hero-shimmer-sweep {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(105deg,
+        transparent 0%, transparent 35%,
+        rgba(245,158,11,0.18) 50%,
+        rgba(251,191,36,0.12) 55%,
+        transparent 65%, transparent 100%);
+      background-size: 250% 100%;
+      background-position: 150% 0;
+      animation: heroSweep 1s cubic-bezier(0.4,0,0.2,1) forwards;
+      animation-play-state: paused;
+    }
+    .hero-shimmer-sweep.run { animation-play-state: running; }
+    @keyframes heroSweep {
+      from { background-position: 150% 0; }
+      to   { background-position: -30% 0; }
+    }
+
+    /* cursor blink on scramble line */
+    .scramble-cursor {
+      display: inline-block; width: 3px; height: 0.85em;
+      background: var(--gold); margin-left: 2px; vertical-align: middle;
+      animation: cursorBlink 0.6s step-end infinite;
+    }
+    @keyframes cursorBlink { 50% { opacity: 0; } }
+
     /* ── Hero headline ── */
     .hero-h1 {
       font-size: clamp(2.8rem, 8.5vw, 7.5rem);
@@ -383,10 +428,13 @@
     <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
       <p class="section-label mb-6 reveal" style="transition-delay:0.1s">Dubai · AI Ad Production Studio</p>
 
-      <div style="overflow:hidden">
-        <h1 id="hero-headline" class="hero-h1 text-white mb-6">
-          Ads That<br/><span class="grad-gold">Stop the Scroll.</span><br/>Made by AI.
+      <div style="position:relative">
+        <h1 id="hero-headline" class="hero-h1 text-white mb-6" aria-label="Ads That Stop the Scroll. Made by AI.">
+          <span class="scramble-line" id="sline-1"></span>
+          <span class="scramble-line grad-gold" id="sline-2" style="-webkit-text-fill-color:transparent;background:linear-gradient(135deg,#FBBF24,#F97316);-webkit-background-clip:text;background-clip:text"></span>
+          <span class="scramble-line" id="sline-3"></span>
         </h1>
+        <div class="hero-shimmer-sweep" id="hero-sweep"></div>
       </div>
 
       <p class="text-slate-300 text-lg md:text-xl max-w-xl mx-auto mb-10 reveal" style="transition-delay:0.3s; font-weight:300;">
@@ -966,15 +1014,82 @@
     btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
   });
 
-  // ── Hero word-split reveal ──
+  // ── Hero scramble reveal ──
   (function() {
-    const h = document.getElementById('hero-headline');
-    if (!h) return;
-    // Keep inner HTML with span, split only text nodes
-    setTimeout(() => {
-      document.querySelectorAll('.split-word').forEach(w => w.classList.add('revealed'));
-    }, 300);
-    // Also trigger reveal class elements
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
+    const lines = [
+      { id: 'sline-1', text: 'Ads That' },
+      { id: 'sline-2', text: 'Stop the Scroll.' },
+      { id: 'sline-3', text: 'Made by AI.' }
+    ];
+
+    function buildLine(el, text) {
+      el.innerHTML = '';
+      return Array.from(text).map(ch => {
+        const span = document.createElement('span');
+        span.className = 'scramble-char';
+        span.textContent = ch === ' ' ? ' ' : CHAR_FOR(ch);
+        el.appendChild(span);
+        return { span, final: ch };
+      });
+    }
+
+    function CHAR_FOR(ch) { return ch === ' ' ? ' ' : CHARS[Math.floor(Math.random() * CHARS.length)]; }
+
+    function scrambleLine(chars, startDelay, onDone) {
+      const totalDuration = 900; // ms per line
+      const stagger = totalDuration / chars.length;
+      chars.forEach(({ span, final }, i) => {
+        if (final === ' ') { span.textContent = ' '; return; }
+        const resolveAt = startDelay + i * stagger;
+        const scrambleEnd = resolveAt + 220;
+
+        // Scramble loop
+        let scrambleTimer;
+        function scrambleLoop() {
+          span.classList.add('scrambling');
+          span.textContent = CHAR_FOR(final);
+          scrambleTimer = setTimeout(scrambleLoop, 55);
+        }
+        setTimeout(scrambleLoop, Math.max(0, resolveAt - 300));
+
+        // Resolve to final character
+        setTimeout(() => {
+          clearTimeout(scrambleTimer);
+          span.classList.remove('scrambling');
+          span.textContent = final;
+          span.classList.add('done');
+          if (i === chars.length - 1 && onDone) onDone();
+        }, scrambleEnd);
+      });
+    }
+
+    // Build all lines immediately (invisible via opacity on parent)
+    const builtLines = lines.map(({ id, text }) => {
+      const el = document.getElementById(id);
+      return el ? buildLine(el, text) : [];
+    });
+
+    // Add blinking cursor to line 3
+    const line3El = document.getElementById('sline-3');
+    const cur = document.createElement('span');
+    cur.className = 'scramble-cursor';
+    line3El && line3El.appendChild(cur);
+
+    // Stagger lines
+    const lineDelays = [180, 580, 980];
+    builtLines.forEach((chars, li) => {
+      const isLast = li === builtLines.length - 1;
+      scrambleLine(chars, lineDelays[li], isLast ? () => {
+        // Remove cursor
+        cur.remove();
+        // Trigger shimmer sweep
+        const sweep = document.getElementById('hero-sweep');
+        if (sweep) { sweep.classList.add('run'); }
+      } : null);
+    });
+
+    // Trigger reveal class elements after a short delay
     document.querySelectorAll('.reveal').forEach(el => {
       setTimeout(() => el.classList.add('visible'), 350);
     });
