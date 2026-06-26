@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zach Global Ventures — Premium Agricultural Exports</title>
+  <meta name="description" content="Sourcing and shipping premium-quality agricultural produce from India to markets worldwide. Farm-fresh quality, global reach, trusted trade partnership." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --cream:        #FAFAF9;
+      --cream-mid:    #F2EDE4;
+      --cream-dark:   #E8E0D4;
+      --charcoal:     #1C1917;
+      --charcoal-mid: #44403C;
+      --charcoal-lt:  #78716C;
+      --gold:         #A16207;
+      --gold-bright:  #CA8A04;
+      --gold-pale:    #FEF9EC;
+      --border:       rgba(28,25,23,0.1);
+      --border-gold:  rgba(161,98,7,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4 {
+      font-family: 'Cormorant', serif;
+      line-height: 1.1;
+    }
+
+    /* ── Thin gold rule ── */
+    .gold-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+      position: relative; overflow: hidden;
+    }
+    .gold-rule::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, #fff 50%, transparent 100%);
+      animation: ruleShimmer 4s ease-in-out infinite;
+      width: 40%; transform: translateX(-100%);
+    }
+    @keyframes ruleShimmer { 0%{transform:translateX(-100%)} 60%{transform:translateX(350%)} 100%{transform:translateX(350%)} }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.5rem 2rem;
+      transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+    }
+    #navbar.scrolled {
+      background: rgba(250,250,249,0.94);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border);
+      padding: 1rem 2rem;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative; height: 100vh; min-height: 680px;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    #hero-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; transform-origin: center;
+      transform: scale(1.05); will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        110deg,
+        rgba(28,25,23,0.72) 0%,
+        rgba(28,25,23,0.50) 50%,
+        rgba(28,25,23,0.30) 100%
+      );
+    }
+    .hero-overlay-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
+      background: linear-gradient(to top, var(--cream) 0%, transparent 100%);
+    }
+
+    /* ── Section label ── */
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── Hero headline ── */
+    .hero-h1 {
+      font-size: clamp(2.8rem, 7vw, 6.5rem);
+      font-weight: 600; color: #fff;
+      letter-spacing: -0.02em; line-height: 1.05;
+    }
+
+    /* ── Marquee ── */
+    .marquee-wrap { overflow: hidden; }
+    .marquee-track {
+      display: flex; gap: 0; width: max-content;
+      animation: marqueeScroll 32s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marqueeScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .mq-item {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 0 2.5rem; white-space: nowrap;
+      font-family: 'Cormorant', serif; font-size: 1.05rem;
+      font-weight: 500; letter-spacing: 0.05em; color: var(--charcoal-mid);
+    }
+    .mq-dot { color: var(--gold-bright); font-size: 0.5rem; }
+
+    /* ── Product cards ── */
+    .product-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem 1.75rem;
+      background: #fff;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.35s;
+      cursor: default;
+    }
+    .product-card:hover {
+      border-color: var(--border-gold);
+      box-shadow: 0 12px 40px rgba(28,25,23,0.08), 0 0 0 1px rgba(161,98,7,0.1);
+      transform: translateY(-4px);
+    }
+    .prod-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--gold-pale);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      transition: background 0.3s;
+    }
+    .product-card:hover .prod-icon { background: rgba(161,98,7,0.12); }
+
+    /* ── Stat ── */
+    .stat-num {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1;
+      color: var(--charcoal);
+    }
+    .stat-unit { color: var(--gold-bright); }
+
+    /* ── Process step ── */
+    .process-step {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.5rem; align-items: start;
+      transition: background 0.2s;
+    }
+    .process-step:hover { background: rgba(161,98,7,0.02); }
+    .step-num {
+      font-family: 'Cormorant', serif;
+      font-size: 3rem; font-weight: 700;
+      color: rgba(161,98,7,0.18); line-height: 1;
+      transition: color 0.3s;
+    }
+    .process-step:hover .step-num { color: rgba(161,98,7,0.45); }
+
+    /* ── Region pills ── */
+    .region-pill {
+      border: 1px solid var(--border);
+      border-radius: 2px; padding: 1.25rem 1.5rem;
+      background: #fff; transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .region-pill:hover { border-color: var(--border-gold); box-shadow: 0 4px 16px rgba(28,25,23,0.06); }
+
+    /* ── CTA buttons ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--charcoal); color: #fff;
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: 0.875rem; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 1rem 2.25rem; border-radius: 2px; cursor: pointer;
+      transition: background 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: #000; box-shadow: 0 8px 24px rgba(28,25,23,0.2); }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold-bright); color: #fff;
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: 0.875rem; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 1rem 2.25rem; border-radius: 2px; cursor: pointer;
+      transition: background 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+    }
+    .btn-gold:hover { background: var(--gold); box-shadow: 0 8px 24px rgba(161,98,7,0.3); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: #fff;
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: 0.875rem; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 0.9rem 2.25rem; border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.5);
+      cursor: pointer; transition: border-color 0.25s, background 0.25s;
+      text-decoration: none;
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── Pillar cards ── */
+    .pillar {
+      padding: 2.5rem 2rem;
+      border-top: 2px solid var(--border-gold);
+      background: #fff;
+      transition: box-shadow 0.3s;
+    }
+    .pillar:hover { box-shadow: 0 8px 32px rgba(28,25,23,0.07); }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── Contact form ── */
+    .form-input {
+      width: 100%; padding: 0.875rem 1rem;
+      border: 1px solid var(--border); border-radius: 2px;
+      background: #fff; color: var(--charcoal);
+      font-family: 'Inter', sans-serif; font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-input:focus { border-color: var(--gold-bright); box-shadow: 0 0 0 3px rgba(202,138,4,0.1); }
+    .form-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-lt); margin-bottom: 0.5rem; display: block; }
+
+    @media (max-width: 768px) {
+      .process-step { grid-template-columns: 44px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─────────────────────────────────────────
+       NAVBAR
+  ───────────────────────────────────────── -->
+  <nav id="navbar">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Logo (text-based) -->
+      <a href="#" class="flex items-center gap-3 text-white" id="nav-logo">
+        <div style="width:32px;height:32px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;border-radius:2px">
+          <span style="font-family:'Cormorant',serif;font-weight:700;font-size:1rem;line-height:1">Z</span>
+        </div>
+        <div>
+          <div style="font-family:'Cormorant',serif;font-weight:600;font-size:1.05rem;letter-spacing:0.08em;line-height:1.1">ZACH GLOBAL</div>
+          <div style="font-family:'Inter',sans-serif;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.7;margin-top:1px">VENTURES</div>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-8" id="nav-links">
+        <a href="#about" class="nav-link text-sm font-medium tracking-wide transition-colors" style="color:rgba(255,255,255,0.8)">About</a>
+        <a href="#products" class="nav-link text-sm font-medium tracking-wide transition-colors" style="color:rgba(255,255,255,0.8)">Products</a>
+        <a href="#reach" class="nav-link text-sm font-medium tracking-wide transition-colors" style="color:rgba(255,255,255,0.8)">Our Reach</a>
+        <a href="#contact" class="btn-gold text-xs py-2.5 px-5">Get a Quote</a>
+      </div>
+
+      <!-- Mobile menu -->
+      <button id="menu-btn" aria-label="Menu"
+              style="color:rgba(255,255,255,0.9);background:none;border:none;cursor:pointer;padding:0.5rem">
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 flex-col gap-3">
+      <a href="#about" class="py-2 text-sm text-white/80 hover:text-white transition-colors">About</a>
+      <a href="#products" class="py-2 text-sm text-white/80 hover:text-white transition-colors">Products</a>
+      <a href="#reach" class="py-2 text-sm text-white/80 hover:text-white transition-colors">Our Reach</a>
+      <a href="#contact" class="btn-gold text-center justify-center mt-2">Get a Quote</a>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────────────
+       HERO
+  ───────────────────────────────────────── -->
+  <section id="hero">
+    <img id="hero-bg"
+         src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1920&q=80"
+         alt="Premium spices and agricultural produce"
+         loading="eager" />
+    <div class="hero-overlay"></div>
+    <div class="hero-overlay-bottom"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+      <div class="max-w-3xl">
+        <p class="eyebrow mb-6" style="color:rgba(202,138,4,0.9);animation:fadeIn 1s ease 0.2s both">
+          Dubai FZC · Est. 2024 · Global Agri-Trade
+        </p>
+        <h1 class="hero-h1 mb-7" style="animation:heroReveal 1.1s cubic-bezier(0.16,1,0.3,1) 0.3s both">
+          Premium Produce.<br/>
+          <em style="font-style:italic;color:rgba(255,255,255,0.82)">From Farm</em><br/>
+          To Destination.
+        </h1>
+        <p class="text-white/70 text-lg mb-10 max-w-xl" style="font-weight:300;line-height:1.75;animation:fadeIn 1s ease 0.6s both">
+          Sourcing the finest agricultural produce from India's heartland and delivering it to B2B and B2C markets worldwide — with freshness, trust, and consistency at every step.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4" style="animation:fadeIn 1s ease 0.8s both">
+          <a href="#contact" class="btn-gold w-full sm:w-auto justify-center">
+            Start a Trade Partnership
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="#products" class="btn-outline w-full sm:w-auto justify-center">Explore Our Range</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-10 right-10 z-10 hidden md:flex flex-col items-center gap-2 opacity-50">
+      <div style="writing-mode:vertical-rl;font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:#fff">Scroll</div>
+      <div style="width:1px;height:56px;background:linear-gradient(to bottom,rgba(255,255,255,0.6),transparent)"></div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       MARQUEE — PRODUCT CATEGORIES
+  ───────────────────────────────────────── -->
+  <div style="background:var(--charcoal);padding:1.1rem 0;overflow:hidden">
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <div class="mq-item" style="color:rgba(255,255,255,0.65)">
+          <span class="mq-dot">◆</span> Basmati Rice <span class="mq-dot">◆</span> Aromatic Spices <span class="mq-dot">◆</span> Turmeric <span class="mq-dot">◆</span> Cumin &amp; Coriander <span class="mq-dot">◆</span> Pulses &amp; Lentils <span class="mq-dot">◆</span> Fresh Mangoes <span class="mq-dot">◆</span> Oilseeds <span class="mq-dot">◆</span> Jaggery &amp; Sugar <span class="mq-dot">◆</span> Dried Fruits <span class="mq-dot">◆</span> Sesame Seeds <span class="mq-dot">◆</span> Black Pepper <span class="mq-dot">◆</span>
+        </div>
+        <div class="mq-item" style="color:rgba(255,255,255,0.65)">
+          <span class="mq-dot">◆</span> Basmati Rice <span class="mq-dot">◆</span> Aromatic Spices <span class="mq-dot">◆</span> Turmeric <span class="mq-dot">◆</span> Cumin &amp; Coriander <span class="mq-dot">◆</span> Pulses &amp; Lentils <span class="mq-dot">◆</span> Fresh Mangoes <span class="mq-dot">◆</span> Oilseeds <span class="mq-dot">◆</span> Jaggery &amp; Sugar <span class="mq-dot">◆</span> Dried Fruits <span class="mq-dot">◆</span> Sesame Seeds <span class="mq-dot">◆</span> Black Pepper <span class="mq-dot">◆</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────
+       ABOUT
+  ───────────────────────────────────────── -->
+  <section id="about" class="py-28 px-6" style="background:var(--cream)">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+
+        <!-- Left — editorial text -->
+        <div class="reveal-left">
+          <p class="eyebrow mb-5">About Zach Global Ventures</p>
+          <h2 style="font-family:'Cormorant',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:600;letter-spacing:-0.02em;line-height:1.1;color:var(--charcoal);margin-bottom:1.75rem">
+            Bridging the World's<br/>
+            <em style="font-style:italic;color:var(--charcoal-mid)">Finest Harvests</em><br/>
+            to Global Markets
+          </h2>
+          <div class="gold-rule mb-8" style="width:80px"></div>
+          <p style="font-size:1.05rem;color:var(--charcoal-mid);line-height:1.8;font-weight:300;margin-bottom:1.25rem">
+            Founded in Dubai's dynamic free zone ecosystem, Zach Global Ventures specialises in the sourcing, quality assurance, and re-export of premium agricultural commodities. With deep roots in India's agricultural heartland, we connect the world's most trusted farms with discerning buyers across the Middle East, Africa, Europe, and Southeast Asia.
+          </p>
+          <p style="font-size:1.05rem;color:var(--charcoal-mid);line-height:1.8;font-weight:300;margin-bottom:2.5rem">
+            Every consignment we handle is a commitment — to freshness, to consistency, and to the trust our clients and farming partners place in us. We are not just traders; we are custodians of quality across the entire supply chain.
+          </p>
+          <a href="#contact" class="btn-primary">Partner With Us</a>
+        </div>
+
+        <!-- Right — editorial image stack -->
+        <div class="reveal" style="position:relative">
+          <div style="position:relative;overflow:hidden;border-radius:4px;aspect-ratio:3/4;max-height:560px">
+            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=900&q=80"
+                 alt="Premium Indian spices arranged beautifully"
+                 style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy" />
+            <!-- Gold badge overlay -->
+            <div style="position:absolute;bottom:2rem;left:2rem;background:var(--charcoal);color:#fff;padding:1.25rem 1.5rem;border-radius:2px;border-left:3px solid var(--gold-bright)">
+              <div style="font-family:'Cormorant',serif;font-size:1.8rem;font-weight:700;line-height:1;color:#fff">India</div>
+              <div style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-top:4px">Sourcing Origin</div>
+            </div>
+          </div>
+          <!-- Floating accent card -->
+          <div style="position:absolute;top:2rem;right:-1.5rem;background:#fff;border:1px solid var(--border-gold);padding:1.25rem 1.5rem;border-radius:4px;box-shadow:0 8px 32px rgba(28,25,23,0.12)">
+            <div style="font-family:'Cormorant',serif;font-size:1.6rem;font-weight:700;color:var(--charcoal)">40+</div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--charcoal-lt);margin-top:2px">Countries Reached</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-rule mx-6 md:mx-16"></div>
+
+  <!-- ─────────────────────────────────────────
+       PRODUCTS WE TRADE
+  ───────────────────────────────────────── -->
+  <section id="products" class="py-28 px-6" style="background:var(--cream-mid)">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="mb-16 reveal">
+        <p class="eyebrow mb-4">What We Trade</p>
+        <div class="flex flex-col md:flex-row md:items-end gap-6">
+          <h2 style="font-family:'Cormorant',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:600;letter-spacing:-0.02em;line-height:1.1;color:var(--charcoal);flex:1">
+            Nature's Best,<br/><em style="font-style:italic">Carefully Chosen</em>
+          </h2>
+          <p style="font-size:1rem;color:var(--charcoal-lt);max-width:360px;font-weight:300;line-height:1.75;padding-bottom:0.5rem">
+            Every category is sourced from certified farms and quality-verified before export.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+
+        <div class="product-card reveal">
+          <div class="prod-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-1.8 0-3.5.6-4.9 1.7L3.7 7.1C2.6 8 2 9.3 2 10.7v2.6c0 1.4.6 2.7 1.7 3.6l3.4 2.4C8.5 20.4 10.2 21 12 21s3.5-.6 4.9-1.7l3.4-2.4c1.1-.9 1.7-2.2 1.7-3.6v-2.6c0-1.4-.6-2.7-1.7-3.6L16.9 4.7C15.5 3.6 13.8 3 12 3z"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem">Basmati Rice</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.7;font-weight:300">Long-grain aromatic varieties from Punjab and Haryana, aged to perfection.</p>
+        </div>
+
+        <div class="product-card reveal" style="transition-delay:0.08s">
+          <div class="prod-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem">Aromatic Spices</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.7;font-weight:300">Turmeric, cumin, coriander, cardamom — whole, ground, and oleoresin formats.</p>
+        </div>
+
+        <div class="product-card reveal" style="transition-delay:0.16s">
+          <div class="prod-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem">Pulses &amp; Lentils</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.7;font-weight:300">Chana, masoor, moong, toor dal — bulk and consumer-pack export ready.</p>
+        </div>
+
+        <div class="product-card reveal" style="transition-delay:0.24s">
+          <div class="prod-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem">Fresh Produce</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.7;font-weight:300">Alphonso mangoes, pomegranates, grapes — cold-chain handled from farm gate.</p>
+        </div>
+
+        <div class="product-card reveal" style="transition-delay:0.32s">
+          <div class="prod-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1 1 .03 2.617-1.42 2.44l-3.68-.488m-3.6.488l-3.68.488c-1.45.18-2.42-1.44-1.42-2.44L5 14.5"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem">Oilseeds &amp; Oils</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.7;font-weight:300">Sesame, groundnut, mustard — seeds and cold-pressed oils for food industry.</p>
+        </div>
+
+        <div class="product-card reveal" style="transition-delay:0.40s">
+          <div class="prod-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem">Jaggery &amp; Sugar</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.7;font-weight:300">Organic jaggery, raw cane sugar, and refined white sugar in all pack sizes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-rule mx-6 md:mx-16"></div>
+
+  <!-- ─────────────────────────────────────────
+       BY THE NUMBERS
+  ───────────────────────────────────────── -->
+  <section class="py-24 px-6" style="background:var(--charcoal)">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px" style="background:rgba(255,255,255,0.07)">
+
+        <div class="reveal py-12 px-8" style="background:var(--charcoal);text-align:center">
+          <div class="stat-num" style="color:#fff"><span class="counter" data-count="40">0</span>+</div>
+          <div style="font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:0.75rem">Countries Reached</div>
+        </div>
+
+        <div class="reveal py-12 px-8" style="background:var(--charcoal);text-align:center;transition-delay:0.1s">
+          <div class="stat-num" style="color:#fff"><span class="counter" data-count="500">0</span>+</div>
+          <div style="font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:0.75rem">MT Shipped Monthly</div>
+        </div>
+
+        <div class="reveal py-12 px-8" style="background:var(--charcoal);text-align:center;transition-delay:0.2s">
+          <div class="stat-num" style="color:#fff"><span class="counter" data-count="12">0</span>+</div>
+          <div style="font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:0.75rem">Product Categories</div>
+        </div>
+
+        <div class="reveal py-12 px-8" style="background:var(--charcoal);text-align:center;transition-delay:0.3s">
+          <div class="stat-num" style="color:#fff"><span class="counter" data-count="100">0</span>%</div>
+          <div style="font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:0.75rem">Quality Certified</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       HOW IT WORKS
+  ───────────────────────────────────────── -->
+  <section id="process" class="py-28 px-6" style="background:var(--cream)">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="mb-16 reveal">
+        <p class="eyebrow mb-4">How It Works</p>
+        <h2 style="font-family:'Cormorant',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:600;letter-spacing:-0.02em;line-height:1.1;color:var(--charcoal)">
+          Farm to Destination<br/><em style="font-style:italic;color:var(--charcoal-mid)">in Four Steps</em>
+        </h2>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.6rem;font-weight:600;color:var(--charcoal);margin-bottom:0.6rem">Inquiry &amp; Briefing</h3>
+          <p style="font-size:0.95rem;color:var(--charcoal-lt);line-height:1.8;font-weight:300;max-width:520px">
+            Share your product requirements, destination, volume, and certification needs. We'll respond within 24 hours with sourcing availability and indicative pricing.
+          </p>
+        </div>
+      </div>
+
+      <div class="process-step reveal" style="transition-delay:0.08s">
+        <div class="step-num">02</div>
+        <div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.6rem;font-weight:600;color:var(--charcoal);margin-bottom:0.6rem">Sourcing &amp; Quality Check</h3>
+          <p style="font-size:0.95rem;color:var(--charcoal-lt);line-height:1.8;font-weight:300;max-width:520px">
+            We engage our verified farm network in India, conduct physical quality inspections, and arrange lab testing where required. Samples sent on request.
+          </p>
+        </div>
+      </div>
+
+      <div class="process-step reveal" style="transition-delay:0.16s">
+        <div class="step-num">03</div>
+        <div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.6rem;font-weight:600;color:var(--charcoal);margin-bottom:0.6rem">Documentation &amp; Compliance</h3>
+          <p style="font-size:0.95rem;color:var(--charcoal-lt);line-height:1.8;font-weight:300;max-width:520px">
+            Full export documentation — phytosanitary certificates, FSSAI, APEDA, and destination country–specific compliance — handled end-to-end.
+          </p>
+        </div>
+      </div>
+
+      <div class="process-step reveal" style="transition-delay:0.24s">
+        <div class="step-num">04</div>
+        <div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.6rem;font-weight:600;color:var(--charcoal);margin-bottom:0.6rem">Shipment &amp; Delivery</h3>
+          <p style="font-size:0.95rem;color:var(--charcoal-lt);line-height:1.8;font-weight:300;max-width:520px">
+            FCL and LCL sea freight, air freight for perishables, real-time tracking, and destination delivery coordination through our trusted logistics network.
+          </p>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border)"></div>
+
+    </div>
+  </section>
+
+  <div class="gold-rule mx-6 md:mx-16"></div>
+
+  <!-- ─────────────────────────────────────────
+       OUR REACH
+  ───────────────────────────────────────── -->
+  <section id="reach" class="py-28 px-6" style="background:var(--cream-mid)">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="mb-16 reveal">
+        <p class="eyebrow mb-4">Our Reach</p>
+        <h2 style="font-family:'Cormorant',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:600;letter-spacing:-0.02em;line-height:1.1;color:var(--charcoal)">
+          Sourced in India.<br/><em style="font-style:italic;color:var(--charcoal-mid)">Delivered Everywhere.</em>
+        </h2>
+      </div>
+
+      <!-- Source -->
+      <div class="mb-8 reveal">
+        <p class="eyebrow mb-5" style="color:var(--charcoal-lt)">Sourcing Origin</p>
+        <div class="flex flex-wrap gap-3">
+          <div class="region-pill" style="border-color:var(--border-gold);background:var(--gold-pale)">
+            <div style="font-family:'Cormorant',serif;font-size:1.1rem;font-weight:600;color:var(--charcoal)">India</div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-top:2px">Primary Origin · Farm Network</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export markets -->
+      <div class="reveal" style="transition-delay:0.1s">
+        <p class="eyebrow mb-5" style="color:var(--charcoal-lt)">Export Markets</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="region-pill">
+            <div style="font-family:'Cormorant',serif;font-size:1.1rem;font-weight:600;color:var(--charcoal)">Middle East &amp; GCC</div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--charcoal-lt);margin-top:2px">UAE · Saudi Arabia · Qatar · Kuwait</div>
+          </div>
+          <div class="region-pill">
+            <div style="font-family:'Cormorant',serif;font-size:1.1rem;font-weight:600;color:var(--charcoal)">Africa</div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--charcoal-lt);margin-top:2px">East &amp; West Africa · North Africa</div>
+          </div>
+          <div class="region-pill">
+            <div style="font-family:'Cormorant',serif;font-size:1.1rem;font-weight:600;color:var(--charcoal)">Southeast Asia</div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--charcoal-lt);margin-top:2px">Malaysia · Singapore · Indonesia</div>
+          </div>
+          <div class="region-pill">
+            <div style="font-family:'Cormorant',serif;font-size:1.1rem;font-weight:600;color:var(--charcoal)">Europe &amp; Americas</div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--charcoal-lt);margin-top:2px">UK · EU · North America</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       WHY CHOOSE US
+  ───────────────────────────────────────── -->
+  <section class="py-28 px-6" style="background:var(--cream)">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="mb-16 reveal">
+        <p class="eyebrow mb-4">Why Choose Us</p>
+        <h2 style="font-family:'Cormorant',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:600;letter-spacing:-0.02em;line-height:1.1;color:var(--charcoal)">
+          The Difference is<br/><em style="font-style:italic">in the Details</em>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <div class="pillar reveal">
+          <div style="margin-bottom:1.25rem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-8 h-8" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.6rem">Certified Quality</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.75;font-weight:300">Every batch is lab-tested and certified to international food safety standards before dispatch.</p>
+        </div>
+
+        <div class="pillar reveal" style="transition-delay:0.1s">
+          <div style="margin-bottom:1.25rem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-8 h-8" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.6rem">Reliable Timelines</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.75;font-weight:300">On-time delivery is a core promise. Our logistics network is built for precision, not approximation.</p>
+        </div>
+
+        <div class="pillar reveal" style="transition-delay:0.2s">
+          <div style="margin-bottom:1.25rem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-8 h-8" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.6rem">Trusted Farmer Network</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.75;font-weight:300">Decades of farmer relationships across India mean consistent sourcing and transparent traceability.</p>
+        </div>
+
+        <div class="pillar reveal" style="transition-delay:0.3s">
+          <div style="margin-bottom:1.25rem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-8 h-8" style="color:var(--gold)">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;color:var(--charcoal);margin-bottom:0.6rem">Dubai FZC Advantage</h3>
+          <p style="font-size:0.875rem;color:var(--charcoal-lt);line-height:1.75;font-weight:300">Our UAE Free Zone structure enables tax-efficient re-export, faster customs clearance, and global banking access.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-rule mx-6 md:mx-16"></div>
+
+  <!-- ─────────────────────────────────────────
+       CONTACT
+  ───────────────────────────────────────── -->
+  <section id="contact" class="py-28 px-6" style="background:var(--cream-mid)">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-16 items-start">
+
+        <!-- Left -->
+        <div class="reveal-left">
+          <p class="eyebrow mb-5">Get in Touch</p>
+          <h2 style="font-family:'Cormorant',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:600;letter-spacing:-0.02em;line-height:1.1;color:var(--charcoal);margin-bottom:1.5rem">
+            Ready to Start<br/><em style="font-style:italic">Trading Together?</em>
+          </h2>
+          <div class="gold-rule mb-8" style="width:80px"></div>
+          <p style="font-size:1rem;color:var(--charcoal-lt);line-height:1.8;font-weight:300;margin-bottom:2.5rem;max-width:400px">
+            Whether you're a bulk importer, a retail chain, or exploring new commodity sources — let's have a conversation.
+          </p>
+
+          <div class="flex flex-col gap-5">
+            <a href="mailto:info@zachglobalfzc.com"
+               style="display:flex;align-items:center;gap:1rem;text-decoration:none;color:var(--charcoal);transition:color 0.2s"
+               onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--charcoal)'">
+              <div style="width:44px;height:44px;border:1px solid var(--border-gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color:var(--gold)">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                </svg>
+              </div>
+              <div>
+                <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--charcoal-lt);margin-bottom:2px">Email</div>
+                <div style="font-size:0.95rem;font-weight:500">info@zachglobalfzc.com</div>
+              </div>
+            </a>
+
+            <a href="https://wa.me/971551383940" target="_blank" rel="noopener"
+               style="display:flex;align-items:center;gap:1rem;text-decoration:none;color:var(--charcoal);transition:color 0.2s"
+               onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--charcoal)'">
+              <div style="width:44px;height:44px;border:1px solid var(--border-gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" style="color:var(--gold)">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M11.999 2C6.477 2 2 6.477 2 11.999c0 1.869.487 3.625 1.34 5.146L2 22l5.013-1.313A9.94 9.94 0 0011.999 22C17.523 22 22 17.523 22 11.999 22 6.477 17.523 2 11.999 2zm0 18c-1.7 0-3.285-.456-4.645-1.254l-.334-.198-3.464.908.924-3.376-.215-.347A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+                </svg>
+              </div>
+              <div>
+                <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--charcoal-lt);margin-bottom:2px">WhatsApp</div>
+                <div style="font-size:0.95rem;font-weight:500">+971 55 138 3940</div>
+              </div>
+            </a>
+
+            <div style="display:flex;align-items:center;gap:1rem">
+              <div style="width:44px;height:44px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color:var(--charcoal-lt)">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                </svg>
+              </div>
+              <div>
+                <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--charcoal-lt);margin-bottom:2px">Registered Office</div>
+                <div style="font-size:0.95rem;font-weight:500;color:var(--charcoal)">Dubai Free Zone, UAE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right — form -->
+        <div class="reveal" style="background:#fff;padding:2.5rem;border:1px solid var(--border);border-radius:4px">
+          <h3 style="font-family:'Cormorant',serif;font-size:1.8rem;font-weight:600;color:var(--charcoal);margin-bottom:1.75rem">Send a Trade Enquiry</h3>
+
+          <form id="contact-form" onsubmit="handleForm(event)" class="flex flex-col gap-5">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="form-label" for="f-name">Your Name</label>
+                <input id="f-name" name="name" type="text" class="form-input" placeholder="Ahmed Al-Rashid" required />
+              </div>
+              <div>
+                <label class="form-label" for="f-company">Company</label>
+                <input id="f-company" name="company" type="text" class="form-input" placeholder="Al-Rashid Trading LLC" />
+              </div>
+            </div>
+            <div>
+              <label class="form-label" for="f-email">Email Address</label>
+              <input id="f-email" name="email" type="email" class="form-input" placeholder="ahmed@company.com" required />
+            </div>
+            <div>
+              <label class="form-label" for="f-product">Product of Interest</label>
+              <select id="f-product" name="product" class="form-input" style="cursor:pointer">
+                <option value="">Select a product category</option>
+                <option>Basmati Rice</option>
+                <option>Aromatic Spices</option>
+                <option>Pulses &amp; Lentils</option>
+                <option>Fresh Produce</option>
+                <option>Oilseeds &amp; Oils</option>
+                <option>Jaggery &amp; Sugar</option>
+                <option>Multiple / Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label" for="f-message">Message</label>
+              <textarea id="f-message" name="message" class="form-input" rows="4" placeholder="Tell us about your volume requirements, destination, and any specific certifications needed..." style="resize:vertical"></textarea>
+            </div>
+            <button type="submit" class="btn-primary justify-center w-full" id="form-btn">
+              Send Enquiry
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </button>
+            <p id="form-success" style="display:none;text-align:center;color:var(--gold);font-size:0.875rem;font-weight:500">
+              Thank you — we'll be in touch within 24 hours.
+            </p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       FOOTER
+  ───────────────────────────────────────── -->
+  <footer style="background:var(--charcoal);color:rgba(255,255,255,0.5)">
+    <div class="max-w-7xl mx-auto px-6 py-16">
+      <div class="flex flex-col md:flex-row justify-between gap-10 mb-12">
+
+        <!-- Brand -->
+        <div class="max-w-xs">
+          <div class="flex items-center gap-3 mb-5">
+            <div style="width:32px;height:32px;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;border-radius:2px">
+              <span style="font-family:'Cormorant',serif;font-weight:700;font-size:1rem;color:#fff">Z</span>
+            </div>
+            <div>
+              <div style="font-family:'Cormorant',serif;font-weight:600;font-size:1.05rem;letter-spacing:0.08em;color:#fff">ZACH GLOBAL VENTURES</div>
+              <div style="font-family:'Inter',sans-serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4)">Dubai FZC</div>
+            </div>
+          </div>
+          <p style="font-size:0.875rem;line-height:1.7;color:rgba(255,255,255,0.4);font-weight:300">
+            Bridging premium agricultural produce from India's farms to global markets with trust, quality, and reliability.
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div class="flex gap-16">
+          <div>
+            <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem">Company</p>
+            <div class="flex flex-col gap-2.5">
+              <a href="#about" style="font-size:0.875rem;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.55)'">About</a>
+              <a href="#products" style="font-size:0.875rem;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.55)'">Products</a>
+              <a href="#process" style="font-size:0.875rem;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.55)'">How It Works</a>
+              <a href="#reach" style="font-size:0.875rem;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.55)'">Our Reach</a>
+            </div>
+          </div>
+          <div>
+            <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem">Contact</p>
+            <div class="flex flex-col gap-2.5">
+              <a href="mailto:info@zachglobalfzc.com" style="font-size:0.875rem;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.55)'">Email Us</a>
+              <a href="https://wa.me/971551383940" target="_blank" rel="noopener" style="font-size:0.875rem;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.55)'">WhatsApp</a>
+              <a href="#contact" style="font-size:0.875rem;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.55)'">Trade Enquiry</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:2rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem">
+        <p style="font-size:0.8rem">© 2025 Zach Global Ventures FZC · Dubai, UAE</p>
+        <p style="font-size:0.8rem">info@zachglobalfzc.com · +971 55 138 3940</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp float -->
+  <a href="https://wa.me/971551383940" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
+     style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:500;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s,box-shadow 0.2s;cursor:pointer"
+     onmouseenter="this.style.transform='scale(1.1)';this.style.boxShadow='0 8px 30px rgba(37,211,102,0.5)'"
+     onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,0.35)'">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="white" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M11.999 2C6.477 2 2 6.477 2 11.999c0 1.869.487 3.625 1.34 5.146L2 22l5.013-1.313A9.94 9.94 0 0011.999 22C17.523 22 22 17.523 22 11.999 22 6.477 17.523 2 11.999 2zm0 18c-1.7 0-3.285-.456-4.645-1.254l-.334-.198-3.464.908.924-3.376-.215-.347A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+    </svg>
+  </a>
+
+  <!-- ─────────────────────────────────────────
+       JAVASCRIPT
+  ───────────────────────────────────────── -->
+  <style>
+    @keyframes fadeIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes heroReveal { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
+  </style>
+
+  <script>
+  // ── Navbar: scroll behaviour + color switch ──
+  const navbar = document.getElementById('navbar');
+  const navLogo = document.getElementById('nav-logo');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function updateNav() {
+    const scrolled = window.scrollY > 60;
+    navbar.classList.toggle('scrolled', scrolled);
+    navLogo.style.color = scrolled ? 'var(--charcoal)' : '#fff';
+    navLinks.forEach(l => {
+      l.style.color = scrolled ? 'var(--charcoal-mid)' : 'rgba(255,255,255,0.8)';
+    });
+    const menuBtn = document.getElementById('menu-btn');
+    menuBtn.style.color = scrolled ? 'var(--charcoal)' : 'rgba(255,255,255,0.9)';
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  // ── Mobile menu ──
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const hidden = mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex', !hidden);
+    document.getElementById('icon-open').classList.toggle('hidden', !hidden);
+    document.getElementById('icon-close').classList.toggle('hidden', hidden);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex');
+    document.getElementById('icon-open').classList.remove('hidden');
+    document.getElementById('icon-close').classList.add('hidden');
+  }));
+
+  // ── Hero parallax ──
+  const heroBg = document.getElementById('hero-bg');
+  window.addEventListener('scroll', () => {
+    heroBg.style.transform = `translateY(${window.scrollY * 0.3}px) scale(1.05)`;
+  }, { passive: true });
+
+  // ── Scroll reveal ──
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .reveal-left').forEach(el => ro.observe(el));
+
+  // ── Counters ──
+  function countUp(el) {
+    const target = parseInt(el.dataset.count);
+    const start = performance.now();
+    const dur = 1600;
+    (function step(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(ease * target);
+      if (p < 1) requestAnimationFrame(step);
+    })(start);
+  }
+  const co = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); co.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => co.observe(el));
+
+  // ── Contact form ──
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('form-btn');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    // Compose mailto
+    const data = new FormData(e.target);
+    const subject = encodeURIComponent(`Trade Enquiry — ${data.get('product') || 'General'}`);
+    const body = encodeURIComponent(
+      `Name: ${data.get('name')}\nCompany: ${data.get('company')}\nEmail: ${data.get('email')}\nProduct: ${data.get('product')}\n\nMessage:\n${data.get('message')}`
+    );
+    window.location.href = `mailto:info@zachglobalfzc.com?subject=${subject}&body=${body}`;
+    setTimeout(() => {
+      document.getElementById('form-success').style.display = 'block';
+      btn.textContent = 'Sent';
+    }, 800);
+  }
+  </script>
+
+</body>
+</html>
