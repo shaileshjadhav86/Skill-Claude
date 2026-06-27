@@ -185,31 +185,23 @@
     .marquee-item { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #94A3B8; }
     .marquee-dot { color: var(--gold); opacity: 0.7; }
 
-    /* ── Horizontal reel ── */
-    .reel-track {
-      display: flex; gap: 1.25rem; overflow-x: auto; padding: 0.5rem 0 1.5rem;
-      scroll-snap-type: x mandatory; cursor: grab;
-      -webkit-overflow-scrolling: touch; scrollbar-width: none;
-    }
-    .reel-track::-webkit-scrollbar { display: none; }
-    .reel-track.dragging { cursor: grabbing; }
+    /* ── Stacked reel ── */
     .reel-card {
-      flex: 0 0 auto; border-radius: 12px; overflow: hidden;
-      position: relative; scroll-snap-align: start;
+      border-radius: 12px; overflow: hidden; position: relative; cursor: pointer;
       transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
-      cursor: pointer;
     }
-    .reel-card:hover { transform: translateY(-6px) scale(1.015); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.2); }
-    .reel-card video { display: block; pointer-events: none; }
+    .reel-card:hover { transform: translateY(-6px) scale(1.015); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.3); }
+    .reel-card video { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
     .reel-card-overlay {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
       background: rgba(4,7,15,0.0); transition: background 0.3s;
     }
-    .reel-card:hover .reel-card-overlay { background: rgba(4,7,15,0.35); }
+    .reel-card:hover .reel-card-overlay { background: rgba(4,7,15,0.45); }
     .play-btn {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: rgba(245,158,11,0.9); display: flex; align-items: center; justify-content: center;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(245,158,11,0.92); display: flex; align-items: center; justify-content: center;
       opacity: 0; transform: scale(0.75); transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 0 40px rgba(245,158,11,0.5);
     }
     .reel-card:hover .play-btn { opacity: 1; transform: scale(1); }
 
@@ -504,113 +496,106 @@
           Campaigns that<br/><span class="grad-text">convert</span>
         </h2>
         <p class="text-slate-400 mt-4 max-w-lg text-lg" style="font-weight:300">
-          Drag to explore. Click any video to watch with sound.
+          Click any video to watch with sound.
         </p>
       </div>
 
       <div class="shimmer-line mb-10 reveal"></div>
 
-      <!-- Horizontal reel -->
-      <div id="reel-track" class="reel-track reveal">
-
-        <!-- 16:9 Showreel -->
-        <div class="reel-card" style="width:min(680px,85vw)"
-             onclick="openModal('showreel.mp4','Studio Showreel 2025','file',null,'16:9')">
-          <video autoplay muted loop playsinline style="width:100%;height:auto;display:block">
+      <!-- Row 1: Full-width showreel 16:9 -->
+      <div class="reel-card reveal mb-5"
+           onclick="openModal('showreel.mp4','Studio Showreel 2025','file',null,'16:9')">
+        <div style="aspect-ratio:16/9;overflow:hidden">
+          <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
             <source src="showreel.mp4" type="video/mp4"/>
           </video>
-          <div class="reel-card-overlay">
-            <div class="play-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            </div>
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 p-4" style="background:linear-gradient(to top,rgba(4,7,15,0.85),transparent)">
-            <p class="text-white font-semibold text-sm">Studio Showreel 2025</p>
-            <p class="text-slate-400 text-xs mt-0.5">Flagship reel · 16:9</p>
+        </div>
+        <div class="reel-card-overlay">
+          <div class="play-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
           </div>
         </div>
+        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
+          <p class="text-white font-bold text-base">Studio Showreel 2025</p>
+          <p class="text-slate-400 text-xs mt-1">Flagship reel · 16:9</p>
+        </div>
+      </div>
 
-        <!-- Portrait 1 -->
-        <div class="reel-card" style="width:min(300px,55vw)"
+      <!-- Row 2: Three portrait reels side by side 9:16 -->
+      <div class="grid grid-cols-3 gap-4 mb-5">
+        <div class="reel-card reveal" style="transition-delay:0.05s"
              onclick="openModal('reel_portrait_1.mp4','Campaign — Social Vertical #1','file',null,'9:16')">
-          <video autoplay muted loop playsinline style="width:100%;height:auto;display:block">
-            <source src="reel_portrait_1.mp4" type="video/mp4"/>
-          </video>
+          <div style="aspect-ratio:9/16;overflow:hidden">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+              <source src="reel_portrait_1.mp4" type="video/mp4"/>
+            </video>
+          </div>
           <div class="reel-card-overlay">
             <div class="play-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-          <div class="absolute bottom-0 left-0 right-0 p-4" style="background:linear-gradient(to top,rgba(4,7,15,0.85),transparent)">
+          <div class="absolute bottom-0 left-0 right-0 p-3" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
             <p class="text-white font-semibold text-sm">Social Vertical #1</p>
             <p class="text-slate-400 text-xs mt-0.5">9:16 · Story/Reels</p>
           </div>
         </div>
 
-        <!-- Portrait 2 -->
-        <div class="reel-card" style="width:min(300px,55vw)"
+        <div class="reel-card reveal" style="transition-delay:0.1s"
              onclick="openModal('reel_portrait_2.mp4','Campaign — Social Vertical #2','file',null,'9:16')">
-          <video autoplay muted loop playsinline style="width:100%;height:auto;display:block">
-            <source src="reel_portrait_2.mp4" type="video/mp4"/>
-          </video>
+          <div style="aspect-ratio:9/16;overflow:hidden">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+              <source src="reel_portrait_2.mp4" type="video/mp4"/>
+            </video>
+          </div>
           <div class="reel-card-overlay">
             <div class="play-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-          <div class="absolute bottom-0 left-0 right-0 p-4" style="background:linear-gradient(to top,rgba(4,7,15,0.85),transparent)">
+          <div class="absolute bottom-0 left-0 right-0 p-3" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
             <p class="text-white font-semibold text-sm">Social Vertical #2</p>
             <p class="text-slate-400 text-xs mt-0.5">9:16 · Story/Reels</p>
           </div>
         </div>
 
-        <!-- Portrait 3 -->
-        <div class="reel-card" style="width:min(300px,55vw)"
+        <div class="reel-card reveal" style="transition-delay:0.15s"
              onclick="openModal('reel_portrait_3.mp4','Campaign — Social Vertical #3','file',null,'9:16')">
-          <video autoplay muted loop playsinline style="width:100%;height:auto;display:block">
-            <source src="reel_portrait_3.mp4" type="video/mp4"/>
-          </video>
+          <div style="aspect-ratio:9/16;overflow:hidden">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+              <source src="reel_portrait_3.mp4" type="video/mp4"/>
+            </video>
+          </div>
           <div class="reel-card-overlay">
             <div class="play-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-          <div class="absolute bottom-0 left-0 right-0 p-4" style="background:linear-gradient(to top,rgba(4,7,15,0.85),transparent)">
+          <div class="absolute bottom-0 left-0 right-0 p-3" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
             <p class="text-white font-semibold text-sm">Social Vertical #3</p>
             <p class="text-slate-400 text-xs mt-0.5">9:16 · Story/Reels</p>
           </div>
         </div>
+      </div>
 
-        <!-- YouTube 21:9 -->
-        <div class="reel-card" style="width:min(680px,85vw)"
-             onclick="openModal(null,'Full Campaign Demo','yt','7F2y_gAbMuo','21:9')">
-          <div style="aspect-ratio:21/9;background:#070D1A;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
-            <img src="https://img.youtube.com/vi/7F2y_gAbMuo/maxresdefault.jpg"
-                 alt="Campaign demo thumbnail"
-                 style="width:100%;height:100%;object-fit:cover;opacity:0.7" />
-            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
-              <div style="width:64px;height:64px;border-radius:50%;background:rgba(245,158,11,0.9);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(245,158,11,0.4)">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="#04070F">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </div>
+      <!-- Row 3: YouTube 21:9 cinematic -->
+      <div class="reel-card reveal"
+           onclick="openModal(null,'Full Campaign Demo','yt','7F2y_gAbMuo','21:9')">
+        <div style="aspect-ratio:21/9;background:#070D1A;overflow:hidden;position:relative">
+          <img src="https://img.youtube.com/vi/7F2y_gAbMuo/maxresdefault.jpg"
+               alt="Campaign demo thumbnail"
+               style="width:100%;height:100%;object-fit:cover;opacity:0.75;display:block" />
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+            <div style="width:68px;height:68px;border-radius:50%;background:rgba(245,158,11,0.92);display:flex;align-items:center;justify-content:center;box-shadow:0 0 50px rgba(245,158,11,0.5)">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-          <div class="absolute bottom-0 left-0 right-0 p-4" style="background:linear-gradient(to top,rgba(4,7,15,0.85),transparent)">
-            <p class="text-white font-semibold text-sm">Full Campaign Demo</p>
-            <p class="text-slate-400 text-xs mt-0.5">YouTube · 21:9 Cinematic</p>
-          </div>
         </div>
-
-      </div><!-- /reel-track -->
+        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
+          <p class="text-white font-bold text-base">Full Campaign Demo</p>
+          <p class="text-slate-400 text-xs mt-1">YouTube · 21:9 Cinematic</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -630,7 +615,7 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
         <div class="stat-card reveal">
-          <div class="stat-num mb-2"><span class="counter" data-count="120">0</span>+</div>
+          <div class="stat-num mb-2"><span class="counter" data-count="60">0</span>+</div>
           <p class="text-slate-400 text-sm font-medium tracking-wide">Campaigns Delivered</p>
         </div>
         <div class="stat-card reveal" style="transition-delay:0.1s">
