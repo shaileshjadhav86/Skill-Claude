@@ -15,10 +15,11 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Zach Global Studio — AI-Crafted Advertising" />
   <meta name="twitter:description" content="Cinematic AI-powered video ads for luxury brands. 48-hour delivery. Dubai." />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Lexend:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -33,50 +34,67 @@
       --text-muted: #64748B;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; }
+    html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--navy);
       color: #CBD5E1;
-      font-family: 'Source Sans 3', sans-serif;
+      font-family: 'Inter', sans-serif;
       overflow-x: hidden;
       line-height: 1.6;
       cursor: none;
     }
     @media (hover: none) { body { cursor: auto; } }
-    h1,h2,h3,h4,h5 { font-family: 'Lexend', sans-serif; line-height: 1.1; }
+    h1,h2,h3,h4,h5 { font-family: 'Cormorant Garamond', serif; line-height: 1.05; }
 
     /* ── Film grain ── */
     #grain {
       position: fixed; inset: 0; z-index: 9998; pointer-events: none;
-      opacity: 0.028; background-repeat: repeat; background-size: 200px 200px;
+      opacity: 0.025; background-repeat: repeat; background-size: 200px 200px;
       animation: grainShift 0.15s steps(1) infinite;
     }
     @keyframes grainShift {
-      0%  { transform: translate(0,0) }
-      10% { transform: translate(-3%,-4%) }
-      20% { transform: translate(-6%,2%) }
-      30% { transform: translate(3%,-5%) }
-      40% { transform: translate(-2%,6%) }
-      50% { transform: translate(-5%,0%) }
-      60% { transform: translate(4%,3%) }
-      70% { transform: translate(0,-4%) }
-      80% { transform: translate(-3%,5%) }
-      90% { transform: translate(5%,1%) }
+      0%  { transform: translate(0,0) }  10% { transform: translate(-3%,-4%) }
+      20% { transform: translate(-6%,2%) } 30% { transform: translate(3%,-5%) }
+      40% { transform: translate(-2%,6%) } 50% { transform: translate(-5%,0%) }
+      60% { transform: translate(4%,3%) }  70% { transform: translate(0,-4%) }
+      80% { transform: translate(-3%,5%) } 90% { transform: translate(5%,1%) }
     }
+
+    /* ── Page intro ── */
+    #page-intro {
+      position: fixed; inset: 0; z-index: 100000;
+      background: #000; display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.7s ease;
+    }
+    #intro-logo { width: 72px; height: auto; border-radius: 8px; opacity: 0; transition: opacity 0.5s ease; }
+    #page-intro.fade-out { opacity: 0; pointer-events: none; }
+
+    /* ── Top ticker ── */
+    #top-ticker {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
+      background: #000; height: 32px; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    .ticker-track {
+      display: flex; gap: 3rem; animation: tickerScroll 30s linear infinite; white-space: nowrap;
+    }
+    @keyframes tickerScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .ticker-item { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); font-family: 'Inter', sans-serif; }
+    .ticker-dot { color: var(--gold); opacity: 0.8; margin: 0 0.5rem; }
 
     /* ── Custom cursor ── */
     #cursor-dot {
-      position: fixed; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--gold); pointer-events: none; z-index: 9999;
-      transform: translate(-50%,-50%); transition: transform 0.1s, background 0.2s;
+      position: fixed; width: 8px; height: 8px; border-radius: 50%;
+      background: #fff; pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%); transition: transform 0.1s, background 0.2s, width 0.25s, height 0.25s;
     }
     #cursor-ring {
-      position: fixed; width: 38px; height: 38px; border-radius: 50%;
-      border: 1.5px solid rgba(245,158,11,0.45); pointer-events: none; z-index: 9999;
+      position: fixed; width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.4); pointer-events: none; z-index: 9999;
       transform: translate(-50%,-50%);
-      transition: left 0.12s ease-out, top 0.12s ease-out, width 0.25s, height 0.25s, border-color 0.25s;
+      transition: left 0.1s ease-out, top 0.1s ease-out, width 0.25s, height 0.25s, border-color 0.25s;
     }
-    #cursor-ring.expanded { width: 60px; height: 60px; border-color: rgba(245,158,11,0.7); }
+    #cursor-ring.expanded { width: 56px; height: 56px; border-color: rgba(245,158,11,0.8); background: rgba(245,158,11,0.05); }
     @media (hover: none) { #cursor-dot, #cursor-ring { display: none; } }
 
     /* ── Gradient text utilities ── */
@@ -84,12 +102,12 @@
     .grad-gold { background: linear-gradient(135deg, #FBBF24, #F97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .glass { background: var(--navy-card); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(56,189,248,0.1); }
     .glass-gold { background: var(--navy-card); backdrop-filter: blur(18px); border: 1px solid rgba(245,158,11,0.18); }
-    .bg-grid { background-image: linear-gradient(rgba(56,189,248,0.025) 1px,transparent 1px), linear-gradient(90deg,rgba(56,189,248,0.025) 1px,transparent 1px); background-size: 56px 56px; }
+    .bg-grid { background-image: linear-gradient(rgba(56,189,248,0.02) 1px,transparent 1px), linear-gradient(90deg,rgba(56,189,248,0.02) 1px,transparent 1px); background-size: 56px 56px; }
 
     /* ── Shimmer separator ── */
     .shimmer-line {
       height: 1px; position: relative; overflow: hidden;
-      background: linear-gradient(90deg, transparent, rgba(56,189,248,0.12), rgba(245,158,11,0.12), transparent);
+      background: linear-gradient(90deg, transparent, rgba(56,189,248,0.1), rgba(245,158,11,0.1), transparent);
     }
     .shimmer-line::after {
       content: ''; position: absolute; inset: 0;
@@ -100,18 +118,31 @@
 
     /* ── Navbar ── */
     #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      position: fixed; top: 32px; left: 0; right: 0; z-index: 1000;
       padding: 1.25rem 2rem;
-      transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s;
+      transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s, border-color 0.4s;
     }
     #navbar.scrolled {
-      background: rgba(4,7,15,0.88); backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border); padding: 0.75rem 2rem;
+      background: rgba(4,7,15,0.92); backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(245,158,11,0.12); padding: 0.75rem 2rem;
     }
 
+    /* Nav link hover underline */
+    .nav-link {
+      position: relative; font-size: 0.8rem; color: #94A3B8; letter-spacing: 0.08em;
+      font-family: 'Inter', sans-serif; font-weight: 500; transition: color 0.2s;
+      text-decoration: none;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px;
+      background: var(--gold); transition: width 0.22s ease;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { width: 100%; }
+
     /* ── Hero ── */
-    #hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    #hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 32px; }
     #hero-vid {
       position: absolute; inset: 0; width: 100%; height: 100%;
       object-fit: cover; transform-origin: center; will-change: transform;
@@ -119,117 +150,97 @@
     }
     .hero-overlay {
       position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(to bottom, rgba(4,7,15,0.45) 0%, rgba(4,7,15,0.15) 40%, rgba(4,7,15,0.55) 75%, rgba(4,7,15,0.98) 100%);
+      background: linear-gradient(to bottom,
+        rgba(4,7,15,0.5) 0%,
+        rgba(4,7,15,0.2) 35%,
+        rgba(4,7,15,0.45) 65%,
+        rgba(4,7,15,0.97) 100%);
     }
-
-    /* ── Word split reveal ── */
-    .split-word {
-      display: inline-block;
-      transform: translateY(110%); opacity: 0;
-      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), opacity 0.7s ease;
-    }
-    .split-word.revealed { transform: translateY(0); opacity: 1; }
-
-    /* ── Scramble headline ── */
-    #hero-headline {
-      position: relative;
-      overflow: visible;
-    }
-    .scramble-line {
-      display: block;
-      overflow: hidden;
-      position: relative;
-    }
-    .scramble-char {
-      display: inline-block;
-      min-width: 0.3em;
-      transition: color 0.08s;
-    }
-    .scramble-char.scrambling { color: rgba(245,158,11,0.45); }
-    .scramble-char.done-gold { color: transparent; }
-
-    /* shimmer sweep over headline */
-    .hero-shimmer-sweep {
-      position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(105deg,
-        transparent 0%, transparent 35%,
-        rgba(245,158,11,0.18) 50%,
-        rgba(251,191,36,0.12) 55%,
-        transparent 65%, transparent 100%);
-      background-size: 250% 100%;
-      background-position: 150% 0;
-      animation: heroSweep 1s cubic-bezier(0.4,0,0.2,1) forwards;
-      animation-play-state: paused;
-    }
-    .hero-shimmer-sweep.run { animation-play-state: running; }
-    @keyframes heroSweep {
-      from { background-position: 150% 0; }
-      to   { background-position: -30% 0; }
-    }
-
-    /* cursor blink on scramble line */
-    .scramble-cursor {
-      display: inline-block; width: 3px; height: 0.85em;
-      background: var(--gold); margin-left: 2px; vertical-align: middle;
-      animation: cursorBlink 0.6s step-end infinite;
-    }
-    @keyframes cursorBlink { 50% { opacity: 0; } }
 
     /* ── Hero headline ── */
     .hero-h1 {
-      font-size: clamp(2.8rem, 8.5vw, 7.5rem);
-      font-weight: 900; letter-spacing: -0.04em; line-height: 1.0;
-      font-family: 'Lexend', sans-serif;
+      font-size: clamp(3.2rem, 9vw, 8.5rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.0;
+      font-family: 'Cormorant Garamond', serif;
     }
+    .hero-h1 em { font-style: italic; }
+
+    /* ── Scroll pulse ── */
+    @keyframes scrollPulse {
+      0%   { transform: translateY(0) scaleY(1); opacity: 0.7; }
+      50%  { transform: translateY(12px) scaleY(0.7); opacity: 0.3; }
+      100% { transform: translateY(0) scaleY(1); opacity: 0.7; }
+    }
+    .scroll-pulse-dot { animation: scrollPulse 1.8s ease-in-out infinite; }
 
     /* ── Section label ── */
     .section-label {
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em;
       text-transform: uppercase; color: var(--gold); opacity: 0.85;
+      font-family: 'Inter', sans-serif;
     }
 
     /* ── Marquee ── */
     .marquee-track { display: flex; gap: 3rem; animation: marqueeScroll 35s linear infinite; white-space: nowrap; }
     .marquee-track:hover { animation-play-state: paused; }
     @keyframes marqueeScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    .marquee-item { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #94A3B8; }
+    .marquee-item { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #94A3B8; font-family: 'Inter', sans-serif; }
     .marquee-dot { color: var(--gold); opacity: 0.7; }
+
+    /* ── Work filter ── */
+    .filter-btn {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      font-family: 'Inter', sans-serif; padding: 0.45rem 1.1rem; border-radius: 99px;
+      border: 1px solid rgba(255,255,255,0.1); color: #64748B; background: transparent;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .filter-btn:hover { border-color: rgba(245,158,11,0.4); color: #CBD5E1; }
+    .filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(245,158,11,0.08); }
 
     /* ── Stacked reel ── */
     .reel-card {
       border-radius: 12px; overflow: hidden; position: relative; cursor: pointer;
       transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
     }
-    .reel-card:hover { transform: translateY(-6px) scale(1.015); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.3); }
+    .reel-card:hover { transform: translateY(-4px) scale(1.008); box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,158,11,0.4); }
     .reel-card video { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
     .reel-card-overlay {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
       background: rgba(4,7,15,0.0); transition: background 0.3s;
     }
-    .reel-card:hover .reel-card-overlay { background: rgba(4,7,15,0.45); }
+    .reel-card:hover .reel-card-overlay { background: rgba(4,7,15,0.5); }
     .play-btn {
-      width: 60px; height: 60px; border-radius: 50%;
+      width: 64px; height: 64px; border-radius: 50%;
       background: rgba(245,158,11,0.92); display: flex; align-items: center; justify-content: center;
       opacity: 0; transform: scale(0.75); transition: opacity 0.3s, transform 0.3s;
-      box-shadow: 0 0 40px rgba(245,158,11,0.5);
+      box-shadow: 0 0 50px rgba(245,158,11,0.5);
     }
     .reel-card:hover .play-btn { opacity: 1; transform: scale(1); }
 
+    /* ── Card industry tag ── */
+    .card-industry-tag {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); font-family: 'Inter', sans-serif; margin-bottom: 0.3rem; display: block;
+    }
+
     /* ── Stat cards ── */
     .stat-card {
-      border: 1px solid rgba(245,158,11,0.15); border-radius: 16px;
-      padding: 2rem 1.5rem; text-align: center;
+      border: 1px solid rgba(245,158,11,0.18); border-radius: 16px;
+      padding: 2.25rem 1.5rem; text-align: center;
       background: rgba(11,20,37,0.5); backdrop-filter: blur(10px);
       transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      position: relative; overflow: hidden;
     }
-    .stat-card:hover {
-      border-color: rgba(245,158,11,0.5);
-      box-shadow: 0 0 40px rgba(245,158,11,0.08), 0 12px 40px rgba(0,0,0,0.4);
-      transform: translateY(-4px);
+    .stat-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.06), transparent 70%);
+      opacity: 0; transition: opacity 0.35s;
     }
+    .stat-card:hover { border-color: rgba(245,158,11,0.5); box-shadow: 0 0 50px rgba(245,158,11,0.1), 0 16px 50px rgba(0,0,0,0.4); transform: translateY(-6px); }
+    .stat-card:hover::before { opacity: 1; }
     .stat-num {
-      font-family: 'Lexend', sans-serif; font-size: clamp(2.5rem,5vw,4rem);
-      font-weight: 900; letter-spacing: -0.04em; line-height: 1;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,6vw,5rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1;
       background: linear-gradient(135deg, #FBBF24 30%, #F97316 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
@@ -237,68 +248,101 @@
     /* ── Edge cards ── */
     .edge-card {
       border: 1px solid var(--border); border-radius: 16px;
-      padding: 2rem; background: rgba(11,20,37,0.4);
+      padding: 2.25rem; background: rgba(11,20,37,0.4);
       transition: border-color 0.3s, transform 0.35s, box-shadow 0.35s;
       position: relative; overflow: hidden;
     }
     .edge-card::before {
       content: ''; position: absolute; inset: 0; border-radius: inherit;
-      background: linear-gradient(135deg, rgba(245,158,11,0.04), rgba(14,165,233,0.04));
+      background: linear-gradient(135deg, rgba(245,158,11,0.05), rgba(14,165,233,0.03));
       opacity: 0; transition: opacity 0.35s;
     }
-    .edge-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .edge-card:hover { border-color: rgba(245,158,11,0.35); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
     .edge-card:hover::before { opacity: 1; }
     .edge-icon {
-      width: 56px; height: 56px; border-radius: 14px;
-      background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(14,165,233,0.1));
-      display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;
+      width: 60px; height: 60px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(14,165,233,0.08));
+      display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;
       border: 1px solid rgba(245,158,11,0.2);
     }
 
-    /* ── Process (editorial rows) ── */
-    .process-step {
-      border-top: 1px solid var(--border);
-      padding: 2.25rem 0;
-      display: grid;
-      grid-template-columns: 72px 1fr auto;
-      gap: 1.5rem;
-      align-items: start;
-      transition: background 0.3s;
-      cursor: default;
+    /* ── Process (cinematic horizontal timeline) ── */
+    .process-wrapper {
+      position: relative;
     }
-    .process-step:hover { background: rgba(245,158,11,0.02); }
-    .process-num {
-      font-family: 'Lexend', sans-serif; font-size: clamp(2rem,4vw,3.5rem);
-      font-weight: 900; letter-spacing: -0.04em; line-height: 1;
-      color: rgba(245,158,11,0.2); transition: color 0.3s;
+    .process-progress-bar {
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: rgba(245,158,11,0.1); border-radius: 2px; overflow: hidden;
     }
-    .process-step:hover .process-num { color: rgba(245,158,11,0.6); }
-    .process-tag {
-      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--gold); border: 1px solid rgba(245,158,11,0.3); border-radius: 99px;
-      padding: 0.2rem 0.75rem; align-self: center;
+    .process-progress-fill {
+      height: 100%; background: linear-gradient(90deg, #F59E0B, #F97316);
+      border-radius: 2px; transition: width 0.5s ease;
+      box-shadow: 0 0 12px rgba(245,158,11,0.5);
+    }
+    .process-panel {
+      position: relative; overflow: hidden; border-radius: 16px;
+      background: rgba(7,13,26,0.8); border: 1px solid var(--border);
+      padding: 4rem 3rem; margin-top: 2rem;
+      display: none; min-height: 360px; align-items: center;
+      transition: opacity 0.4s ease;
+    }
+    .process-panel.active { display: flex; animation: panelFadeIn 0.5s ease; }
+    @keyframes panelFadeIn { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
+    .process-step-num-bg {
+      position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(8rem,18vw,14rem);
+      font-weight: 700; color: rgba(245,158,11,0.04); line-height: 1; user-select: none;
+      pointer-events: none;
+    }
+    .process-nav-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.3); background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s; color: #94A3B8;
+    }
+    .process-nav-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(245,158,11,0.08); }
+    .process-dots { display: flex; gap: 8px; }
+    .process-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); cursor: pointer;
+      transition: all 0.2s; border: 1px solid transparent;
+    }
+    .process-dot.active { background: var(--gold); box-shadow: 0 0 10px rgba(245,158,11,0.5); }
+    @media (max-width: 768px) {
+      .process-panel { padding: 2.5rem 1.5rem; min-height: 300px; }
     }
 
-    /* ── Industry rows ── */
-    .industry-row {
-      border-top: 1px solid var(--border); padding: 1.5rem 0;
-      display: flex; align-items: center; justify-content: space-between;
-      transition: padding-left 0.3s;
-      cursor: default;
+    /* ── Industry cards (visual) ── */
+    .industry-card {
+      position: relative; border-radius: 12px; overflow: hidden;
+      cursor: default; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      aspect-ratio: 4/3;
     }
-    .industry-row:hover { padding-left: 0.5rem; }
-    .ind-name {
-      font-family: 'Lexend', sans-serif;
-      font-size: clamp(1.1rem,2.5vw,1.5rem);
-      font-weight: 700; color: #F1F5F9;
-      transition: color 0.25s;
+    .industry-card:hover { transform: translateY(-4px); }
+    .industry-card-img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease, filter 0.4s ease;
+      filter: brightness(0.4) saturate(0.7);
     }
-    .industry-row:hover .ind-name { color: var(--gold); }
-    .ind-arrow {
-      opacity: 0; transform: translateX(-8px);
-      transition: opacity 0.25s, transform 0.25s; color: var(--gold); font-size: 1.25rem;
+    .industry-card:hover .industry-card-img { transform: scale(1.05); filter: brightness(0.55) saturate(0.8); }
+    .industry-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(4,7,15,0.95) 0%, rgba(4,7,15,0.5) 50%, rgba(4,7,15,0.2) 100%);
+      transition: background 0.4s;
     }
-    .industry-row:hover .ind-arrow { opacity: 1; transform: translateX(0); }
+    .industry-card:hover .industry-card-overlay {
+      background: linear-gradient(to top, rgba(4,7,15,0.9) 0%, rgba(4,7,15,0.4) 50%, rgba(4,7,15,0.1) 100%);
+    }
+    .industry-card-content {
+      position: absolute; inset: 0; padding: 1.75rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .industry-card-arrow {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      opacity: 0; transform: translateX(-6px);
+      transition: opacity 0.25s, transform 0.25s; color: var(--gold); font-size: 1.1rem;
+    }
+    .industry-card:hover .industry-card-arrow { opacity: 1; transform: translateX(0); }
 
     /* ── Magnetic buttons ── */
     .magnetic { transition: transform 0.25s cubic-bezier(0.16,1,0.3,1); display: inline-block; }
@@ -307,40 +351,62 @@
     .btn-gold {
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: linear-gradient(135deg, #F59E0B, #F97316);
-      color: #04070F; font-family: 'Lexend', sans-serif; font-weight: 700;
+      color: #04070F; font-family: 'Inter', sans-serif; font-weight: 700;
       padding: 0.9rem 2.25rem; border-radius: 8px; font-size: 0.95rem;
-      letter-spacing: 0.01em; border: none; cursor: none;
-      transition: box-shadow 0.3s, filter 0.3s;
+      letter-spacing: 0.02em; border: none; cursor: pointer;
+      transition: box-shadow 0.3s, filter 0.3s, transform 0.2s;
       box-shadow: 0 4px 24px rgba(245,158,11,0.3);
     }
-    .btn-gold:hover { filter: brightness(1.1); box-shadow: 0 8px 40px rgba(245,158,11,0.5); }
+    .btn-gold:hover { filter: brightness(1.12); box-shadow: 0 10px 50px rgba(245,158,11,0.55); transform: translateY(-1px); }
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: transparent; color: #CBD5E1;
-      font-family: 'Lexend', sans-serif; font-weight: 600;
+      font-family: 'Inter', sans-serif; font-weight: 600;
       padding: 0.9rem 2.25rem; border-radius: 8px; font-size: 0.95rem;
-      border: 1px solid rgba(255,255,255,0.15); cursor: none;
-      transition: border-color 0.3s, color 0.3s;
+      border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
     }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: #fff; background: rgba(255,255,255,0.04); }
 
     /* ── Reveal animations ── */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-scale { opacity: 0; transform: scale(0.94); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal-scale.visible { opacity: 1; transform: scale(1); }
 
-    /* ── Contact section ── */
-    .contact-bg {
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,158,11,0.06) 0%, transparent 70%),
-                  radial-gradient(ellipse 60% 50% at 80% 100%, rgba(14,165,233,0.05) 0%, transparent 60%),
-                  linear-gradient(to bottom, rgba(4,7,15,0), var(--navy));
+    /* ── Mask reveal for headings ── */
+    .mask-reveal-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; }
+    .mask-reveal-inner {
+      display: inline-block;
+      transform: translateY(105%);
+      transition: transform 0.85s cubic-bezier(0.16,1,0.3,1);
     }
+    .mask-reveal-inner.visible { transform: translateY(0); }
+
+    /* ── Contact section ── */
+    #contact-vid-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0.07; pointer-events: none;
+    }
+    .contact-bg {
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(245,158,11,0.07) 0%, transparent 70%),
+                  linear-gradient(to bottom, var(--navy-mid), var(--navy));
+    }
+
+    /* ── Response badge ── */
+    .response-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.72rem;
+      font-weight: 600; color: #4ADE80; font-family: 'Inter', sans-serif; letter-spacing: 0.05em;
+    }
+    .response-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; animation: responsePulse 1.5s ease-in-out infinite; }
+    @keyframes responsePulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
     /* ── Modal ── */
     #video-modal {
       position: fixed; inset: 0; z-index: 10000;
-      background: rgba(4,7,15,0.96); display: none; align-items: center; justify-content: center;
+      background: rgba(4,7,15,0.97); display: none; align-items: center; justify-content: center;
       padding: 1rem;
     }
     #video-modal.open { display: flex; animation: fadeInModal 0.3s ease; }
@@ -348,7 +414,7 @@
     #modal-inner { position: relative; width: 100%; max-width: 1100px; }
     #modal-close {
       position: absolute; top: -44px; right: 0; background: none; border: none;
-      color: #94A3B8; font-size: 1.5rem; cursor: none; padding: 0.5rem;
+      color: #94A3B8; font-size: 1.5rem; cursor: pointer; padding: 0.5rem;
       transition: color 0.2s;
     }
     #modal-close:hover { color: #fff; }
@@ -359,19 +425,13 @@
 
     /* ── Mobile tweaks ── */
     @media (max-width: 768px) {
-      .process-step { grid-template-columns: 48px 1fr; }
-      .process-tag { display: none; }
+      .process-panel { padding: 2rem 1.25rem; }
+      .industry-grid { grid-template-columns: 1fr 1fr !important; }
+      .industry-card { aspect-ratio: 3/2; }
     }
-
-    /* ── Word-split section heading animation ── */
-    .split-heading { overflow: hidden; }
-    .split-heading .w-word {
-      display: inline-block; opacity: 0;
-      transform: translateY(60%) rotateX(-20deg);
-      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
-      margin-right: 0.25em;
+    @media (max-width: 480px) {
+      .industry-grid { grid-template-columns: 1fr !important; }
     }
-    .split-heading.visible .w-word { opacity: 1; transform: translateY(0) rotateX(0); }
 
     /* ── WhatsApp float pulse ── */
     @keyframes waPulse {
@@ -385,15 +445,20 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
       #grain { animation: none; }
-      .marquee-track { animation: none; }
+      .marquee-track, .ticker-track { animation: none; }
       #hero-vid { transform: none !important; }
     }
   </style>
 </head>
 <body class="bg-grid">
 
+  <!-- ── Page load intro ── -->
+  <div id="page-intro">
+    <img src="logo1.jpg" alt="ZG" id="intro-logo" />
+  </div>
+
   <!-- Skip to content (accessibility) -->
-  <a href="#main" style="position:absolute;top:-100px;left:1rem;z-index:99999;background:var(--gold);color:#04070F;padding:0.5rem 1rem;border-radius:6px;font-weight:700;font-family:'Lexend',sans-serif;font-size:0.85rem;transition:top 0.2s" onfocus="this.style.top='1rem'" onblur="this.style.top='-100px'">Skip to content</a>
+  <a href="#main" style="position:absolute;top:-100px;left:1rem;z-index:99999;background:var(--gold);color:#04070F;padding:0.5rem 1rem;border-radius:6px;font-weight:700;font-family:'Inter',sans-serif;font-size:0.85rem;transition:top 0.2s" onfocus="this.style.top='1rem'" onblur="this.style.top='-100px'">Skip to content</a>
 
   <!-- Film grain overlay -->
   <div id="grain"></div>
@@ -401,6 +466,30 @@
   <!-- Custom cursor -->
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
+
+  <!-- ── Top ticker ── -->
+  <div id="top-ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Luxury</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Real Estate</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Fashion</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Hospitality</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Fintech</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Healthcare</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Technology</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Travel</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">E-Commerce</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Luxury</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Real Estate</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Fashion</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Hospitality</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Fintech</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Healthcare</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Technology</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Travel</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">E-Commerce</span><span class="ticker-dot">✦</span>
+    </div>
+  </div>
 
   <!-- ─────────────────────────────────────────
        NAVBAR
@@ -414,11 +503,11 @@
 
       <!-- Desktop nav -->
       <div class="hidden md:flex items-center gap-8">
-        <a href="#work" class="text-sm text-slate-400 hover:text-white transition-colors tracking-wide">Work</a>
-        <a href="#process" class="text-sm text-slate-400 hover:text-white transition-colors tracking-wide">Process</a>
-        <a href="#industries" class="text-sm text-slate-400 hover:text-white transition-colors tracking-wide">Industries</a>
+        <a href="#work" class="nav-link">Our Work</a>
+        <a href="#process" class="nav-link">The Process</a>
+        <a href="#industries" class="nav-link">We Serve</a>
         <a href="https://wa.me/971551383940" target="_blank" rel="noopener"
-           class="btn-gold magnetic text-sm py-2 px-5">Start a Project</a>
+           class="btn-gold magnetic text-sm py-2 px-5" style="font-size:0.8rem;padding:0.55rem 1.35rem;border-radius:6px">Start a Project</a>
       </div>
 
       <!-- Mobile menu button -->
@@ -435,9 +524,9 @@
 
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 flex flex-col gap-4">
-      <a href="#work" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide">Work</a>
-      <a href="#process" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide">Process</a>
-      <a href="#industries" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide">Industries</a>
+      <a href="#work" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide">Our Work</a>
+      <a href="#process" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide">The Process</a>
+      <a href="#industries" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide">We Serve</a>
       <a href="https://wa.me/971551383940" target="_blank" rel="noopener"
          class="btn-gold text-center w-full justify-center">Start a Project</a>
     </div>
@@ -447,57 +536,45 @@
        HERO
   ───────────────────────────────────────── -->
   <section id="hero" aria-label="Hero">
-    <video id="hero-vid" autoplay muted loop playsinline preload="auto" poster=""
+    <video id="hero-vid" autoplay muted loop playsinline preload="auto"
            style="opacity:0.62">
       <source src="hero-reel.mp4" type="video/mp4" />
     </video>
     <div class="hero-overlay"></div>
 
     <!-- Particles canvas -->
-    <canvas id="particles-canvas" class="absolute inset-0 w-full h-full" style="z-index:1;pointer-events:none;opacity:0.6"></canvas>
+    <canvas id="particles-canvas" class="absolute inset-0 w-full h-full" style="z-index:1;pointer-events:none;opacity:0.5"></canvas>
 
     <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
 
-      <div style="position:relative">
-        <h1 id="hero-headline" class="hero-h1 text-white mb-6" aria-label="Ads That Stop the Scroll.">
-          <span style="display:block">Ads That</span>
-          <span class="scramble-line grad-gold" id="sline-2" style="-webkit-text-fill-color:transparent;background:linear-gradient(135deg,#FBBF24,#F97316);-webkit-background-clip:text;background-clip:text;min-height:1.15em"></span>
-        </h1>
-        <div class="hero-shimmer-sweep" id="hero-sweep"></div>
-      </div>
+      <h1 class="hero-h1 text-white mb-8 reveal" style="transition-delay:0.1s">
+        <span class="block">Cinema meets</span>
+        <span class="block grad-gold" style="-webkit-text-fill-color:transparent">Intelligence.</span>
+        <span class="block text-white" style="font-size:0.72em;font-weight:400;letter-spacing:0.01em;margin-top:0.2em;opacity:0.9">Built for Brands — Powered by AI</span>
+      </h1>
 
-      <p class="text-slate-300 text-lg md:text-xl max-w-xl mx-auto mb-10 reveal" style="transition-delay:0.3s; font-weight:300;">
-        High-converting video ads for corporate brands —<br class="hidden md:block"/>
-        faster, sharper, and more cinematic than any agency.
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4 items-center justify-center reveal" style="transition-delay:0.45s">
+      <div class="flex flex-col sm:flex-row gap-4 items-center justify-center reveal" style="transition-delay:0.3s">
         <a href="https://wa.me/971551383940" target="_blank" rel="noopener"
-           class="btn-gold magnetic w-full sm:w-auto justify-center text-base py-3.5 px-8">
+           class="btn-gold magnetic w-full sm:w-auto justify-center" style="font-size:1rem;padding:1rem 2.5rem">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
             <path d="M11.999 2C6.477 2 2 6.477 2 11.999c0 1.869.487 3.625 1.34 5.146L2 22l5.013-1.313A9.94 9.94 0 0011.999 22C17.523 22 22 17.523 22 11.999 22 6.477 17.523 2 11.999 2zm0 18c-1.7 0-3.285-.456-4.645-1.254l-.334-.198-3.464.908.924-3.376-.215-.347A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
           </svg>
           Start Your Campaign
         </a>
-        <a href="#work" class="btn-ghost magnetic w-full sm:w-auto justify-center text-base py-3.5 px-8">
+        <a href="#work" class="btn-ghost magnetic w-full sm:w-auto justify-center" style="font-size:1rem;padding:1rem 2.5rem">
           Watch Our Work
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
         </a>
       </div>
-
-      <!-- Typewriter -->
-      <p class="mt-12 text-slate-500 text-sm tracking-widest uppercase reveal" style="transition-delay:0.6s">
-        Trusted for&nbsp;<span id="typewriter" class="grad-gold font-semibold">Luxury Brands</span>
-      </p>
     </div>
 
-    <!-- Scroll cue -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-50">
-      <span class="text-xs tracking-widest uppercase text-slate-500">Scroll</span>
-      <div style="width:1px;height:48px;background:linear-gradient(to bottom,rgba(245,158,11,0.6),transparent)"></div>
+    <!-- Scroll pulse cue -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3">
+      <div class="scroll-pulse-dot" style="width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px rgba(245,158,11,0.6)"></div>
+      <div style="width:1px;height:44px;background:linear-gradient(to bottom,rgba(245,158,11,0.5),transparent)"></div>
     </div>
   </section>
 
@@ -505,7 +582,7 @@
   <main id="main">
 
   <!-- Marquee -->
-  <div class="overflow-hidden py-4" style="background:rgba(4,7,15,0.95);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="overflow-hidden py-4" style="background:rgba(4,7,15,0.97);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
     <div class="marquee-track">
       <span class="marquee-item">AI Video Production</span><span class="marquee-dot mx-6">✦</span>
       <span class="marquee-item">Corporate Advertising</span><span class="marquee-dot mx-6">✦</span>
@@ -515,7 +592,6 @@
       <span class="marquee-item">Dubai · UAE · Global</span><span class="marquee-dot mx-6">✦</span>
       <span class="marquee-item">48-Hour Delivery</span><span class="marquee-dot mx-6">✦</span>
       <span class="marquee-item">Enterprise Creative</span><span class="marquee-dot mx-6">✦</span>
-      <!-- duplicate for seamless loop -->
       <span class="marquee-item">AI Video Production</span><span class="marquee-dot mx-6">✦</span>
       <span class="marquee-item">Corporate Advertising</span><span class="marquee-dot mx-6">✦</span>
       <span class="marquee-item">Brand Films</span><span class="marquee-dot mx-6">✦</span>
@@ -528,24 +604,34 @@
   </div>
 
   <!-- ─────────────────────────────────────────
-       01 — SELECTED WORK
+       01 — OUR WORK
   ───────────────────────────────────────── -->
   <section id="work" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
-      <div class="mb-12 reveal">
-        <p class="section-label mb-3">01 — Selected Work</p>
-        <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight split-heading" style="letter-spacing:-0.03em">
-          Campaigns that<br/><span class="grad-text">convert</span>
+      <div class="mb-10 reveal">
+        <p class="section-label mb-4">01 — Our Work</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
+          Campaigns that<br/><em class="grad-text" style="-webkit-text-fill-color:transparent">convert</em>
         </h2>
-        <p class="text-slate-400 mt-4 max-w-lg text-lg" style="font-weight:300">
+        <p class="text-slate-400 mt-4 max-w-lg" style="font-size:1.05rem;font-weight:300">
           Click any video to watch with sound.
         </p>
       </div>
 
-      <div class="shimmer-line mb-10 reveal"></div>
+      <!-- Category filter -->
+      <div class="flex flex-wrap gap-2 mb-8 reveal" style="transition-delay:0.1s" id="work-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="luxury">Luxury</button>
+        <button class="filter-btn" data-filter="real-estate">Real Estate</button>
+        <button class="filter-btn" data-filter="fashion">Fashion</button>
+        <button class="filter-btn" data-filter="tech">Tech</button>
+        <button class="filter-btn" data-filter="travel">Travel</button>
+      </div>
+
+      <div class="shimmer-line mb-8 reveal"></div>
 
       <!-- Row 1: Full-width showreel 16:9 -->
-      <div class="reel-card reveal mb-5"
+      <div class="reel-card reveal mb-5" data-category="luxury"
            onclick="openModal('showreel.mp4','Studio Showreel 2025','file',null,'16:9')">
         <div style="aspect-ratio:16/9;overflow:hidden">
           <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
@@ -557,16 +643,20 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
           </div>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
-          <p class="text-white font-bold text-base">Studio Showreel 2025</p>
-          <p class="text-slate-400 text-xs mt-1">Flagship reel · 16:9</p>
+        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:linear-gradient(to top,rgba(4,7,15,0.92),transparent)">
+          <span class="card-industry-tag">Multi-Industry</span>
+          <p class="text-white font-bold" style="font-family:'Inter',sans-serif;font-size:1rem">Studio Showreel 2025</p>
+          <div class="flex items-center gap-3 mt-1">
+            <p class="text-slate-400 text-xs">Flagship reel · 16:9</p>
+            <span style="font-size:0.65rem;color:#64748B;letter-spacing:0.08em">2:30</span>
+          </div>
         </div>
       </div>
 
       <!-- Row 2: Three portrait reels side by side 9:16 -->
       <div class="grid grid-cols-3 gap-4 mb-5">
-        <div class="reel-card reveal" style="transition-delay:0.05s"
-             onclick="openModal('reel_portrait_1.mp4','Campaign — Social Vertical #1','file',null,'9:16')">
+        <div class="reel-card reveal" style="transition-delay:0.05s" data-category="real-estate"
+             onclick="openModal('reel_portrait_1.mp4','Campaign Reel #1','file',null,'9:16')">
           <div style="aspect-ratio:9/16;overflow:hidden">
             <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
               <source src="reel_portrait_1.mp4" type="video/mp4"/>
@@ -577,14 +667,10 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-          <div class="absolute bottom-0 left-0 right-0 p-3" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
-            <p class="text-white font-semibold text-sm">Social Vertical #1</p>
-            <p class="text-slate-400 text-xs mt-0.5">9:16 · Story/Reels</p>
-          </div>
         </div>
 
-        <div class="reel-card reveal" style="transition-delay:0.1s"
-             onclick="openModal('reel_portrait_2.mp4','Campaign — Social Vertical #2','file',null,'9:16')">
+        <div class="reel-card reveal" style="transition-delay:0.1s" data-category="luxury"
+             onclick="openModal('reel_portrait_2.mp4','Campaign Reel #2','file',null,'9:16')">
           <div style="aspect-ratio:9/16;overflow:hidden">
             <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
               <source src="reel_portrait_2.mp4" type="video/mp4"/>
@@ -595,14 +681,10 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-          <div class="absolute bottom-0 left-0 right-0 p-3" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
-            <p class="text-white font-semibold text-sm">Social Vertical #2</p>
-            <p class="text-slate-400 text-xs mt-0.5">9:16 · Story/Reels</p>
-          </div>
         </div>
 
-        <div class="reel-card reveal" style="transition-delay:0.15s"
-             onclick="openModal('reel_portrait_3.mp4','Campaign — Social Vertical #3','file',null,'9:16')">
+        <div class="reel-card reveal" style="transition-delay:0.15s" data-category="fashion"
+             onclick="openModal('reel_portrait_3.mp4','Campaign Reel #3','file',null,'9:16')">
           <div style="aspect-ratio:9/16;overflow:hidden">
             <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
               <source src="reel_portrait_3.mp4" type="video/mp4"/>
@@ -613,30 +695,27 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-          <div class="absolute bottom-0 left-0 right-0 p-3" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
-            <p class="text-white font-semibold text-sm">Social Vertical #3</p>
-            <p class="text-slate-400 text-xs mt-0.5">9:16 · Story/Reels</p>
-          </div>
         </div>
       </div>
 
       <!-- Row 3: YouTube 21:9 cinematic -->
-      <div class="reel-card reveal"
-           onclick="openModal(null,'Full Campaign Demo','yt','7F2y_gAbMuo','21:9')">
+      <div class="reel-card reveal" data-category="tech"
+           onclick="openModal(null,'Cinematic Storytelling','yt','7F2y_gAbMuo','21:9')">
         <div style="aspect-ratio:21/9;background:#070D1A;overflow:hidden;position:relative">
           <img src="https://img.youtube.com/vi/7F2y_gAbMuo/maxresdefault.jpg"
-               alt="Full campaign demo — cinematic product advertisement"
+               alt="Cinematic product storytelling — full campaign demo"
                loading="lazy"
-               style="width:100%;height:100%;object-fit:cover;opacity:0.75;display:block" />
+               style="width:100%;height:100%;object-fit:cover;opacity:0.72;display:block" />
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
-            <div style="width:68px;height:68px;border-radius:50%;background:rgba(245,158,11,0.92);display:flex;align-items:center;justify-content:center;box-shadow:0 0 50px rgba(245,158,11,0.5)">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
+            <div style="width:72px;height:72px;border-radius:50%;background:rgba(245,158,11,0.92);display:flex;align-items:center;justify-content:center;box-shadow:0 0 60px rgba(245,158,11,0.55)">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:linear-gradient(to top,rgba(4,7,15,0.9),transparent)">
-          <p class="text-white font-bold text-base">Full Campaign Demo</p>
-          <p class="text-slate-400 text-xs mt-1">YouTube · 21:9 Cinematic</p>
+        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:linear-gradient(to top,rgba(4,7,15,0.92),transparent)">
+          <span class="card-industry-tag">Cinematic Feature</span>
+          <p class="text-white font-bold" style="font-family:'Inter',sans-serif;font-size:1rem">Cinematic Storytelling</p>
+          <p class="text-slate-400 text-xs mt-1">YouTube · 21:9 Widescreen</p>
         </div>
       </div>
     </div>
@@ -649,29 +728,29 @@
   ───────────────────────────────────────── -->
   <section id="stats" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
-      <div class="mb-12 reveal">
-        <p class="section-label mb-3">02 — By The Numbers</p>
-        <h2 class="text-4xl md:text-5xl font-black text-white split-heading" style="letter-spacing:-0.03em">
-          Results that<br/><span class="grad-gold">speak louder</span>
+      <div class="mb-14 reveal">
+        <p class="section-label mb-4">02 — By The Numbers</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
+          Results that<br/><span class="grad-gold" style="-webkit-text-fill-color:transparent">speak louder</span>
         </h2>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
         <div class="stat-card reveal">
           <div class="stat-num mb-2"><span class="counter" data-count="60">0</span>+</div>
-          <p class="text-slate-400 text-sm font-medium tracking-wide">Campaigns Delivered</p>
+          <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">Campaigns Delivered</p>
         </div>
         <div class="stat-card reveal" style="transition-delay:0.1s">
           <div class="stat-num mb-2"><span class="counter" data-count="48">0</span>h</div>
-          <p class="text-slate-400 text-sm font-medium tracking-wide">Avg. Turnaround</p>
+          <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">Avg. Turnaround</p>
         </div>
         <div class="stat-card reveal" style="transition-delay:0.2s">
           <div class="stat-num mb-2"><span class="counter" data-count="3">0</span>×</div>
-          <p class="text-slate-400 text-sm font-medium tracking-wide">ROAS Improvement</p>
+          <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">ROAS Improvement</p>
         </div>
         <div class="stat-card reveal" style="transition-delay:0.3s">
           <div class="stat-num mb-2"><span class="counter" data-count="100">0</span>%</div>
-          <p class="text-slate-400 text-sm font-medium tracking-wide">Client Satisfaction</p>
+          <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">Client Satisfaction</p>
         </div>
       </div>
     </div>
@@ -685,9 +764,9 @@
   <section id="edge" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="mb-14 reveal">
-        <p class="section-label mb-3">03 — Our Edge</p>
-        <h2 class="text-4xl md:text-5xl font-black text-white" style="letter-spacing:-0.03em">
-          Why AI ads<br/><span class="grad-text">win</span>
+        <p class="section-label mb-4">03 — Our Edge</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
+          Why AI ads<br/><em class="grad-text" style="-webkit-text-fill-color:transparent">win</em>
         </h2>
       </div>
 
@@ -698,8 +777,8 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">10× Faster</h3>
-          <p class="text-slate-400 text-base" style="font-weight:300;line-height:1.7">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#fff;margin-bottom:0.75rem">10× Faster</h3>
+          <p class="text-slate-400" style="font-weight:300;line-height:1.75;font-size:1rem">
             Full campaigns in 48 hours. Traditional agencies take weeks. We ship while the trend is still hot.
           </p>
         </div>
@@ -710,8 +789,8 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Infinite Variations</h3>
-          <p class="text-slate-400 text-base" style="font-weight:300;line-height:1.7">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#fff;margin-bottom:0.75rem">Infinite Variations</h3>
+          <p class="text-slate-400" style="font-weight:300;line-height:1.75;font-size:1rem">
             A/B test 20 different cuts from one brief. Optimise for performance, not just aesthetics.
           </p>
         </div>
@@ -722,8 +801,8 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">80% Cost Reduction</h3>
-          <p class="text-slate-400 text-base" style="font-weight:300;line-height:1.7">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#fff;margin-bottom:0.75rem">80% Cost Reduction</h3>
+          <p class="text-slate-400" style="font-weight:300;line-height:1.75;font-size:1rem">
             Premium production quality at a fraction of the traditional cost. Enterprise results, startup budget.
           </p>
         </div>
@@ -734,171 +813,223 @@
   <div class="shimmer-line mx-6 md:mx-16"></div>
 
   <!-- ─────────────────────────────────────────
-       04 — PROCESS
+       04 — THE PROCESS
   ───────────────────────────────────────── -->
   <section id="process" class="py-24 px-6">
     <div class="max-w-5xl mx-auto">
       <div class="mb-14 reveal">
-        <p class="section-label mb-3">04 — The Process</p>
-        <h2 class="text-4xl md:text-5xl font-black text-white split-heading" style="letter-spacing:-0.03em">
-          Brief to broadcast<br/><span class="grad-gold">in 4 steps</span>
+        <p class="section-label mb-4">04 — The Process</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
+          Brief to broadcast<br/><span class="grad-gold" style="-webkit-text-fill-color:transparent">in 4 steps</span>
         </h2>
       </div>
 
-      <!-- Step rows -->
-      <div class="process-step reveal">
-        <div class="process-num">01</div>
-        <div>
-          <h3 class="text-xl font-bold text-white mb-2">Brief & Strategy</h3>
-          <p class="text-slate-400" style="font-weight:300;line-height:1.7;max-width:480px">
-            Share your brand, objectives, and target audience. Our AI strategists map the creative direction.
-          </p>
+      <!-- Progress bar -->
+      <div class="process-wrapper reveal" style="transition-delay:0.1s">
+        <div class="process-progress-bar">
+          <div class="process-progress-fill" id="process-progress" style="width:25%"></div>
         </div>
-        <div class="process-tag">Day 1</div>
-      </div>
 
-      <div class="process-step reveal" style="transition-delay:0.08s">
-        <div class="process-num">02</div>
-        <div>
-          <h3 class="text-xl font-bold text-white mb-2">Concept & Storyboard</h3>
-          <p class="text-slate-400" style="font-weight:300;line-height:1.7;max-width:480px">
-            We generate multiple concept directions with visual references and a clear narrative arc.
-          </p>
+        <!-- Step panels -->
+        <div class="process-panel active" id="process-panel-0">
+          <div class="process-step-num-bg">01</div>
+          <div style="max-width:480px;position:relative;z-index:2">
+            <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-family:'Inter',sans-serif;display:block;margin-bottom:0.75rem">Day 1</span>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:#fff;margin-bottom:1rem">Brief &amp; Strategy</h3>
+            <p class="text-slate-400" style="font-weight:300;line-height:1.8;font-size:1rem">
+              Share your brand, objectives, and target audience. Our AI strategists map the creative direction, competitive landscape, and the single message that will make your audience stop scrolling.
+            </p>
+          </div>
         </div>
-        <div class="process-tag">Day 1–2</div>
-      </div>
 
-      <div class="process-step reveal" style="transition-delay:0.16s">
-        <div class="process-num">03</div>
-        <div>
-          <h3 class="text-xl font-bold text-white mb-2">AI Production</h3>
-          <p class="text-slate-400" style="font-weight:300;line-height:1.7;max-width:480px">
-            Cinematic visuals, voiceover, music, and motion graphics produced simultaneously using our AI stack.
-          </p>
+        <div class="process-panel" id="process-panel-1">
+          <div class="process-step-num-bg">02</div>
+          <div style="max-width:480px;position:relative;z-index:2">
+            <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-family:'Inter',sans-serif;display:block;margin-bottom:0.75rem">Day 1–2</span>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:#fff;margin-bottom:1rem">Concept &amp; Storyboard</h3>
+            <p class="text-slate-400" style="font-weight:300;line-height:1.8;font-size:1rem">
+              We generate multiple concept directions with visual references and a clear narrative arc. You choose the direction — we own the execution entirely.
+            </p>
+          </div>
         </div>
-        <div class="process-tag">Day 2–3</div>
-      </div>
 
-      <div class="process-step reveal" style="transition-delay:0.24s">
-        <div class="process-num">04</div>
-        <div>
-          <h3 class="text-xl font-bold text-white mb-2">Deliver & Iterate</h3>
-          <p class="text-slate-400" style="font-weight:300;line-height:1.7;max-width:480px">
-            Final delivery in all aspect ratios. Unlimited revisions. A/B variants ready to launch.
-          </p>
+        <div class="process-panel" id="process-panel-2">
+          <div class="process-step-num-bg">03</div>
+          <div style="max-width:480px;position:relative;z-index:2">
+            <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-family:'Inter',sans-serif;display:block;margin-bottom:0.75rem">Day 2–3</span>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:#fff;margin-bottom:1rem">AI Production</h3>
+            <p class="text-slate-400" style="font-weight:300;line-height:1.8;font-size:1rem">
+              Cinematic visuals, voiceover, music, and motion graphics produced simultaneously using our AI stack. What takes a traditional studio three weeks happens in hours.
+            </p>
+          </div>
         </div>
-        <div class="process-tag">Day 3–4</div>
-      </div>
-      <div style="border-top:1px solid var(--border)"></div>
 
+        <div class="process-panel" id="process-panel-3">
+          <div class="process-step-num-bg">04</div>
+          <div style="max-width:480px;position:relative;z-index:2">
+            <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-family:'Inter',sans-serif;display:block;margin-bottom:0.75rem">Day 3–4</span>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:#fff;margin-bottom:1rem">Deliver &amp; Iterate</h3>
+            <p class="text-slate-400" style="font-weight:300;line-height:1.8;font-size:1rem">
+              Final delivery in all aspect ratios. Unlimited revisions. A/B variants ready to launch. Your campaign goes live in under 96 hours from first message.
+            </p>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex items-center justify-between mt-6" style="padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.07)">
+          <div class="process-dots" id="process-dots">
+            <div class="process-dot active" data-step="0"></div>
+            <div class="process-dot" data-step="1"></div>
+            <div class="process-dot" data-step="2"></div>
+            <div class="process-dot" data-step="3"></div>
+          </div>
+          <div class="flex gap-3">
+            <button class="process-nav-btn" id="process-prev" aria-label="Previous step">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button class="process-nav-btn" id="process-next" aria-label="Next step">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <div class="shimmer-line mx-6 md:mx-16"></div>
 
   <!-- ─────────────────────────────────────────
-       05 — INDUSTRIES
+       05 — WE SERVE
   ───────────────────────────────────────── -->
   <section id="industries" class="py-24 px-6">
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-7xl mx-auto">
       <div class="mb-14 reveal">
-        <p class="section-label mb-3">05 — Industries</p>
-        <h2 class="text-4xl md:text-5xl font-black text-white split-heading" style="letter-spacing:-0.03em">
-          We work across<br/><span class="grad-text">every vertical</span>
+        <p class="section-label mb-4">05 — We Serve</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
+          We work across<br/><em class="grad-text" style="-webkit-text-fill-color:transparent">every vertical</em>
         </h2>
       </div>
 
-      <div class="industry-row reveal">
-        <div>
-          <p class="ind-name">Real Estate &amp; Property</p>
-          <p class="text-slate-500 text-sm mt-1">Luxury developments · off-plan launches · virtual tours</p>
-        </div>
-        <span class="ind-arrow">→</span>
-      </div>
+      <div class="industry-grid reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;transition-delay:0.1s">
 
-      <div class="industry-row reveal" style="transition-delay:0.06s">
-        <div>
-          <p class="ind-name">Retail &amp; E-commerce</p>
-          <p class="text-slate-500 text-sm mt-1">Product launches · seasonal campaigns · conversion ads</p>
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=75&auto=format" alt="Luxury real estate" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Real Estate</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Real Estate &amp; Property</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Luxury developments · off-plan launches</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
         </div>
-        <span class="ind-arrow">→</span>
-      </div>
 
-      <div class="industry-row reveal" style="transition-delay:0.12s">
-        <div>
-          <p class="ind-name">Finance &amp; Fintech</p>
-          <p class="text-slate-500 text-sm mt-1">Brand trust · product explainers · compliance-safe creative</p>
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&q=75&auto=format" alt="Retail fashion" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">E-Commerce</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Retail &amp; E-commerce</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Product launches · seasonal campaigns</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
         </div>
-        <span class="ind-arrow">→</span>
-      </div>
 
-      <div class="industry-row reveal" style="transition-delay:0.18s">
-        <div>
-          <p class="ind-name">Hospitality &amp; Travel</p>
-          <p class="text-slate-500 text-sm mt-1">Hotel reels · destination marketing · experiential ads</p>
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=75&auto=format" alt="Finance trading" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Finance</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Finance &amp; Fintech</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Brand trust · product explainers</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
         </div>
-        <span class="ind-arrow">→</span>
-      </div>
 
-      <div class="industry-row reveal" style="transition-delay:0.24s">
-        <div>
-          <p class="ind-name">Healthcare &amp; Wellness</p>
-          <p class="text-slate-500 text-sm mt-1">Patient trust · clinic branding · wellness product ads</p>
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=75&auto=format" alt="Hotel luxury pool" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Hospitality</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Hospitality &amp; Travel</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Hotel reels · destination marketing</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
         </div>
-        <span class="ind-arrow">→</span>
-      </div>
 
-      <div class="industry-row reveal" style="transition-delay:0.30s">
-        <div>
-          <p class="ind-name">Technology &amp; SaaS</p>
-          <p class="text-slate-500 text-sm mt-1">Product demos · B2B awareness · app launch campaigns</p>
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=75&auto=format" alt="Healthcare clinic" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Healthcare</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Healthcare &amp; Wellness</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Patient trust · clinic branding</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
         </div>
-        <span class="ind-arrow">→</span>
-      </div>
 
-      <div class="industry-row reveal" style="transition-delay:0.36s">
-        <div>
-          <p class="ind-name">Luxury &amp; Fashion</p>
-          <p class="text-slate-500 text-sm mt-1">High-end brand films · fashion weeks · editorial video</p>
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=75&auto=format" alt="Luxury fashion editorial" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Fashion</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Luxury &amp; Fashion</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">High-end brand films · editorial video</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
         </div>
-        <span class="ind-arrow">→</span>
-      </div>
 
-      <div style="border-top:1px solid var(--border)"></div>
+      </div>
     </div>
   </section>
 
   <!-- ─────────────────────────────────────────
        CONTACT / CTA
   ───────────────────────────────────────── -->
-  <section id="contact" class="py-32 px-6 contact-bg relative overflow-hidden">
-    <!-- Glow -->
-    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(245,158,11,0.08),transparent 70%);pointer-events:none"></div>
+  <section id="contact" class="py-36 px-6 contact-bg relative overflow-hidden">
+    <!-- Atmospheric video bg -->
+    <video autoplay muted loop playsinline id="contact-vid-bg">
+      <source src="hero-reel.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Glow radials -->
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(245,158,11,0.09),transparent 70%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:0;right:10%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(14,165,233,0.05),transparent 70%);pointer-events:none"></div>
 
     <div class="max-w-4xl mx-auto text-center relative z-10">
       <p class="section-label mb-6 reveal">Ready to Start?</p>
 
-      <h2 class="reveal" style="font-family:'Lexend',sans-serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;letter-spacing:-0.04em;color:#fff;line-height:1.05;margin-bottom:1.5rem">
-        Your next campaign<br/>starts with a <span class="grad-gold">message.</span>
+      <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,8vw,6.5rem);font-weight:700;letter-spacing:-0.02em;color:#fff;line-height:1.0;margin-bottom:1.5rem;transition-delay:0.05s">
+        Your Competitor<br/>Is Already Here.<br/><em class="grad-gold" style="-webkit-text-fill-color:transparent">Are You?</em>
       </h2>
 
-      <p class="text-slate-400 text-xl mb-12 reveal" style="transition-delay:0.1s;font-weight:300;max-width:520px;margin-left:auto;margin-right:auto">
-        Share your brief on WhatsApp. We'll respond within 2 hours with a creative proposal.
+      <p class="text-slate-400 mb-12 reveal" style="font-size:1.1rem;transition-delay:0.12s;font-weight:300;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7">
+        Share your brief on WhatsApp. We'll come back with a creative proposal that changes how you see advertising.
       </p>
 
-      <div class="shimmer-line mb-12 reveal" style="transition-delay:0.15s"></div>
+      <div class="shimmer-line mb-10 reveal" style="transition-delay:0.15s"></div>
 
-      <div class="flex flex-col sm:flex-row gap-5 justify-center reveal" style="transition-delay:0.2s">
+      <div class="flex flex-col items-center gap-5 reveal" style="transition-delay:0.2s">
         <a href="https://wa.me/971551383940" target="_blank" rel="noopener"
-           class="btn-gold magnetic justify-center text-base py-4 px-10" style="font-size:1.05rem">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+           class="btn-gold magnetic justify-center w-full sm:w-auto" id="cta-wa-btn" style="font-size:1.1rem;padding:1.15rem 3rem">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
             <path d="M11.999 2C6.477 2 2 6.477 2 11.999c0 1.869.487 3.625 1.34 5.146L2 22l5.013-1.313A9.94 9.94 0 0011.999 22C17.523 22 22 17.523 22 11.999 22 6.477 17.523 2 11.999 2zm0 18c-1.7 0-3.285-.456-4.645-1.254l-.334-.198-3.464.908.924-3.376-.215-.347A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
           </svg>
           Message on WhatsApp
         </a>
+
+        <!-- Response badge -->
+        <div class="response-badge">
+          <span class="response-dot"></span>
+          We respond within 2 hours
+        </div>
+
         <a href="mailto:studio@zachglobalfzc.com"
-           class="btn-ghost magnetic justify-center text-base py-4 px-10" style="font-size:1.05rem">
+           class="btn-ghost magnetic justify-center w-full sm:w-auto" style="font-size:1rem;padding:0.9rem 2.5rem">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
@@ -915,27 +1046,32 @@
   <!-- ─────────────────────────────────────────
        FOOTER
   ───────────────────────────────────────── -->
-  <footer style="background:rgba(4,7,15,0.97);border-top:1px solid var(--border)" class="py-12 px-6">
-    <div class="max-w-7xl mx-auto">
+  <footer style="background:rgba(4,7,15,0.98);border-top:1px solid var(--border);position:relative;overflow:hidden" class="py-14 px-6">
+    <!-- ZG watermark -->
+    <div style="position:absolute;right:-2%;bottom:-15%;pointer-events:none;opacity:0.03;z-index:0">
+      <img src="logo1.jpg" alt="" style="width:380px;height:380px;object-fit:contain;filter:grayscale(1) invert(1)" />
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
       <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 mb-10">
         <a href="#" class="flex items-center gap-2">
           <img src="logo1.jpg" alt="ZG mark" class="h-8 w-auto rounded" />
           <img src="logo2.jpg" alt="Zach Global Studio" class="h-7 w-auto" />
         </a>
-        <nav class="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-3 text-sm text-slate-400">
-          <a href="#work" class="hover:text-white transition-colors">Work</a>
-          <a href="#process" class="hover:text-white transition-colors">Process</a>
-          <a href="#industries" class="hover:text-white transition-colors">Industries</a>
-          <a href="https://wa.me/971551383940" class="hover:text-white transition-colors">WhatsApp</a>
-          <a href="mailto:studio@zachglobalfzc.com" class="hover:text-white transition-colors">Email</a>
+        <nav class="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-3 text-sm">
+          <a href="#work" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">Our Work</a>
+          <a href="#process" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">The Process</a>
+          <a href="#industries" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">We Serve</a>
+          <a href="https://wa.me/971551383940" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">WhatsApp</a>
+          <a href="mailto:studio@zachglobalfzc.com" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">Email</a>
         </nav>
       </div>
 
       <div class="shimmer-line mb-8"></div>
 
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-600">
-        <p>© 2025 Zach Global Studio FZC · Dubai, UAE</p>
-        <p>studio@zachglobalfzc.com · +971 55 138 3940</p>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs" style="color:#475569;font-family:'Inter',sans-serif">
+        <p>© 2025 Zach Global Studio FZC · Dubai, UAE · <span style="color:rgba(245,158,11,0.6)">AI-Crafted Advertising</span></p>
+        <p style="color:var(--gold-light);opacity:0.5">studio@zachglobalfzc.com · +971 55 138 3940</p>
       </div>
     </div>
   </footer>
@@ -966,6 +1102,16 @@
        JAVASCRIPT
   ───────────────────────────────────────── -->
   <script>
+  // ── Page intro ──
+  (function() {
+    const intro = document.getElementById('page-intro');
+    const logo = document.getElementById('intro-logo');
+    if (!intro) return;
+    setTimeout(() => { logo.style.opacity = '1'; }, 100);
+    setTimeout(() => { intro.classList.add('fade-out'); }, 900);
+    setTimeout(() => { intro.style.display = 'none'; }, 1650);
+  })();
+
   // ── Film grain ──
   (function() {
     const el = document.getElementById('grain');
@@ -991,12 +1137,12 @@
     document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
     function animCursor() {
       dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
       ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
       requestAnimationFrame(animCursor);
     }
     animCursor();
-    document.querySelectorAll('a,button,.reel-card,.edge-card,.stat-card,.process-step,.industry-row').forEach(el => {
+    document.querySelectorAll('a,button,.reel-card,.edge-card,.stat-card,.process-nav-btn,.filter-btn,.industry-card').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('expanded'));
       el.addEventListener('mouseleave', () => ring.classList.remove('expanded'));
     });
@@ -1035,112 +1181,90 @@
   document.querySelectorAll('.magnetic').forEach(btn => {
     btn.addEventListener('mousemove', e => {
       const r = btn.getBoundingClientRect();
-      const dx = (e.clientX - r.left - r.width / 2) * 0.22;
-      const dy = (e.clientY - r.top - r.height / 2) * 0.22;
+      const dx = (e.clientX - r.left - r.width / 2) * 0.2;
+      const dy = (e.clientY - r.top - r.height / 2) * 0.2;
       btn.style.transform = `translate(${dx}px,${dy}px)`;
     });
     btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
   });
 
-  // -- Hero cycling scramble --
+  // ── Work section filter ──
   (function() {
-    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
-    const PHRASES = [
-      'Stop the Scroll.',
-      'Captivate the Audience.',
-      'Convert.',
-      'Create Impact.',
-      'Drive Real Results.'
-    ];
-    const el = document.getElementById('sline-2');
-    if (!el) return;
-
-    function randChar() { return CHARS[Math.random() * CHARS.length | 0]; }
-
-    function buildSpans(text) {
-      el.innerHTML = '';
-      const spans = Array.from(text).map(ch => {
-        const s = document.createElement('span');
-        s.className = 'scramble-char';
-        s.textContent = ch;
-        el.appendChild(s);
-        return { s, ch };
-      });
-      const cur = document.createElement('span');
-      cur.className = 'scramble-cursor';
-      cur.id = 'sc-cursor';
-      el.appendChild(cur);
-      return spans;
-    }
-
-    function scrambleTo(text, onDone) {
-      const spans = buildSpans(text);
-      const stagger = Math.min(800 / spans.length, 55);
-      let resolved = 0;
-      const total = spans.filter(({ch}) => ch !== ' ').length || 1;
-      spans.forEach(({ s, ch }, i) => {
-        if (ch === ' ') return;
-        const resolveDelay = i * stagger + 180;
-        let timer;
-        const loop = () => { s.classList.add('scrambling'); s.textContent = randChar(); timer = setTimeout(loop, 48); };
-        setTimeout(loop, Math.max(0, resolveDelay - 260));
-        setTimeout(() => {
-          clearTimeout(timer);
-          s.classList.remove('scrambling');
-          s.textContent = ch;
-          resolved++;
-          if (resolved === total) {
-            const cur = document.getElementById('sc-cursor');
-            if (cur) cur.remove();
-            if (onDone) onDone();
+    const btns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.reel-card[data-category]');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+            card.style.opacity = '1';
+          } else {
+            card.style.display = 'none';
           }
-        }, resolveDelay + 180);
+        });
+        // Handle the 3-portrait grid row visibility
+        const portraitGrid = document.querySelector('.grid.grid-cols-3');
+        if (portraitGrid) {
+          const visiblePortraits = Array.from(portraitGrid.querySelectorAll('.reel-card')).filter(c => c.style.display !== 'none');
+          portraitGrid.style.display = visiblePortraits.length > 0 ? '' : 'none';
+        }
       });
+    });
+  })();
+
+  // ── CTA WhatsApp button pulse ──
+  (function() {
+    const btn = document.getElementById('cta-wa-btn');
+    if (!btn) return;
+    // Add pulse keyframes inline for the CTA button
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ctaWaPulse {
+        0%,100% { box-shadow: 0 4px 24px rgba(245,158,11,0.3), 0 0 0 0 rgba(245,158,11,0.4); }
+        50% { box-shadow: 0 4px 24px rgba(245,158,11,0.5), 0 0 0 12px rgba(245,158,11,0); }
+      }
+      #cta-wa-btn { animation: ctaWaPulse 2.8s ease-out infinite; }
+      #cta-wa-btn:hover { animation: none; }
+    `;
+    document.head.appendChild(style);
+  })();
+
+  // ── Process timeline ──
+  (function() {
+    let current = 0;
+    const total = 4;
+    const panels = document.querySelectorAll('.process-panel');
+    const dots = document.querySelectorAll('.process-dot');
+    const progress = document.getElementById('process-progress');
+    const prevBtn = document.getElementById('process-prev');
+    const nextBtn = document.getElementById('process-next');
+    if (!panels.length) return;
+
+    function goTo(idx) {
+      panels.forEach(p => p.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+      panels[idx].classList.add('active');
+      dots[idx].classList.add('active');
+      progress.style.width = ((idx + 1) / total * 100) + '%';
+      current = idx;
     }
 
-    function scrambleOut(onDone) {
-      const spans = Array.from(el.querySelectorAll('.scramble-char'));
-      if (!spans.length) { onDone && onDone(); return; }
-      const stagger = Math.min(350 / spans.length, 38);
-      let done = 0;
-      spans.forEach((s, i) => {
-        setTimeout(() => {
-          let t = setInterval(() => { s.textContent = randChar(); }, 40);
-          s.classList.add('scrambling');
-          setTimeout(() => {
-            clearInterval(t); s.style.opacity = '0'; done++;
-            if (done === spans.length) onDone && onDone();
-          }, 200);
-        }, i * stagger);
-      });
-    }
-
-    let phraseIndex = 0;
-
-    function cycle() {
-      scrambleTo(PHRASES[phraseIndex], () => {
-        setTimeout(() => {
-          scrambleOut(() => {
-            phraseIndex = (phraseIndex + 1) % PHRASES.length;
-            setTimeout(cycle, 100);
-          });
-        }, 2200);
-      });
-    }
-
-    // Initial phrase + shimmer sweep after it lands
-    scrambleTo(PHRASES[0], () => {
-      const sweep = document.getElementById('hero-sweep');
-      if (sweep) { sweep.classList.add('run'); }
-      phraseIndex = 1;
-      setTimeout(() => {
-        scrambleOut(() => setTimeout(cycle, 100));
-      }, 2200);
+    prevBtn.addEventListener('click', () => goTo((current - 1 + total) % total));
+    nextBtn.addEventListener('click', () => goTo((current + 1) % total));
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => goTo(parseInt(dot.dataset.step)));
     });
 
-    // Trigger reveal class elements
-    document.querySelectorAll('.reveal').forEach(e => {
-      setTimeout(() => e.classList.add('visible'), 350);
+    // Auto-advance every 5 seconds
+    let autoTimer = setInterval(() => goTo((current + 1) % total), 5000);
+    [prevBtn, nextBtn, ...dots].forEach(el => {
+      el.addEventListener('click', () => {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => goTo((current + 1) % total), 5000);
+      });
     });
   })();
 
@@ -1152,9 +1276,23 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+  // ── Mask reveal for headings (curtain sweep) ──
+  (function() {
+    document.querySelectorAll('.mask-reveal-inner').forEach(el => {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      obs.observe(el);
+    });
+  })();
 
   // ── Animated counters ──
   function countUp(el) {
@@ -1180,85 +1318,13 @@
   }, { threshold: 0.4 });
   document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
-  // ── Typewriter ──
-  (function() {
-    const el = document.getElementById('typewriter');
-    if (!el) return;
-    const words = ['Luxury Brands', 'Real Estate', 'Fintech', 'Healthcare', 'E-Commerce', 'Hospitality', 'Fashion'];
-    let wi = 0, ci = 0, deleting = false;
-    function tick() {
-      const word = words[wi];
-      if (!deleting) {
-        el.textContent = word.slice(0, ++ci);
-        if (ci === word.length) { deleting = true; setTimeout(tick, 1800); return; }
-      } else {
-        el.textContent = word.slice(0, --ci);
-        if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
-      }
-      setTimeout(tick, deleting ? 55 : 95);
-    }
-    setTimeout(tick, 1200);
-  })();
-
-  // ── Word-split section heading animation ──
-  (function() {
-    const headings = document.querySelectorAll('.split-heading');
-    headings.forEach(h => {
-      // Wrap each text node word in a span, preserve child elements (grad spans)
-      Array.from(h.childNodes).forEach(node => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          const words = node.textContent.split(/(\s+)/);
-          const frag = document.createDocumentFragment();
-          words.forEach(word => {
-            if (/^\s+$/.test(word)) {
-              frag.appendChild(document.createTextNode(word));
-            } else if (word) {
-              const s = document.createElement('span');
-              s.className = 'w-word';
-              s.textContent = word;
-              frag.appendChild(s);
-            }
-          });
-          node.parentNode.replaceChild(frag, node);
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-          // Wrap words inside child elements too
-          const inner = node.textContent.split(/(\s+)/);
-          node.innerHTML = '';
-          inner.forEach(word => {
-            if (/^\s+$/.test(word)) {
-              node.appendChild(document.createTextNode(word));
-            } else if (word) {
-              const s = document.createElement('span');
-              s.className = 'w-word';
-              s.textContent = word;
-              node.appendChild(s);
-            }
-          });
-        }
-      });
-    });
-
-    // Stagger each word's transition-delay on visibility
-    const splitObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.w-word').forEach((w, i) => {
-            w.style.transitionDelay = (i * 0.07) + 's';
-          });
-          entry.target.classList.add('visible');
-          splitObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    headings.forEach(h => splitObs.observe(h));
-  })();
-
   // ── Particles ──
   (function() {
     const canvas = document.getElementById('particles-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let W, H, particles = [];
+    let W, H;
+    const particles = [];
     function resize() {
       W = canvas.width = canvas.offsetWidth;
       H = canvas.height = canvas.offsetHeight;
@@ -1266,13 +1332,13 @@
     resize();
     window.addEventListener('resize', resize, { passive: true });
     const colors = ['rgba(245,158,11,', 'rgba(14,165,233,', 'rgba(251,191,36,'];
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 70; i++) {
       particles.push({
         x: Math.random() * 2000, y: Math.random() * 1200,
-        r: Math.random() * 1.5 + 0.3, vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3 - 0.15,
+        r: Math.random() * 1.4 + 0.3, vx: (Math.random() - 0.5) * 0.28,
+        vy: (Math.random() - 0.5) * 0.28 - 0.12,
         c: colors[Math.floor(Math.random() * colors.length)],
-        o: Math.random() * 0.5 + 0.1
+        o: Math.random() * 0.45 + 0.08
       });
     }
     function draw() {
@@ -1299,7 +1365,6 @@
     vid.style.display = 'none'; iframe.style.display = 'none';
     vid.pause && vid.pause(); vid.src = ''; iframe.src = '';
 
-    // Aspect ratio
     const ratioMap = { '16:9': '56.25%', '9:16': '177.78%', '21:9': '42.86%', '4:3': '75%' };
     const pt = ratioMap[aspect] || '56.25%';
     document.getElementById('modal-inner').style.paddingBottom = pt;
