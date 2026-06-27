@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zach Global Studio — AI-Crafted Advertising</title>
-  <meta name="description" content="We create stunning AI-powered video ads and campaigns for leading corporations. Share your brief, we deliver world-class creative." />
+  <title>Zach Global Studio — AI-Crafted Advertising | Dubai</title>
+  <meta name="description" content="Cinematic AI-powered video ads for luxury brands. We deliver high-ROAS campaigns in 48 hours — faster, sharper, more cinematic than any agency. Based in Dubai, serving global brands." />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Zach Global Studio — AI-Crafted Advertising" />
+  <meta property="og:description" content="Cinematic AI-powered video ads for luxury brands. High-ROAS campaigns delivered in 48 hours. Dubai-based, globally trusted." />
+  <meta property="og:url" content="https://studio.zachglobalfzc.com" />
+  <meta property="og:image" content="https://studio.zachglobalfzc.com/logo1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zach Global Studio — AI-Crafted Advertising" />
+  <meta name="twitter:description" content="Cinematic AI-powered video ads for luxury brands. 48-hour delivery. Dubai." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -352,9 +362,38 @@
       .process-step { grid-template-columns: 48px 1fr; }
       .process-tag { display: none; }
     }
+
+    /* ── Word-split section heading animation ── */
+    .split-heading { overflow: hidden; }
+    .split-heading .w-word {
+      display: inline-block; opacity: 0;
+      transform: translateY(60%) rotateX(-20deg);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      margin-right: 0.25em;
+    }
+    .split-heading.visible .w-word { opacity: 1; transform: translateY(0) rotateX(0); }
+
+    /* ── WhatsApp float pulse ── */
+    @keyframes waPulse {
+      0%   { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.45); }
+      70%  { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 14px rgba(37,211,102,0); }
+      100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0); }
+    }
+    #wa-float { animation: waPulse 2.5s ease-out infinite; }
+
+    /* ── prefers-reduced-motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      #grain { animation: none; }
+      .marquee-track { animation: none; }
+      #hero-vid { transform: none !important; }
+    }
   </style>
 </head>
 <body class="bg-grid">
+
+  <!-- Skip to content (accessibility) -->
+  <a href="#main" style="position:absolute;top:-100px;left:1rem;z-index:99999;background:var(--gold);color:#04070F;padding:0.5rem 1rem;border-radius:6px;font-weight:700;font-family:'Lexend',sans-serif;font-size:0.85rem;transition:top 0.2s" onfocus="this.style.top='1rem'" onblur="this.style.top='-100px'">Skip to content</a>
 
   <!-- Film grain overlay -->
   <div id="grain"></div>
@@ -366,7 +405,7 @@
   <!-- ─────────────────────────────────────────
        NAVBAR
   ───────────────────────────────────────── -->
-  <nav id="navbar">
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <a href="#" class="flex items-center gap-2">
         <img src="logo1.jpg" alt="ZG mark" class="h-8 w-auto rounded" />
@@ -407,7 +446,7 @@
   <!-- ─────────────────────────────────────────
        HERO
   ───────────────────────────────────────── -->
-  <section id="hero">
+  <section id="hero" aria-label="Hero">
     <video id="hero-vid" autoplay muted loop playsinline preload="auto" poster=""
            style="opacity:0.62">
       <source src="hero-reel.mp4" type="video/mp4" />
@@ -462,6 +501,9 @@
     </div>
   </section>
 
+  <!-- Main content anchor -->
+  <main id="main">
+
   <!-- Marquee -->
   <div class="overflow-hidden py-4" style="background:rgba(4,7,15,0.95);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
     <div class="marquee-track">
@@ -492,7 +534,7 @@
     <div class="max-w-7xl mx-auto">
       <div class="mb-12 reveal">
         <p class="section-label mb-3">01 — Selected Work</p>
-        <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight" style="letter-spacing:-0.03em">
+        <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight split-heading" style="letter-spacing:-0.03em">
           Campaigns that<br/><span class="grad-text">convert</span>
         </h2>
         <p class="text-slate-400 mt-4 max-w-lg text-lg" style="font-weight:300">
@@ -583,7 +625,8 @@
            onclick="openModal(null,'Full Campaign Demo','yt','7F2y_gAbMuo','21:9')">
         <div style="aspect-ratio:21/9;background:#070D1A;overflow:hidden;position:relative">
           <img src="https://img.youtube.com/vi/7F2y_gAbMuo/maxresdefault.jpg"
-               alt="Campaign demo thumbnail"
+               alt="Full campaign demo — cinematic product advertisement"
+               loading="lazy"
                style="width:100%;height:100%;object-fit:cover;opacity:0.75;display:block" />
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
             <div style="width:68px;height:68px;border-radius:50%;background:rgba(245,158,11,0.92);display:flex;align-items:center;justify-content:center;box-shadow:0 0 50px rgba(245,158,11,0.5)">
@@ -608,7 +651,7 @@
     <div class="max-w-7xl mx-auto">
       <div class="mb-12 reveal">
         <p class="section-label mb-3">02 — By The Numbers</p>
-        <h2 class="text-4xl md:text-5xl font-black text-white" style="letter-spacing:-0.03em">
+        <h2 class="text-4xl md:text-5xl font-black text-white split-heading" style="letter-spacing:-0.03em">
           Results that<br/><span class="grad-gold">speak louder</span>
         </h2>
       </div>
@@ -697,7 +740,7 @@
     <div class="max-w-5xl mx-auto">
       <div class="mb-14 reveal">
         <p class="section-label mb-3">04 — The Process</p>
-        <h2 class="text-4xl md:text-5xl font-black text-white" style="letter-spacing:-0.03em">
+        <h2 class="text-4xl md:text-5xl font-black text-white split-heading" style="letter-spacing:-0.03em">
           Brief to broadcast<br/><span class="grad-gold">in 4 steps</span>
         </h2>
       </div>
@@ -760,7 +803,7 @@
     <div class="max-w-5xl mx-auto">
       <div class="mb-14 reveal">
         <p class="section-label mb-3">05 — Industries</p>
-        <h2 class="text-4xl md:text-5xl font-black text-white" style="letter-spacing:-0.03em">
+        <h2 class="text-4xl md:text-5xl font-black text-white split-heading" style="letter-spacing:-0.03em">
           We work across<br/><span class="grad-text">every vertical</span>
         </h2>
       </div>
@@ -867,6 +910,8 @@
     </div>
   </section>
 
+  </main><!-- /main -->
+
   <!-- ─────────────────────────────────────────
        FOOTER
   ───────────────────────────────────────── -->
@@ -907,10 +952,10 @@
   </div>
 
   <!-- WhatsApp float -->
-  <a href="https://wa.me/971551383940" target="_blank" rel="noopener" aria-label="WhatsApp"
-     style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:5000;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s,box-shadow 0.2s;cursor:pointer"
-     onmouseenter="this.style.transform='scale(1.1)';this.style.boxShadow='0 8px 32px rgba(37,211,102,0.5)'"
-     onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,0.35)'">
+  <a href="https://wa.me/971551383940" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" id="wa-float"
+     style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:5000;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;transition:transform 0.2s;cursor:pointer"
+     onmouseenter="this.style.transform='scale(1.12)';this.style.animationPlayState='paused'"
+     onmouseleave="this.style.transform='scale(1)';this.style.animationPlayState='running'">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="white" viewBox="0 0 24 24">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
       <path d="M11.999 2C6.477 2 2 6.477 2 11.999c0 1.869.487 3.625 1.34 5.146L2 22l5.013-1.313A9.94 9.94 0 0011.999 22C17.523 22 22 17.523 22 11.999 22 6.477 17.523 2 11.999 2zm0 18c-1.7 0-3.285-.456-4.645-1.254l-.334-.198-3.464.908.924-3.376-.215-.347A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
@@ -1155,23 +1200,57 @@
     setTimeout(tick, 1200);
   })();
 
-  // ── Drag-to-scroll reel ──
+  // ── Word-split section heading animation ──
   (function() {
-    const track = document.getElementById('reel-track');
-    if (!track) return;
-    let isDown = false, startX, scrollLeft;
-    track.addEventListener('mousedown', e => {
-      isDown = true; track.classList.add('dragging');
-      startX = e.pageX - track.offsetLeft;
-      scrollLeft = track.scrollLeft;
+    const headings = document.querySelectorAll('.split-heading');
+    headings.forEach(h => {
+      // Wrap each text node word in a span, preserve child elements (grad spans)
+      Array.from(h.childNodes).forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const words = node.textContent.split(/(\s+)/);
+          const frag = document.createDocumentFragment();
+          words.forEach(word => {
+            if (/^\s+$/.test(word)) {
+              frag.appendChild(document.createTextNode(word));
+            } else if (word) {
+              const s = document.createElement('span');
+              s.className = 'w-word';
+              s.textContent = word;
+              frag.appendChild(s);
+            }
+          });
+          node.parentNode.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          // Wrap words inside child elements too
+          const inner = node.textContent.split(/(\s+)/);
+          node.innerHTML = '';
+          inner.forEach(word => {
+            if (/^\s+$/.test(word)) {
+              node.appendChild(document.createTextNode(word));
+            } else if (word) {
+              const s = document.createElement('span');
+              s.className = 'w-word';
+              s.textContent = word;
+              node.appendChild(s);
+            }
+          });
+        }
+      });
     });
-    document.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
-    track.addEventListener('mousemove', e => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - track.offsetLeft;
-      track.scrollLeft = scrollLeft - (x - startX) * 1.8;
-    });
+
+    // Stagger each word's transition-delay on visibility
+    const splitObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.w-word').forEach((w, i) => {
+            w.style.transitionDelay = (i * 0.07) + 's';
+          });
+          entry.target.classList.add('visible');
+          splitObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    headings.forEach(h => splitObs.observe(h));
   })();
 
   // ── Particles ──
