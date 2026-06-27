@@ -82,19 +82,20 @@
     .ticker-item { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); font-family: 'Inter', sans-serif; }
     .ticker-dot { color: var(--gold); opacity: 0.8; margin: 0 0.5rem; }
 
-    /* ── Custom cursor ── */
+    /* ── Custom cursor — minimal gold dot ── */
     #cursor-dot {
-      position: fixed; width: 8px; height: 8px; border-radius: 50%;
-      background: #fff; pointer-events: none; z-index: 9999;
-      transform: translate(-50%,-50%); transition: transform 0.1s, background 0.2s, width 0.25s, height 0.25s;
+      position: fixed; width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold); pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width 0.18s, height 0.18s;
     }
     #cursor-ring {
-      position: fixed; width: 36px; height: 36px; border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,0.4); pointer-events: none; z-index: 9999;
+      position: fixed; width: 24px; height: 24px; border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.45); pointer-events: none; z-index: 9999;
       transform: translate(-50%,-50%);
-      transition: left 0.1s ease-out, top 0.1s ease-out, width 0.25s, height 0.25s, border-color 0.25s;
+      transition: left 0.07s linear, top 0.07s linear, width 0.2s, height 0.2s, border-color 0.2s;
     }
-    #cursor-ring.expanded { width: 56px; height: 56px; border-color: rgba(245,158,11,0.8); background: rgba(245,158,11,0.05); }
+    #cursor-ring.expanded { width: 38px; height: 38px; border-color: rgba(245,158,11,0.85); }
     @media (hover: none) { #cursor-dot, #cursor-ring { display: none; } }
 
     /* ── Gradient text utilities ── */
@@ -179,23 +180,6 @@
       text-transform: uppercase; color: var(--gold); opacity: 0.85;
       font-family: 'Inter', sans-serif;
     }
-
-    /* ── Marquee ── */
-    .marquee-track { display: flex; gap: 3rem; animation: marqueeScroll 35s linear infinite; white-space: nowrap; }
-    .marquee-track:hover { animation-play-state: paused; }
-    @keyframes marqueeScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    .marquee-item { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #94A3B8; font-family: 'Inter', sans-serif; }
-    .marquee-dot { color: var(--gold); opacity: 0.7; }
-
-    /* ── Work filter ── */
-    .filter-btn {
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-      font-family: 'Inter', sans-serif; padding: 0.45rem 1.1rem; border-radius: 99px;
-      border: 1px solid rgba(255,255,255,0.1); color: #64748B; background: transparent;
-      cursor: pointer; transition: all 0.2s ease;
-    }
-    .filter-btn:hover { border-color: rgba(245,158,11,0.4); color: #CBD5E1; }
-    .filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(245,158,11,0.08); }
 
     /* ── Stacked reel ── */
     .reel-card {
@@ -441,11 +425,28 @@
     }
     #wa-float { animation: waPulse 2.5s ease-out infinite; }
 
+
+    /* ── Industry card image Ken Burns animation ── */
+    @keyframes kenBurns1 { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.12) translate(-2%,-1%)} }
+    @keyframes kenBurns2 { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.1) translate(2%,-1.5%)} }
+    @keyframes kenBurns3 { 0%{transform:scale(1.05) translate(1%,0)} 100%{transform:scale(1.12) translate(-1%,1.5%)} }
+    @keyframes kenBurns4 { 0%{transform:scale(1) translate(-1%,0)} 100%{transform:scale(1.1) translate(1%,-2%)} }
+    @keyframes kenBurns5 { 0%{transform:scale(1.08) translate(0,1%)} 100%{transform:scale(1) translate(-1%,-1%)} }
+    @keyframes kenBurns6 { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.1) translate(-1.5%,1%)} }
+    .industry-card:nth-child(1) .industry-card-img { animation: kenBurns1 8s ease-in-out infinite alternate; }
+    .industry-card:nth-child(2) .industry-card-img { animation: kenBurns2 9s ease-in-out infinite alternate; }
+    .industry-card:nth-child(3) .industry-card-img { animation: kenBurns3 7s ease-in-out infinite alternate; }
+    .industry-card:nth-child(4) .industry-card-img { animation: kenBurns4 10s ease-in-out infinite alternate; }
+    .industry-card:nth-child(5) .industry-card-img { animation: kenBurns5 8.5s ease-in-out infinite alternate; }
+    .industry-card:nth-child(6) .industry-card-img { animation: kenBurns6 9.5s ease-in-out infinite alternate; }
+    /* Override hover scale since animation handles it */
+    .industry-card:hover .industry-card-img { transform: none; filter: brightness(0.55) saturate(0.8); }
+
     /* ── prefers-reduced-motion ── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
       #grain { animation: none; }
-      .marquee-track, .ticker-track { animation: none; }
+      .ticker-track { animation: none; }
       #hero-vid { transform: none !important; }
     }
   </style>
@@ -581,51 +582,18 @@
   <!-- Main content anchor -->
   <main id="main">
 
-  <!-- Marquee -->
-  <div class="overflow-hidden py-4" style="background:rgba(4,7,15,0.97);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-    <div class="marquee-track">
-      <span class="marquee-item">AI Video Production</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Corporate Advertising</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Brand Films</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Social Media Ads</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Product Launches</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Dubai · UAE · Global</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">48-Hour Delivery</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Enterprise Creative</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">AI Video Production</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Corporate Advertising</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Brand Films</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Social Media Ads</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Product Launches</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Dubai · UAE · Global</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">48-Hour Delivery</span><span class="marquee-dot mx-6">✦</span>
-      <span class="marquee-item">Enterprise Creative</span><span class="marquee-dot mx-6">✦</span>
-    </div>
-  </div>
-
   <!-- ─────────────────────────────────────────
        01 — OUR WORK
   ───────────────────────────────────────── -->
   <section id="work" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="mb-10 reveal">
-        <p class="section-label mb-4">01 — Our Work</p>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
-          Campaigns that<br/><em class="grad-text" style="-webkit-text-fill-color:transparent">convert</em>
+          Campaigns that <em class="grad-text" style="-webkit-text-fill-color:transparent">convert</em>
         </h2>
-        <p class="text-slate-400 mt-4 max-w-lg" style="font-size:1.05rem;font-weight:300">
-          Click any video to watch with sound.
+        <p class="text-slate-400 mt-4 max-w-lg" style="font-size:1.05rem;font-weight:300;font-style:italic">
+          Cinema meets Intelligence. Built for Brands–Powered by AI
         </p>
-      </div>
-
-      <!-- Category filter -->
-      <div class="flex flex-wrap gap-2 mb-8 reveal" style="transition-delay:0.1s" id="work-filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="luxury">Luxury</button>
-        <button class="filter-btn" data-filter="real-estate">Real Estate</button>
-        <button class="filter-btn" data-filter="fashion">Fashion</button>
-        <button class="filter-btn" data-filter="tech">Tech</button>
-        <button class="filter-btn" data-filter="travel">Travel</button>
       </div>
 
       <div class="shimmer-line mb-8 reveal"></div>
@@ -729,9 +697,8 @@
   <section id="stats" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="mb-14 reveal">
-        <p class="section-label mb-4">02 — By The Numbers</p>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
-          Results that<br/><span class="grad-gold" style="-webkit-text-fill-color:transparent">speak louder</span>
+          Results that <span class="grad-gold" style="-webkit-text-fill-color:transparent">speak volumes</span>
         </h2>
       </div>
 
@@ -745,7 +712,7 @@
           <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">Avg. Turnaround</p>
         </div>
         <div class="stat-card reveal" style="transition-delay:0.2s">
-          <div class="stat-num mb-2"><span class="counter" data-count="3">0</span>×</div>
+          <div class="stat-num mb-2">3×</div>
           <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">ROAS Improvement</p>
         </div>
         <div class="stat-card reveal" style="transition-delay:0.3s">
@@ -764,9 +731,8 @@
   <section id="edge" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="mb-14 reveal">
-        <p class="section-label mb-4">03 — Our Edge</p>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
-          Why AI ads<br/><em class="grad-text" style="-webkit-text-fill-color:transparent">win</em>
+          Why AI ads <em class="grad-text" style="-webkit-text-fill-color:transparent">win</em>
         </h2>
       </div>
 
@@ -818,7 +784,6 @@
   <section id="process" class="py-24 px-6">
     <div class="max-w-5xl mx-auto">
       <div class="mb-14 reveal">
-        <p class="section-label mb-4">04 — The Process</p>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
           Brief to broadcast<br/><span class="grad-gold" style="-webkit-text-fill-color:transparent">in 4 steps</span>
         </h2>
@@ -908,10 +873,10 @@
   <section id="industries" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="mb-14 reveal">
-        <p class="section-label mb-4">05 — We Serve</p>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
-          We work across<br/><em class="grad-text" style="-webkit-text-fill-color:transparent">every vertical</em>
+          We work across <em class="grad-text" style="-webkit-text-fill-color:transparent">every vertical</em>
         </h2>
+        <p style="margin-top:1rem;font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.35rem);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:linear-gradient(135deg,#FBBF24,#F59E0B,#D97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;filter:drop-shadow(0 0 8px rgba(245,158,11,0.35))">The Cinematic AI Studio for Ambitious Brands</p>
       </div>
 
       <div class="industry-grid reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;transition-delay:0.1s">
@@ -939,7 +904,7 @@
         </div>
 
         <div class="industry-card">
-          <img class="industry-card-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=75&auto=format" alt="Finance trading" loading="lazy" />
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=75&auto=format" alt="Finance and fintech" loading="lazy" />
           <div class="industry-card-overlay"></div>
           <div class="industry-card-content">
             <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Finance</p>
@@ -1000,7 +965,6 @@
     <div style="position:absolute;bottom:0;right:10%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(14,165,233,0.05),transparent 70%);pointer-events:none"></div>
 
     <div class="max-w-4xl mx-auto text-center relative z-10">
-      <p class="section-label mb-6 reveal">Ready to Start?</p>
 
       <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,8vw,6.5rem);font-weight:700;letter-spacing:-0.02em;color:#fff;line-height:1.0;margin-bottom:1.5rem;transition-delay:0.05s">
         Your Competitor<br/>Is Already Here.<br/><em class="grad-gold" style="-webkit-text-fill-color:transparent">Are You?</em>
@@ -1142,7 +1106,7 @@
       requestAnimationFrame(animCursor);
     }
     animCursor();
-    document.querySelectorAll('a,button,.reel-card,.edge-card,.stat-card,.process-nav-btn,.filter-btn,.industry-card').forEach(el => {
+    document.querySelectorAll('a,button,.reel-card,.edge-card,.stat-card,.process-nav-btn,.industry-card').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('expanded'));
       el.addEventListener('mouseleave', () => ring.classList.remove('expanded'));
     });
@@ -1187,33 +1151,6 @@
     });
     btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
   });
-
-  // ── Work section filter ──
-  (function() {
-    const btns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.reel-card[data-category]');
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        btns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        cards.forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = '';
-            card.style.opacity = '1';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-        // Handle the 3-portrait grid row visibility
-        const portraitGrid = document.querySelector('.grid.grid-cols-3');
-        if (portraitGrid) {
-          const visiblePortraits = Array.from(portraitGrid.querySelectorAll('.reel-card')).filter(c => c.style.display !== 'none');
-          portraitGrid.style.display = visiblePortraits.length > 0 ? '' : 'none';
-        }
-      });
-    });
-  })();
 
   // ── CTA WhatsApp button pulse ──
   (function() {
