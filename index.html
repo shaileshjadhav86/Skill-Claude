@@ -397,11 +397,15 @@
     @keyframes fadeInModal { from{opacity:0} to{opacity:1} }
     #modal-inner { position: relative; width: 100%; max-width: 1100px; }
     #modal-close {
-      position: absolute; top: -44px; right: 0; background: none; border: none;
-      color: #94A3B8; font-size: 1.5rem; cursor: pointer; padding: 0.5rem;
-      transition: color 0.2s;
+      position: fixed; top: 1.25rem; right: 1.25rem; z-index: 10001;
+      background: rgba(4,7,15,0.75); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%; width: 42px; height: 42px;
+      color: #CBD5E1; font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+      backdrop-filter: blur(8px);
     }
-    #modal-close:hover { color: #fff; }
+    #modal-close:hover { color: #fff; background: rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.5); }
     #modal-vid, #modal-iframe {
       width: 100%; border-radius: 12px; display: none;
       background: #000;
@@ -649,19 +653,17 @@
         </div>
       </div>
 
-      <!-- Row 3: YouTube 21:9 cinematic -->
-      <div class="reel-card reveal" data-category="tech"
-           onclick="openModal(null,'Cinematic Storytelling','yt','7F2y_gAbMuo','21:9')">
+      <!-- Row 3: YouTube 21:9 cinematic — inline muted autoplay -->
+      <div class="reel-card reveal" data-category="tech" style="cursor:default">
         <div style="aspect-ratio:21/9;background:#070D1A;overflow:hidden;position:relative">
-          <img src="https://img.youtube.com/vi/7F2y_gAbMuo/maxresdefault.jpg"
-               alt="Cinematic product storytelling — full campaign demo"
-               loading="lazy"
-               style="width:100%;height:100%;object-fit:cover;opacity:0.72;display:block" />
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
-            <div style="width:72px;height:72px;border-radius:50%;background:rgba(245,158,11,0.92);display:flex;align-items:center;justify-content:center;box-shadow:0 0 60px rgba(245,158,11,0.55)">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
+          <iframe
+            src="https://www.youtube.com/embed/7F2y_gAbMuo?autoplay=1&mute=1&loop=1&playlist=7F2y_gAbMuo&controls=0&rel=0&modestbranding=1&playsinline=1"
+            title="Cinematic Storytelling"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+            style="position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none">
+          </iframe>
         </div>
         <div class="absolute bottom-0 left-0 right-0 p-5" style="background:linear-gradient(to top,rgba(4,7,15,0.92),transparent)">
           <span class="card-industry-tag">Cinematic Feature</span>
@@ -1287,9 +1289,16 @@
 
     const ratioMap = { '16:9': '56.25%', '9:16': '177.78%', '21:9': '42.86%', '4:3': '75%' };
     const pt = ratioMap[aspect] || '56.25%';
-    document.getElementById('modal-inner').style.paddingBottom = pt;
-    document.getElementById('modal-inner').style.position = 'relative';
-    document.getElementById('modal-inner').style.height = '0';
+    const inner = document.getElementById('modal-inner');
+    // For portrait videos, constrain width so the video fits in viewport height
+    if (aspect === '9:16') {
+      inner.style.maxWidth = Math.min(380, window.innerHeight * 0.85 * (9/16)) + 'px';
+    } else {
+      inner.style.maxWidth = '1100px';
+    }
+    inner.style.paddingBottom = pt;
+    inner.style.position = 'relative';
+    inner.style.height = '0';
 
     if (type === 'file') {
       vid.style.display = 'block';
