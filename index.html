@@ -192,7 +192,7 @@
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
       background: rgba(4,7,15,0.0); transition: background 0.3s;
     }
-    .reel-card:hover .reel-card-overlay { background: rgba(4,7,15,0.5); }
+    .reel-card:hover .reel-card-overlay { background: rgba(4,7,15,0.25); }
     .play-btn {
       width: 64px; height: 64px; border-radius: 50%;
       background: rgba(245,158,11,0.92); display: flex; align-items: center; justify-content: center;
@@ -407,8 +407,9 @@
     }
     #modal-close:hover { color: #fff; background: rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.5); }
     #modal-vid, #modal-iframe {
-      width: 100%; border-radius: 12px; display: none;
-      background: #000;
+      width: 100%; height: 100%; border-radius: 12px; display: none;
+      background: #000; object-fit: contain; opacity: 1;
+      position: absolute; inset: 0;
     }
 
     /* ── Mobile tweaks ── */
@@ -1302,18 +1303,15 @@
 
     if (type === 'file') {
       vid.style.display = 'block';
-      vid.style.position = 'absolute'; vid.style.inset = '0'; vid.style.borderRadius = '12px';
-      vid.src = src; vid.play();
+      vid.src = src;
+      vid.load();
+      vid.play().catch(() => {});
     } else if (type === 'yt') {
       iframe.style.display = 'block';
-      iframe.style.position = 'absolute'; iframe.style.inset = '0'; iframe.style.borderRadius = '12px';
       iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
-      iframe.style.width = '100%'; iframe.style.height = '100%';
     } else if (type === 'gdrive') {
       iframe.style.display = 'block';
-      iframe.style.position = 'absolute'; iframe.style.inset = '0'; iframe.style.borderRadius = '12px';
       iframe.src = `https://drive.google.com/file/d/${ytId}/preview`;
-      iframe.style.width = '100%'; iframe.style.height = '100%';
     }
 
     modal.classList.add('open');
