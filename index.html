@@ -609,8 +609,8 @@
         </div>
       </div>
 
-      <!-- Row 2: Three portrait reels side by side 9:16 -->
-      <div class="grid grid-cols-3 gap-4 mb-5">
+      <!-- Row 2: Four portrait reels side by side 9:16 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
         <div class="reel-card reveal" style="transition-delay:0.05s" data-category="real-estate"
              onclick="openModal('reel_portrait_1.mp4','Campaign Reel #1','file',null,'9:16')">
           <div style="aspect-ratio:9/16;overflow:hidden">
@@ -644,6 +644,20 @@
           <div style="aspect-ratio:9/16;overflow:hidden">
             <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
               <source src="reel_portrait_3.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="reel-card-overlay">
+            <div class="play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-card reveal" style="transition-delay:0.2s" data-category="luxury"
+             onclick="openModal('reel_portrait_4.mp4','Campaign Reel #4','file',null,'9:16')">
+          <div style="aspect-ratio:9/16;overflow:hidden">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+              <source src="reel_portrait_4.mp4" type="video/mp4"/>
             </video>
           </div>
           <div class="reel-card-overlay">
