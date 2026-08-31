@@ -1,0 +1,7 @@
+# video-use session outputs (generated per source folder, not source-controlled)
+edit/
+*/edit/
+
+# video-use secrets (never commit)
+.claude/skills/video-use/.env
+.claude/skills/video-use/.env.local
