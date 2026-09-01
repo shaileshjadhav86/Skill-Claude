@@ -20,8 +20,1433 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Lexend:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #F59E0B;
+      --gold-light: #FBBF24;
+      --electric: #0EA5E9;
+      --electric-light: #38BDF8;
+      --navy: #04070F;
+      --navy-mid: #070D1A;
+      --navy-card: rgba(11,20,37,0.75);
+      --border: rgba(255,255,255,0.07);
+      --text-muted: #64748B;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: #CBD5E1;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      cursor: none;
+    }
+    @media (hover: none) { body { cursor: auto; } }
+    h1,h2,h3,h4,h5 { font-family: 'Cormorant Garamond', serif; line-height: 1.05; }
+
+    /* ── Film grain ── */
+    #grain {
+      position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+      opacity: 0.025; background-repeat: repeat; background-size: 200px 200px;
+      animation: grainShift 0.15s steps(1) infinite;
+    }
+    @keyframes grainShift {
+      0%  { transform: translate(0,0) }  10% { transform: translate(-3%,-4%) }
+      20% { transform: translate(-6%,2%) } 30% { transform: translate(3%,-5%) }
+      40% { transform: translate(-2%,6%) } 50% { transform: translate(-5%,0%) }
+      60% { transform: translate(4%,3%) }  70% { transform: translate(0,-4%) }
+      80% { transform: translate(-3%,5%) } 90% { transform: translate(5%,1%) }
+    }
+
+    /* ── Page intro ── */
+    #page-intro {
+      position: fixed; inset: 0; z-index: 100000;
+      background: #000; display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.7s ease;
+    }
+    #intro-logo { width: 72px; height: auto; border-radius: 8px; opacity: 0; transition: opacity 0.5s ease; }
+    #page-intro.fade-out { opacity: 0; pointer-events: none; }
+
+    /* ── Top ticker ── */
+    #top-ticker {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
+      background: #000; height: 32px; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    .ticker-track {
+      display: flex; gap: 3rem; animation: tickerScroll 30s linear infinite; white-space: nowrap;
+    }
+    @keyframes tickerScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .ticker-item { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); font-family: 'Inter', sans-serif; }
+    .ticker-dot { color: var(--gold); opacity: 0.8; margin: 0 0.5rem; }
+
+    /* ── Custom cursor — minimal gold dot ── */
+    #cursor-dot {
+      position: fixed; width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold); pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width 0.18s, height 0.18s;
+    }
+    #cursor-ring {
+      position: fixed; width: 24px; height: 24px; border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.45); pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: left 0.07s linear, top 0.07s linear, width 0.2s, height 0.2s, border-color 0.2s;
+    }
+    #cursor-ring.expanded { width: 38px; height: 38px; border-color: rgba(245,158,11,0.85); }
+    @media (hover: none) { #cursor-dot, #cursor-ring { display: none; } }
+
+    /* ── Gradient text utilities ── */
+    .grad-text { background: linear-gradient(135deg, #38BDF8 20%, #FBBF24 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .grad-gold { background: linear-gradient(135deg, #FBBF24, #F97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: var(--navy-card); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(56,189,248,0.1); }
+    .glass-gold { background: var(--navy-card); backdrop-filter: blur(18px); border: 1px solid rgba(245,158,11,0.18); }
+    .bg-grid { background-image: linear-gradient(rgba(56,189,248,0.02) 1px,transparent 1px), linear-gradient(90deg,rgba(56,189,248,0.02) 1px,transparent 1px); background-size: 56px 56px; }
+
+    /* ── Shimmer separator ── */
+    .shimmer-line {
+      height: 1px; position: relative; overflow: hidden;
+      background: linear-gradient(90deg, transparent, rgba(56,189,248,0.1), rgba(245,158,11,0.1), transparent);
+    }
+    .shimmer-line::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.9) 50%, transparent 100%);
+      animation: shimmer 3.5s ease-in-out infinite; width: 60%; transform: translateX(-100%);
+    }
+    @keyframes shimmer { 0%{transform:translateX(-100%)} 60%{transform:translateX(250%)} 100%{transform:translateX(250%)} }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed; top: 32px; left: 0; right: 0; z-index: 1000;
+      padding: 1.25rem 2rem;
+      transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s, border-color 0.4s;
+    }
+    #navbar.scrolled {
+      background: rgba(4,7,15,0.92); backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(245,158,11,0.12); padding: 0.75rem 2rem;
+    }
+
+    /* Nav link hover underline */
+    .nav-link {
+      position: relative; font-size: 0.8rem; color: #94A3B8; letter-spacing: 0.08em;
+      font-family: 'Inter', sans-serif; font-weight: 500; transition: color 0.2s;
+      text-decoration: none;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px;
+      background: var(--gold); transition: width 0.22s ease;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ── Hero ── */
+    #hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 32px; }
+    #hero-vid {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; transform-origin: center; will-change: transform;
+      transform: scale(1.05);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to bottom,
+        rgba(4,7,15,0.5) 0%,
+        rgba(4,7,15,0.2) 35%,
+        rgba(4,7,15,0.45) 65%,
+        rgba(4,7,15,0.97) 100%);
+    }
+
+    /* ── Hero headline ── */
+    .hero-h1 {
+      font-size: clamp(3.2rem, 9vw, 8.5rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.0;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .hero-h1 em { font-style: italic; }
+
+    /* ── Scroll pulse ── */
+    @keyframes scrollPulse {
+      0%   { transform: translateY(0) scaleY(1); opacity: 0.7; }
+      50%  { transform: translateY(12px) scaleY(0.7); opacity: 0.3; }
+      100% { transform: translateY(0) scaleY(1); opacity: 0.7; }
+    }
+    .scroll-pulse-dot { animation: scrollPulse 1.8s ease-in-out infinite; }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.85;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── Stacked reel ── */
+    .reel-card {
+      border-radius: 12px; overflow: hidden; position: relative; cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
+    }
+    .reel-card:hover { transform: translateY(-4px) scale(1.008); box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,158,11,0.4); }
+    .reel-card video { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .reel-card-overlay {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(4,7,15,0.0); transition: background 0.3s;
+    }
+    .reel-card:hover .reel-card-overlay { background: rgba(4,7,15,0.25); }
+    .play-btn {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(245,158,11,0.92); display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: scale(0.75); transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 0 50px rgba(245,158,11,0.5);
+    }
+    .reel-card:hover .play-btn { opacity: 1; transform: scale(1); }
+
+    /* ── Card industry tag ── */
+    .card-industry-tag {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); font-family: 'Inter', sans-serif; margin-bottom: 0.3rem; display: block;
+    }
+
+    /* ── Stat cards ── */
+    .stat-card {
+      border: 1px solid rgba(245,158,11,0.18); border-radius: 16px;
+      padding: 2.25rem 1.5rem; text-align: center;
+      background: rgba(11,20,37,0.5); backdrop-filter: blur(10px);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.06), transparent 70%);
+      opacity: 0; transition: opacity 0.35s;
+    }
+    .stat-card:hover { border-color: rgba(245,158,11,0.5); box-shadow: 0 0 50px rgba(245,158,11,0.1), 0 16px 50px rgba(0,0,0,0.4); transform: translateY(-6px); }
+    .stat-card:hover::before { opacity: 1; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,6vw,5rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1;
+      background: linear-gradient(135deg, #FBBF24 30%, #F97316 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ── Edge cards ── */
+    .edge-card {
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 2.25rem; background: rgba(11,20,37,0.4);
+      transition: border-color 0.3s, transform 0.35s, box-shadow 0.35s;
+      position: relative; overflow: hidden;
+    }
+    .edge-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: linear-gradient(135deg, rgba(245,158,11,0.05), rgba(14,165,233,0.03));
+      opacity: 0; transition: opacity 0.35s;
+    }
+    .edge-card:hover { border-color: rgba(245,158,11,0.35); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+    .edge-card:hover::before { opacity: 1; }
+    .edge-icon {
+      width: 60px; height: 60px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(14,165,233,0.08));
+      display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;
+      border: 1px solid rgba(245,158,11,0.2);
+    }
+
+    /* ── Process nav buttons (shared) ── */
+    .process-nav-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.3); background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s; color: #94A3B8;
+    }
+    .process-nav-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(245,158,11,0.08); }
+
+    /* ── 3D Cylinder carousel ── */
+    .cyl-card {
+      position: absolute;
+      width: 340px; height: 400px;
+      left: 50%; top: 50%;
+      margin-left: -170px; margin-top: -200px;
+      transition: opacity 0.6s, filter 0.6s;
+    }
+    .cyl-card-inner {
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, rgba(14,22,42,0.95), rgba(7,13,26,0.98));
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      display: flex; flex-direction: column;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset,
+                  0 30px 80px rgba(0,0,0,0.6),
+                  0 0 40px rgba(245,158,11,0.05);
+      position: relative; overflow: hidden;
+      transition: box-shadow 0.6s, border-color 0.6s;
+    }
+    /* Glass highlight top edge */
+    .cyl-card-inner::before {
+      content: '';
+      position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.5), rgba(14,165,233,0.3), transparent);
+    }
+    /* Active card glow */
+    .cyl-card.active .cyl-card-inner {
+      border-color: rgba(245,158,11,0.45);
+      box-shadow: 0 0 0 1px rgba(245,158,11,0.12) inset,
+                  0 30px 80px rgba(0,0,0,0.6),
+                  0 0 60px rgba(245,158,11,0.15),
+                  0 0 120px rgba(245,158,11,0.06);
+    }
+    .cyl-step-num {
+      position: absolute; bottom: 1rem; right: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem; font-weight: 700; line-height: 1;
+      color: rgba(245,158,11,0.06); user-select: none; pointer-events: none;
+      transition: color 0.6s;
+    }
+    .cyl-card.active .cyl-step-num { color: rgba(245,158,11,0.1); }
+    .cyl-icon-wrap {
+      width: 60px; height: 60px; border-radius: 14px; margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(14,165,233,0.06));
+      border: 1px solid rgba(245,158,11,0.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cyl-day {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold);
+      font-family: 'Inter', sans-serif; margin-bottom: 0.6rem;
+    }
+    .cyl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem; font-weight: 600; color: #fff;
+      line-height: 1.1; margin-bottom: 1rem;
+    }
+    .cyl-body {
+      color: #64748B; font-weight: 300; line-height: 1.75;
+      font-size: 0.95rem; font-family: 'Inter', sans-serif;
+      transition: color 0.6s;
+    }
+    .cyl-card.active .cyl-body { color: #94A3B8; }
+
+    /* Dot indicators */
+    .cyl-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); cursor: pointer;
+      transition: all 0.25s; border: 1px solid transparent;
+    }
+    .cyl-dot.active {
+      width: 24px; border-radius: 3px;
+      background: linear-gradient(90deg,#F59E0B,#F97316);
+      box-shadow: 0 0 10px rgba(245,158,11,0.5);
+    }
+
+    @media (max-width: 640px) {
+      .cyl-card { width: 280px; margin-left: -140px; }
+      #cyl-scene { height: 440px; }
+    }
+
+    /* ── Industry cards (visual) ── */
+    .industry-card {
+      position: relative; border-radius: 12px; overflow: hidden;
+      cursor: default; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      aspect-ratio: 4/3;
+    }
+    .industry-card:hover { transform: translateY(-4px); }
+    .industry-card-img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease, filter 0.4s ease;
+      filter: brightness(0.4) saturate(0.7);
+    }
+    .industry-card:hover .industry-card-img { transform: scale(1.05); filter: brightness(0.55) saturate(0.8); }
+    .industry-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(4,7,15,0.95) 0%, rgba(4,7,15,0.5) 50%, rgba(4,7,15,0.2) 100%);
+      transition: background 0.4s;
+    }
+    .industry-card:hover .industry-card-overlay {
+      background: linear-gradient(to top, rgba(4,7,15,0.9) 0%, rgba(4,7,15,0.4) 50%, rgba(4,7,15,0.1) 100%);
+    }
+    .industry-card-content {
+      position: absolute; inset: 0; padding: 1.75rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .industry-card-arrow {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      opacity: 0; transform: translateX(-6px);
+      transition: opacity 0.25s, transform 0.25s; color: var(--gold); font-size: 1.1rem;
+    }
+    .industry-card:hover .industry-card-arrow { opacity: 1; transform: translateX(0); }
+
+    /* ── Magnetic buttons ── */
+    .magnetic { transition: transform 0.25s cubic-bezier(0.16,1,0.3,1); display: inline-block; }
+
+    /* ── CTA button styles ── */
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: linear-gradient(135deg, #F59E0B, #F97316);
+      color: #04070F; font-family: 'Inter', sans-serif; font-weight: 700;
+      padding: 0.9rem 2.25rem; border-radius: 8px; font-size: 0.95rem;
+      letter-spacing: 0.02em; border: none; cursor: pointer;
+      transition: box-shadow 0.3s, filter 0.3s, transform 0.2s;
+      box-shadow: 0 4px 24px rgba(245,158,11,0.3);
+    }
+    .btn-gold:hover { filter: brightness(1.12); box-shadow: 0 10px 50px rgba(245,158,11,0.55); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: #CBD5E1;
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      padding: 0.9rem 2.25rem; border-radius: 8px; font-size: 0.95rem;
+      border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: #fff; background: rgba(255,255,255,0.04); }
+
+    /* ── Reveal animations ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.94); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    /* ── Mask reveal for headings ── */
+    .mask-reveal-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; }
+    .mask-reveal-inner {
+      display: inline-block;
+      transform: translateY(105%);
+      transition: transform 0.85s cubic-bezier(0.16,1,0.3,1);
+    }
+    .mask-reveal-inner.visible { transform: translateY(0); }
+
+    /* ── Contact section ── */
+    #contact-vid-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0.07; pointer-events: none;
+    }
+    .contact-bg {
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(245,158,11,0.07) 0%, transparent 70%),
+                  linear-gradient(to bottom, var(--navy-mid), var(--navy));
+    }
+
+    /* ── Response badge ── */
+    .response-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.72rem;
+      font-weight: 600; color: #4ADE80; font-family: 'Inter', sans-serif; letter-spacing: 0.05em;
+    }
+    .response-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; animation: responsePulse 1.5s ease-in-out infinite; }
+    @keyframes responsePulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* ── Modal ── */
+    #video-modal {
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(4,7,15,0.97); display: none; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    #video-modal.open { display: flex; animation: fadeInModal 0.3s ease; }
+    @keyframes fadeInModal { from{opacity:0} to{opacity:1} }
+    #modal-inner { position: relative; width: 100%; max-width: 1100px; }
+    #modal-close {
+      position: fixed; top: 1.25rem; right: 1.25rem; z-index: 10001;
+      background: rgba(4,7,15,0.75); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%; width: 42px; height: 42px;
+      color: #CBD5E1; font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    #modal-close:hover { color: #fff; background: rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.5); }
+    #modal-vid, #modal-iframe {
+      width: 100%; height: 100%; border-radius: 12px; display: none;
+      background: #000; object-fit: contain; opacity: 1;
+      position: absolute; inset: 0;
+    }
+
+    /* ── Mobile tweaks ── */
+    @media (max-width: 768px) {
+      .process-panel { padding: 2rem 1.25rem; }
+      .industry-grid { grid-template-columns: 1fr 1fr !important; }
+      .industry-card { aspect-ratio: 3/2; }
+    }
+    @media (max-width: 480px) {
+      .industry-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ── WhatsApp float pulse ── */
+    @keyframes waPulse {
+      0%   { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.45); }
+      70%  { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 14px rgba(37,211,102,0); }
+      100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0); }
+    }
+    #wa-float { animation: waPulse 2.5s ease-out infinite; }
+
+
+    /* ── Industry card image Ken Burns animation ── */
+    @keyframes kenBurns1 { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.12) translate(-2%,-1%)} }
+    @keyframes kenBurns2 { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.1) translate(2%,-1.5%)} }
+    @keyframes kenBurns3 { 0%{transform:scale(1.05) translate(1%,0)} 100%{transform:scale(1.12) translate(-1%,1.5%)} }
+    @keyframes kenBurns4 { 0%{transform:scale(1) translate(-1%,0)} 100%{transform:scale(1.1) translate(1%,-2%)} }
+    @keyframes kenBurns5 { 0%{transform:scale(1.08) translate(0,1%)} 100%{transform:scale(1) translate(-1%,-1%)} }
+    @keyframes kenBurns6 { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.1) translate(-1.5%,1%)} }
+    .industry-card:nth-child(1) .industry-card-img { animation: kenBurns1 8s ease-in-out infinite alternate; }
+    .industry-card:nth-child(2) .industry-card-img { animation: kenBurns2 9s ease-in-out infinite alternate; }
+    .industry-card:nth-child(3) .industry-card-img { animation: kenBurns3 7s ease-in-out infinite alternate; }
+    .industry-card:nth-child(4) .industry-card-img { animation: kenBurns4 10s ease-in-out infinite alternate; }
+    .industry-card:nth-child(5) .industry-card-img { animation: kenBurns5 8.5s ease-in-out infinite alternate; }
+    .industry-card:nth-child(6) .industry-card-img { animation: kenBurns6 9.5s ease-in-out infinite alternate; }
+    /* Override hover scale since animation handles it */
+    .industry-card:hover .industry-card-img { transform: none; filter: brightness(0.55) saturate(0.8); }
+
+    /* ── prefers-reduced-motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      #grain { animation: none; }
+      .ticker-track { animation: none; }
+      #hero-vid { transform: none !important; }
+    }
+  </style>
 </head>
-<body>
-<!-- Full content from local index.html -->
+<body class="bg-grid">
+
+  <!-- ── Page load intro ── -->
+  <div id="page-intro">
+    <img src="logo1.jpg" alt="ZG" id="intro-logo" />
+  </div>
+
+  <!-- Skip to content (accessibility) -->
+  <a href="#main" style="position:absolute;top:-100px;left:1rem;z-index:99999;background:var(--gold);color:#04070F;padding:0.5rem 1rem;border-radius:6px;font-weight:700;font-family:'Inter',sans-serif;font-size:0.85rem;transition:top 0.2s" onfocus="this.style.top='1rem'" onblur="this.style.top='-100px'">Skip to content</a>
+
+  <!-- Film grain overlay -->
+  <div id="grain"></div>
+
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ── Top ticker ── -->
+  <div id="top-ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Luxury</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Real Estate</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Fashion</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Hospitality</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Fintech</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Healthcare</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Technology</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Travel</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">E-Commerce</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Luxury</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Real Estate</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Fashion</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Hospitality</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Fintech</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Healthcare</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Technology</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">Travel</span><span class="ticker-dot">✦</span>
+      <span class="ticker-item">E-Commerce</span><span class="ticker-dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────
+       NAVBAR
+  ───────────────────────────────────────── -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <img src="logo1.jpg" alt="ZG mark" class="h-8 w-auto rounded" />
+        <img src="logo2.jpg" alt="Zach Global Studio" class="h-7 w-auto" />
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="https://www.instagram.com/zachglobalstudio/" target="_blank" rel="noopener" class="nav-link">Our Work</a>
+        <a href="#process" class="nav-link">The Process</a>
+        <a href="#industries" class="nav-link">We Serve</a>
+        <a href="https://wa.me/971551383940" target="_blank" rel="noopener"
+           class="btn-gold magnetic text-sm py-2 px-5" style="font-size:0.8rem;padding:0.55rem 1.35rem;border-radius:6px">Start Your Campaign</a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button id="menu-btn" aria-label="Menu" class="md:hidden p-2 text-slate-300"
+              style="cursor:pointer">
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 flex flex-col gap-4">
+      <a href="https://www.instagram.com/zachglobalstudio/" target="_blank" rel="noopener" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide">Our Work</a>
+      <a href="#process" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide">The Process</a>
+      <a href="#industries" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide">We Serve</a>
+      <a href="https://wa.me/971551383940" target="_blank" rel="noopener"
+         class="btn-gold text-center w-full justify-center">Start Your Campaign</a>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────────────
+       HERO
+  ───────────────────────────────────────── -->
+  <section id="hero" aria-label="Hero" onclick="heroToggleSound()" style="cursor:pointer">
+    <video id="hero-vid" autoplay muted loop playsinline preload="auto"
+           style="opacity:1.0">
+      <source src="https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/URHM2287.MOV" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+
+    <!-- Particles canvas -->
+    <canvas id="particles-canvas" class="absolute inset-0 w-full h-full" style="z-index:1;pointer-events:none;opacity:0.5"></canvas>
+
+    <!-- Sound toggle hint -->
+    <div id="hero-sound-hint" style="position:absolute;bottom:5rem;right:1.5rem;z-index:10;display:flex;align-items:center;gap:0.5rem;background:rgba(4,7,15,0.6);border:1px solid rgba(245,158,11,0.25);border-radius:99px;padding:0.35rem 0.9rem;backdrop-filter:blur(8px);transition:opacity 0.3s">
+      <svg id="hero-sound-icon" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;color:#F59E0B" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+      </svg>
+      <span id="hero-sound-label" style="font-size:0.62rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#94A3B8;font-family:'Inter',sans-serif">Click for sound</span>
+    </div>
+
+    <!-- Scroll pulse cue -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3">
+      <div class="scroll-pulse-dot" style="width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px rgba(245,158,11,0.6)"></div>
+      <div style="width:1px;height:44px;background:linear-gradient(to bottom,rgba(245,158,11,0.5),transparent)"></div>
+    </div>
+  </section>
+
+  <!-- Main content anchor -->
+  <main id="main">
+
+  <!-- ─────────────────────────────────────────
+       01 — OUR WORK
+  ───────────────────────────────────────── -->
+  <section id="work" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-10 reveal">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
+          Campaigns that <em class="grad-text" style="-webkit-text-fill-color:transparent">convert</em>
+        </h2>
+        <p class="text-slate-400 mt-4 max-w-lg" style="font-size:1.05rem;font-weight:300;font-style:italic">
+          Cinema meets Intelligence. Built for Brands–Powered by AI
+        </p>
+      </div>
+
+      <div class="shimmer-line mb-8 reveal"></div>
+
+      <!-- Row 1: Full-width showreel 16:9 -->
+      <div class="reel-card reveal mb-5" data-category="luxury"
+           onclick="openModal('showreel.mp4','Studio Showreel 2025','file',null,'16:9')">
+        <div style="aspect-ratio:16/9;overflow:hidden">
+          <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+            <source src="showreel.mp4" type="video/mp4"/>
+          </video>
+        </div>
+        <div class="reel-card-overlay">
+          <div class="play-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:linear-gradient(to top,rgba(4,7,15,0.92),transparent)">
+          <span class="card-industry-tag">Multi-Industry</span>
+          <p class="text-white font-bold" style="font-family:'Inter',sans-serif;font-size:1rem">Studio Showreel 2025</p>
+          <div class="flex items-center gap-3 mt-1">
+            <p class="text-slate-400 text-xs">Flagship reel · 16:9</p>
+            <span style="font-size:0.65rem;color:#64748B;letter-spacing:0.08em">2:30</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Four portrait reels side by side 9:16 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
+        <div class="reel-card reveal" style="transition-delay:0.05s" data-category="real-estate"
+             onclick="openModal('reel_portrait_1.mp4','Campaign Reel #1','file',null,'9:16')">
+          <div style="aspect-ratio:9/16;overflow:hidden">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+              <source src="reel_portrait_1.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="reel-card-overlay">
+            <div class="play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-card reveal" style="transition-delay:0.1s" data-category="luxury"
+             onclick="openModal('reel_portrait_2.mp4','Campaign Reel #2','file',null,'9:16')">
+          <div style="aspect-ratio:9/16;overflow:hidden">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+              <source src="reel_portrait_2.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="reel-card-overlay">
+            <div class="play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-card reveal" style="transition-delay:0.15s" data-category="fashion"
+             onclick="openModal('https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/Moko.mov','Campaign Reel #3','file',null,'9:16')">
+          <div style="aspect-ratio:9/16;overflow:hidden">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+              <source src="https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/Moko.mov" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="reel-card-overlay">
+            <div class="play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-card reveal" style="transition-delay:0.2s" data-category="luxury"
+             onclick="openModal('https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/ZachNoir.mp4','Campaign Reel #4','file',null,'9:16')">
+          <div style="aspect-ratio:9/16;overflow:hidden">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+              <source src="https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/ZachNoir.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="reel-card-overlay">
+            <div class="play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#04070F"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: YouTube 21:9 cinematic — inline muted autoplay -->
+      <div class="reel-card reveal" data-category="tech" style="cursor:default">
+        <div style="aspect-ratio:16/9;background:#070D1A;overflow:hidden;position:relative">
+          <iframe
+            src="https://www.youtube.com/embed/7F2y_gAbMuo?autoplay=1&mute=1&loop=1&playlist=7F2y_gAbMuo&controls=0&rel=0&modestbranding=1&playsinline=1"
+            title="Cinematic Storytelling"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+            style="position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none">
+          </iframe>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:linear-gradient(to top,rgba(4,7,15,0.92),transparent)">
+          <span class="card-industry-tag">Cinematic Feature</span>
+          <p class="text-white font-bold" style="font-family:'Inter',sans-serif;font-size:1rem">Cinematic Storytelling</p>
+          <p class="text-slate-400 text-xs mt-1">YouTube · 16:9 Widescreen</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shimmer-line mx-6 md:mx-16"></div>
+
+  <!-- ─────────────────────────────────────────
+       02 — BY THE NUMBERS
+  ───────────────────────────────────────── -->
+  <section id="stats" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-14 reveal">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
+          Results that <span class="grad-gold" style="-webkit-text-fill-color:transparent">speak volumes</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div class="stat-card reveal">
+          <div class="stat-num mb-2"><span class="counter" data-count="60">0</span>+</div>
+          <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">Campaigns Delivered</p>
+        </div>
+        <div class="stat-card reveal" style="transition-delay:0.1s">
+          <div class="stat-num mb-2"><span class="counter" data-count="48">0</span>h</div>
+          <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">Avg. Turnaround</p>
+        </div>
+        <div class="stat-card reveal" style="transition-delay:0.2s">
+          <div class="stat-num mb-2">3×</div>
+          <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">ROAS Improvement</p>
+        </div>
+        <div class="stat-card reveal" style="transition-delay:0.3s">
+          <div class="stat-num mb-2"><span class="counter" data-count="100">0</span>%</div>
+          <p class="text-slate-400 text-sm font-medium tracking-wide" style="font-family:'Inter',sans-serif">Client Satisfaction</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shimmer-line mx-6 md:mx-16"></div>
+
+  <!-- ─────────────────────────────────────────
+       03 — OUR EDGE
+  ───────────────────────────────────────── -->
+  <section id="edge" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-14 reveal">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
+          Why AI ads <em class="grad-text" style="-webkit-text-fill-color:transparent">win</em>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="edge-card reveal">
+          <div class="edge-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" style="color:var(--gold)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#fff;margin-bottom:0.75rem">10× Faster</h3>
+          <p class="text-slate-400" style="font-weight:300;line-height:1.75;font-size:1rem">
+            Full campaigns in 48 hours. Traditional agencies take weeks. We ship while the trend is still hot.
+          </p>
+        </div>
+
+        <div class="edge-card reveal" style="transition-delay:0.12s">
+          <div class="edge-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" style="color:var(--electric-light)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#fff;margin-bottom:0.75rem">Infinite Variations</h3>
+          <p class="text-slate-400" style="font-weight:300;line-height:1.75;font-size:1rem">
+            A/B test 20 different cuts from one brief. Optimise for performance, not just aesthetics.
+          </p>
+        </div>
+
+        <div class="edge-card reveal" style="transition-delay:0.24s">
+          <div class="edge-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" style="color:var(--gold)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#fff;margin-bottom:0.75rem">80% Cost Reduction</h3>
+          <p class="text-slate-400" style="font-weight:300;line-height:1.75;font-size:1rem">
+            Premium production quality at a fraction of the traditional cost. Enterprise results, startup budget.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shimmer-line mx-6 md:mx-16"></div>
+
+  <!-- ─────────────────────────────────────────
+       04 — THE PROCESS (3D Cylinder Carousel)
+  ───────────────────────────────────────── -->
+  <section id="process" class="py-24 px-6" style="overflow:hidden">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-16 reveal text-center">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5.5vw,5rem);font-weight:700;color:#fff;letter-spacing:-0.03em;line-height:1;white-space:nowrap">
+          Brief to broadcast <span class="grad-gold" style="-webkit-text-fill-color:transparent">in 4 steps</span>
+        </h2>
+        <p class="text-slate-500 mt-4" style="font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;font-family:'Inter',sans-serif">Drag or click arrows to explore</p>
+      </div>
+
+      <!-- 3D Cylinder Scene -->
+      <div id="cyl-scene" style="perspective:1100px;perspective-origin:50% 40%;width:100%;height:520px;position:relative;cursor:grab" class="reveal" style="transition-delay:0.1s">
+
+        <!-- Ambient glow floor -->
+        <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:600px;height:120px;background:radial-gradient(ellipse,rgba(245,158,11,0.12),transparent 70%);pointer-events:none;z-index:0"></div>
+        <!-- Top rim light -->
+        <div style="position:absolute;top:60px;left:50%;transform:translateX(-50%);width:500px;height:2px;background:linear-gradient(90deg,transparent,rgba(245,158,11,0.3),rgba(14,165,233,0.2),transparent);pointer-events:none;z-index:0;filter:blur(1px)"></div>
+
+        <!-- Cylinder track -->
+        <div id="cyl-track" style="width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.85s cubic-bezier(0.25,0.46,0.45,0.94)">
+
+          <!-- Card 0: Brief & Strategy -->
+          <div class="cyl-card" data-index="0" style="transform:rotateY(0deg) translateZ(320px)">
+            <div class="cyl-card-inner">
+              <div class="cyl-step-num">01</div>
+              <div class="cyl-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;color:var(--gold)">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <p class="cyl-day">Day 1</p>
+              <h3 class="cyl-title">Brief &amp; Strategy</h3>
+              <p class="cyl-body">Share your brand, objectives, and target audience. Our AI strategists map creative direction and the single message that stops scrolling.</p>
+            </div>
+          </div>
+
+          <!-- Card 1: Concept & Storyboard -->
+          <div class="cyl-card" data-index="1" style="transform:rotateY(90deg) translateZ(320px)">
+            <div class="cyl-card-inner">
+              <div class="cyl-step-num">02</div>
+              <div class="cyl-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;color:var(--electric-light)">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <p class="cyl-day">Day 1–2</p>
+              <h3 class="cyl-title">Concept &amp; Storyboard</h3>
+              <p class="cyl-body">Multiple concept directions with visual references and a clear narrative arc. You choose the direction — we own the execution entirely.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: AI Production -->
+          <div class="cyl-card" data-index="2" style="transform:rotateY(180deg) translateZ(320px)">
+            <div class="cyl-card-inner">
+              <div class="cyl-step-num">03</div>
+              <div class="cyl-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;color:var(--gold)">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <p class="cyl-day">Day 2–3</p>
+              <h3 class="cyl-title">AI Production</h3>
+              <p class="cyl-body">Cinematic visuals, voiceover, music, and motion graphics — produced simultaneously. What takes studios three weeks happens in hours.</p>
+            </div>
+          </div>
+
+          <!-- Card 3: Deliver & Iterate -->
+          <div class="cyl-card" data-index="3" style="transform:rotateY(270deg) translateZ(320px)">
+            <div class="cyl-card-inner">
+              <div class="cyl-step-num">04</div>
+              <div class="cyl-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;color:var(--electric-light)">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <p class="cyl-day">Day 3–4</p>
+              <h3 class="cyl-title">Deliver &amp; Iterate</h3>
+              <p class="cyl-body">Final delivery in all aspect ratios. Unlimited revisions. A/B variants ready to launch. Live in under 96 hours from your first message.</p>
+            </div>
+          </div>
+
+        </div><!-- /cyl-track -->
+      </div><!-- /cyl-scene -->
+
+      <!-- Step indicator + nav -->
+      <div class="flex items-center justify-center gap-6 mt-8 reveal">
+        <button id="cyl-prev" class="process-nav-btn" aria-label="Previous">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <div style="display:flex;gap:10px;align-items:center" id="cyl-dots">
+          <div class="cyl-dot active" data-step="0"></div>
+          <div class="cyl-dot" data-step="1"></div>
+          <div class="cyl-dot" data-step="2"></div>
+          <div class="cyl-dot" data-step="3"></div>
+        </div>
+        <button id="cyl-next" class="process-nav-btn" aria-label="Next">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="shimmer-line mx-6 md:mx-16"></div>
+
+  <!-- ─────────────────────────────────────────
+       05 — WE SERVE
+  ───────────────────────────────────────── -->
+  <section id="industries" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-14 reveal">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.05">
+          We work across <em class="grad-text" style="-webkit-text-fill-color:transparent">every vertical</em>
+        </h2>
+        <p style="margin-top:1rem;font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.35rem);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:linear-gradient(135deg,#FBBF24,#F59E0B,#D97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;filter:drop-shadow(0 0 8px rgba(245,158,11,0.35))">The Cinematic AI Studio for Ambitious Brands</p>
+      </div>
+
+      <div class="industry-grid reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;transition-delay:0.1s">
+
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=75&auto=format" alt="Luxury real estate" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Real Estate</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Real Estate &amp; Property</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Luxury developments · off-plan launches</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
+        </div>
+
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&q=75&auto=format" alt="Retail fashion" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">E-Commerce</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Retail &amp; E-commerce</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Product launches · seasonal campaigns</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
+        </div>
+
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=75&auto=format" alt="Finance and fintech" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Finance</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Finance &amp; Fintech</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Brand trust · product explainers</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
+        </div>
+
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=75&auto=format" alt="Hotel luxury pool" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Hospitality</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Hospitality &amp; Travel</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Hotel reels · destination marketing</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
+        </div>
+
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=75&auto=format" alt="Healthcare clinic" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Healthcare</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Healthcare &amp; Wellness</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">Patient trust · clinic branding</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
+        </div>
+
+        <div class="industry-card">
+          <img class="industry-card-img" src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=75&auto=format" alt="Luxury fashion editorial" loading="lazy" />
+          <div class="industry-card-overlay"></div>
+          <div class="industry-card-content">
+            <p style="font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-family:'Inter',sans-serif">Fashion</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff">Luxury &amp; Fashion</h3>
+            <p class="text-slate-400 text-sm mt-1" style="font-weight:300">High-end brand films · editorial video</p>
+          </div>
+          <span class="industry-card-arrow">→</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────
+       CONTACT / CTA
+  ───────────────────────────────────────── -->
+  <section id="contact" class="py-36 px-6 contact-bg relative overflow-hidden">
+    <!-- Atmospheric video bg -->
+    <video autoplay muted loop playsinline id="contact-vid-bg">
+      <source src="hero-reel.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Glow radials -->
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(245,158,11,0.09),transparent 70%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:0;right:10%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(14,165,233,0.05),transparent 70%);pointer-events:none"></div>
+
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+
+      <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,8vw,6.5rem);font-weight:700;letter-spacing:-0.02em;color:#fff;line-height:1.0;margin-bottom:1.5rem;transition-delay:0.05s">
+        Your Competitor<br/>Is Already Here.<br/><em class="grad-gold" style="-webkit-text-fill-color:transparent">Are You?</em>
+      </h2>
+
+      <p class="text-slate-400 mb-12 reveal" style="font-size:1.1rem;transition-delay:0.12s;font-weight:300;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7">
+        Share your brief on WhatsApp. We'll come back with a creative proposal that changes how you see advertising.
+      </p>
+
+      <div class="shimmer-line mb-10 reveal" style="transition-delay:0.15s"></div>
+
+      <div class="flex flex-col items-center gap-5 reveal" style="transition-delay:0.2s">
+        <a href="https://wa.me/971551383940" target="_blank" rel="noopener"
+           class="btn-gold magnetic justify-center w-full sm:w-auto" id="cta-wa-btn" style="font-size:1.1rem;padding:1.15rem 3rem">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M11.999 2C6.477 2 2 6.477 2 11.999c0 1.869.487 3.625 1.34 5.146L2 22l5.013-1.313A9.94 9.94 0 0011.999 22C17.523 22 22 17.523 22 11.999 22 6.477 17.523 2 11.999 2zm0 18c-1.7 0-3.285-.456-4.645-1.254l-.334-.198-3.464.908.924-3.376-.215-.347A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+          </svg>
+          Message on WhatsApp
+        </a>
+
+        <!-- Response badge -->
+        <div class="response-badge">
+          <span class="response-dot"></span>
+          We respond within 2 hours
+        </div>
+
+        <a href="mailto:studio@zachglobalfzc.com"
+           class="btn-ghost magnetic justify-center w-full sm:w-auto" style="font-size:1rem;padding:0.9rem 2.5rem">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          studio@zachglobalfzc.com
+        </a>
+      </div>
+
+      <div class="shimmer-line mt-12 reveal" style="transition-delay:0.3s"></div>
+    </div>
+  </section>
+
+  </main><!-- /main -->
+
+  <!-- ─────────────────────────────────────────
+       FOOTER
+  ───────────────────────────────────────── -->
+  <footer style="background:rgba(4,7,15,0.98);border-top:1px solid var(--border);position:relative;overflow:hidden" class="py-14 px-6">
+    <!-- ZG watermark -->
+    <div style="position:absolute;right:-2%;bottom:-15%;pointer-events:none;opacity:0.03;z-index:0">
+      <img src="logo1.jpg" alt="" style="width:380px;height:380px;object-fit:contain;filter:grayscale(1) invert(1)" />
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 mb-10">
+        <a href="#" class="flex items-center gap-2">
+          <img src="logo1.jpg" alt="ZG mark" class="h-8 w-auto rounded" />
+          <img src="logo2.jpg" alt="Zach Global Studio" class="h-7 w-auto" />
+        </a>
+        <nav class="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-3 text-sm">
+          <a href="https://www.instagram.com/zachglobalstudio/" target="_blank" rel="noopener" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">Our Work</a>
+          <a href="#process" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">The Process</a>
+          <a href="#industries" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">We Serve</a>
+          <a href="https://wa.me/971551383940" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">WhatsApp</a>
+          <a href="mailto:studio@zachglobalfzc.com" class="hover:text-white transition-colors" style="color:var(--gold-light);opacity:0.8;font-family:'Inter',sans-serif">Email</a>
+        </nav>
+      </div>
+
+      <div class="shimmer-line mb-8"></div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs" style="color:#475569;font-family:'Inter',sans-serif">
+        <p>© 2025 Zach Global Studio FZC · Dubai, UAE · <span style="color:rgba(245,158,11,0.6)">AI-Crafted Advertising</span></p>
+        <p style="color:var(--gold-light);opacity:0.5">studio@zachglobalfzc.com · +971 55 138 3940</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─────────────────────────────────────────
+       VIDEO MODAL
+  ───────────────────────────────────────── -->
+  <div id="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
+    <div id="modal-inner">
+      <button id="modal-close" onclick="closeModal()" aria-label="Close video">✕</button>
+      <video id="modal-vid" controls playsinline></video>
+      <iframe id="modal-iframe" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- WhatsApp float -->
+  <a href="https://wa.me/971551383940" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" id="wa-float"
+     style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:5000;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;transition:transform 0.2s;cursor:pointer"
+     onmouseenter="this.style.transform='scale(1.12)';this.style.animationPlayState='paused'"
+     onmouseleave="this.style.transform='scale(1)';this.style.animationPlayState='running'">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="white" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M11.999 2C6.477 2 2 6.477 2 11.999c0 1.869.487 3.625 1.34 5.146L2 22l5.013-1.313A9.94 9.94 0 0011.999 22C17.523 22 22 17.523 22 11.999 22 6.477 17.523 2 11.999 2zm0 18c-1.7 0-3.285-.456-4.645-1.254l-.334-.198-3.464.908.924-3.376-.215-.347A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+    </svg>
+  </a>
+
+  <!-- ─────────────────────────────────────────
+       JAVASCRIPT
+  ───────────────────────────────────────── -->
+  <script>
+  // ── Page intro ──
+  (function() {
+    const intro = document.getElementById('page-intro');
+    const logo = document.getElementById('intro-logo');
+    if (!intro) return;
+    setTimeout(() => { logo.style.opacity = '1'; }, 100);
+    setTimeout(() => { intro.classList.add('fade-out'); }, 900);
+    setTimeout(() => { intro.style.display = 'none'; }, 1650);
+  })();
+
+  // ── Film grain ──
+  (function() {
+    const el = document.getElementById('grain');
+    const c = document.createElement('canvas');
+    c.width = c.height = 200;
+    const ctx = c.getContext('2d');
+    const img = ctx.createImageData(200, 200);
+    for (let i = 0; i < img.data.length; i += 4) {
+      const v = Math.random() * 255 | 0;
+      img.data[i] = img.data[i+1] = img.data[i+2] = v;
+      img.data[i+3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+    el.style.backgroundImage = `url(${c.toDataURL()})`;
+  })();
+
+  // ── Custom cursor ──
+  (function() {
+    if (window.matchMedia('(hover: none)').matches) return;
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animCursor() {
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+      rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+    document.querySelectorAll('a,button,.reel-card,.edge-card,.stat-card,.process-nav-btn,.industry-card').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('expanded'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('expanded'));
+    });
+  })();
+
+  // ── Navbar scroll ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Mobile menu ──
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden');
+    iconOpen.classList.toggle('hidden', !open);
+    iconClose.classList.toggle('hidden', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    iconOpen.classList.remove('hidden');
+    iconClose.classList.add('hidden');
+  }));
+
+  // ── Hero parallax ──
+  const heroVid = document.getElementById('hero-vid');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    heroVid.style.transform = `translateY(${y * 0.25}px) scale(1.05)`;
+  }, { passive: true });
+
+  // ── Magnetic buttons ──
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width / 2) * 0.2;
+      const dy = (e.clientY - r.top - r.height / 2) * 0.2;
+      btn.style.transform = `translate(${dx}px,${dy}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  });
+
+  // ── CTA WhatsApp button pulse ──
+  (function() {
+    const btn = document.getElementById('cta-wa-btn');
+    if (!btn) return;
+    // Add pulse keyframes inline for the CTA button
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ctaWaPulse {
+        0%,100% { box-shadow: 0 4px 24px rgba(245,158,11,0.3), 0 0 0 0 rgba(245,158,11,0.4); }
+        50% { box-shadow: 0 4px 24px rgba(245,158,11,0.5), 0 0 0 12px rgba(245,158,11,0); }
+      }
+      #cta-wa-btn { animation: ctaWaPulse 2.8s ease-out infinite; }
+      #cta-wa-btn:hover { animation: none; }
+    `;
+    document.head.appendChild(style);
+  })();
+
+  // ── 3D Cylinder carousel ──
+  (function() {
+    const track = document.getElementById('cyl-track');
+    const scene = document.getElementById('cyl-scene');
+    const dots  = document.querySelectorAll('.cyl-dot');
+    const cards = document.querySelectorAll('.cyl-card');
+    const prevBtn = document.getElementById('cyl-prev');
+    const nextBtn = document.getElementById('cyl-next');
+    if (!track) return;
+    const total = 4;
+    let current = 0;
+    let autoTimer;
+
+    function goTo(idx) {
+      current = ((idx % total) + total) % total;
+      // Rotate so the active card faces front (rotateY = -90deg * step)
+      track.style.transform = `rotateY(${-90 * current}deg)`;
+      // Update dots
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      // Update card active state
+      cards.forEach((c, i) => c.classList.toggle('active', i === current));
+    }
+
+    function resetTimer() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1), 4500);
+    }
+
+    prevBtn.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+    dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.step); resetTimer(); }));
+
+    // Drag / swipe
+    let dragStartX = 0, dragging = false;
+    scene.addEventListener('mousedown', e => { dragStartX = e.clientX; dragging = true; scene.style.cursor = 'grabbing'; });
+    scene.addEventListener('mousemove', e => { if (!dragging) return; });
+    scene.addEventListener('mouseup', e => {
+      if (!dragging) return; dragging = false; scene.style.cursor = 'grab';
+      const dx = e.clientX - dragStartX;
+      if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); resetTimer(); }
+    });
+    scene.addEventListener('mouseleave', () => { dragging = false; scene.style.cursor = 'grab'; });
+    scene.addEventListener('touchstart', e => { dragStartX = e.touches[0].clientX; }, { passive: true });
+    scene.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - dragStartX;
+      if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); resetTimer(); }
+    });
+
+    goTo(0);
+    autoTimer = setInterval(() => goTo(current + 1), 4500);
+  })();
+
+  // ── IntersectionObserver for scroll reveals ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+  // ── Mask reveal for headings (curtain sweep) ──
+  (function() {
+    document.querySelectorAll('.mask-reveal-inner').forEach(el => {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      obs.observe(el);
+    });
+  })();
+
+  // ── Animated counters ──
+  function countUp(el) {
+    const target = parseInt(el.dataset.count);
+    const duration = 1800;
+    const start = performance.now();
+    function step(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(ease * target);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        countUp(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+  // ── Particles ──
+  (function() {
+    const canvas = document.getElementById('particles-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    const particles = [];
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    const colors = ['rgba(245,158,11,', 'rgba(14,165,233,', 'rgba(251,191,36,'];
+    for (let i = 0; i < 70; i++) {
+      particles.push({
+        x: Math.random() * 2000, y: Math.random() * 1200,
+        r: Math.random() * 1.4 + 0.3, vx: (Math.random() - 0.5) * 0.28,
+        vy: (Math.random() - 0.5) * 0.28 - 0.12,
+        c: colors[Math.floor(Math.random() * colors.length)],
+        o: Math.random() * 0.45 + 0.08
+      });
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x % W, p.y % H, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.c + p.o + ')';
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // ── Modal ──
+  function openModal(src, title, type, ytId, aspect) {
+    const modal = document.getElementById('video-modal');
+    const vid = document.getElementById('modal-vid');
+    const iframe = document.getElementById('modal-iframe');
+    vid.style.display = 'none'; iframe.style.display = 'none';
+    vid.pause && vid.pause(); vid.src = ''; iframe.src = '';
+
+    const ratioMap = { '16:9': '56.25%', '9:16': '177.78%', '21:9': '42.86%', '4:3': '75%' };
+    const pt = ratioMap[aspect] || '56.25%';
+    const inner = document.getElementById('modal-inner');
+    // For portrait videos, constrain width so the video fits in viewport height
+    if (aspect === '9:16') {
+      inner.style.maxWidth = Math.min(380, window.innerHeight * 0.85 * (9/16)) + 'px';
+    } else {
+      inner.style.maxWidth = '1100px';
+    }
+    inner.style.paddingBottom = pt;
+    inner.style.position = 'relative';
+    inner.style.height = '0';
+
+    if (type === 'file') {
+      vid.style.display = 'block';
+      vid.src = src;
+      vid.load();
+      vid.play().catch(() => {});
+    } else if (type === 'yt') {
+      iframe.style.display = 'block';
+      iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
+    } else if (type === 'gdrive') {
+      iframe.style.display = 'block';
+      iframe.src = `https://drive.google.com/file/d/${ytId}/preview`;
+    }
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('video-modal');
+    const vid = document.getElementById('modal-vid');
+    const iframe = document.getElementById('modal-iframe');
+    modal.classList.remove('open');
+    vid.pause && vid.pause(); vid.src = '';
+    iframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+
+  // ── Hero sound toggle ──
+  function heroToggleSound() {
+    const vid = document.getElementById('hero-vid');
+    const icon = document.getElementById('hero-sound-icon');
+    const label = document.getElementById('hero-sound-label');
+    if (!vid) return;
+    vid.muted = !vid.muted;
+    if (!vid.muted) {
+      vid.volume = 0.7;
+      label.textContent = 'Sound on';
+      label.style.color = '#F59E0B';
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M12 6v12m-3.536-9.536a5 5 0 000 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>';
+    } else {
+      label.textContent = 'Click for sound';
+      label.style.color = '#94A3B8';
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>';
+    }
+  }
+
+  document.getElementById('video-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
+
 </body>
 </html>
