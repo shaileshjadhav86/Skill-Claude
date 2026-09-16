@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Ad Techniques — Zach Global Studio</title>
+  <meta name="description" content="The cinematic AI techniques we use to craft high-converting video ads for luxury brands. Shot breakdowns, examples, and the prompts behind each technique." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #F59E0B;
+      --gold-light: #FBBF24;
+      --electric: #0EA5E9;
+      --navy: #04070F;
+      --navy-mid: #070D1A;
+      --border: rgba(255,255,255,0.07);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: #CBD5E1;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4,h5 { font-family: 'Cormorant Garamond', serif; line-height: 1.1; }
+
+    /* Navbar */
+    .nav-link {
+      position: relative; font-size: 0.8rem; color: #94A3B8; letter-spacing: 0.08em;
+      font-family: 'Inter', sans-serif; font-weight: 500; transition: color 0.2s;
+      text-decoration: none;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px;
+      background: var(--gold); transition: width 0.22s ease;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: var(--gold-light); }
+    .nav-link.active::after { width: 100%; }
+
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #000; font-weight: 700; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.75rem;
+      padding: 0.6rem 1.4rem; border-radius: 6px; text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* Hero */
+    .page-hero {
+      padding: 160px 0 80px;
+      text-align: center;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,158,11,0.08) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Shimmer divider */
+    .shimmer-line {
+      height: 1px; width: 100%;
+      background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+      opacity: 0.4;
+    }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+    /* Sticky sidebar nav */
+    .sidebar-nav {
+      position: sticky; top: 88px;
+    }
+    .sidebar-link {
+      display: block; padding: 0.5rem 0.75rem; border-left: 2px solid transparent;
+      color: #64748B; font-size: 0.78rem; letter-spacing: 0.05em;
+      font-family: 'Inter', sans-serif; text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .sidebar-link:hover { color: #CBD5E1; border-left-color: rgba(245,158,11,0.4); }
+    .sidebar-link.active { color: var(--gold-light); border-left-color: var(--gold); }
+
+    /* Technique card */
+    .technique-section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .technique-section:last-child { border-bottom: none; }
+
+    .tag {
+      display: inline-block; padding: 0.25rem 0.75rem;
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 999px; font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gold-light);
+      font-family: 'Inter', sans-serif; font-weight: 500;
+      background: rgba(245,158,11,0.06);
+    }
+
+    .video-card {
+      position: relative; border-radius: 12px; overflow: hidden;
+      background: #000;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+    .video-card video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* Prompt box */
+    .prompt-box {
+      background: rgba(14,165,233,0.05);
+      border: 1px solid rgba(14,165,233,0.2);
+      border-radius: 10px; padding: 1.25rem 1.5rem;
+    }
+    .prompt-box pre {
+      font-family: 'Inter', monospace; font-size: 0.78rem;
+      color: #94A3B8; white-space: pre-wrap; line-height: 1.7;
+    }
+    .copy-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.72rem; color: var(--electric); letter-spacing: 0.05em;
+      background: none; border: 1px solid rgba(14,165,233,0.3);
+      border-radius: 5px; padding: 0.3rem 0.7rem; cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .copy-btn:hover { background: rgba(14,165,233,0.1); }
+
+    /* Effect pills */
+    .effect-pill {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 6px; padding: 0.35rem 0.75rem;
+      font-size: 0.73rem; color: #94A3B8; font-family: 'Inter', sans-serif;
+    }
+    .effect-pill span { color: var(--gold-light); font-weight: 600; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Mobile menu */
+    #mob-menu { display: none; }
+    #mob-menu.open { display: flex; }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(4,7,15,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 1.5rem;">
+  <div style="max-width:1200px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="display:flex;align-items:center;gap:0.6rem;text-decoration:none;">
+      <img src="logo1.jpg" alt="ZG" style="width:34px;height:34px;border-radius:6px;object-fit:cover;" />
+      <img src="logo2.jpg" alt="Zach Global Studio" style="height:22px;width:auto;object-fit:contain;" />
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="https://www.instagram.com/zachglobalstudio/" target="_blank" rel="noopener" class="nav-link">Our Work</a>
+      <a href="/#process" class="nav-link">The Process</a>
+      <a href="/#industries" class="nav-link">We Serve</a>
+      <a href="techniques.html" class="nav-link active">AI Techniques</a>
+      <a href="https://wa.me/971551383940" target="_blank" rel="noopener" class="btn-gold" style="font-size:0.8rem;padding:0.55rem 1.35rem;">Start Your Campaign</a>
+    </div>
+    <button id="mob-toggle" class="md:hidden text-white p-2" onclick="document.getElementById('mob-menu').classList.toggle('open')" style="background:none;border:none;cursor:pointer;">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mob-menu" class="md:hidden flex-col gap-4 pb-4 px-2">
+    <a href="https://www.instagram.com/zachglobalstudio/" target="_blank" rel="noopener" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide block">Our Work</a>
+    <a href="/#process" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide block">The Process</a>
+    <a href="/#industries" class="text-slate-300 hover:text-white py-2 text-sm tracking-wide block">We Serve</a>
+    <a href="techniques.html" class="text-white py-2 text-sm tracking-wide block" style="color:var(--gold-light)">AI Techniques</a>
+    <a href="https://wa.me/971551383940" target="_blank" rel="noopener" class="btn-gold text-center w-full justify-center mt-2">Start Your Campaign</a>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div style="max-width:760px;margin:0 auto;padding:0 1.5rem;">
+    <div class="reveal">
+      <span class="tag">Craft &amp; Methodology</span>
+      <h1 style="font-size:clamp(2.8rem,6vw,5rem);font-weight:700;color:#fff;margin:1.25rem 0 1rem;letter-spacing:-0.03em;">
+        AI Ad <span style="background:linear-gradient(135deg,#F59E0B,#FBBF24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Techniques</span>
+      </h1>
+      <p style="font-size:1.1rem;color:#94A3B8;max-width:560px;margin:0 auto;font-family:'Inter',sans-serif;line-height:1.7;">
+        The cinematic methods we use to turn AI tools into high-converting video ads — each technique broken down with real examples and the prompts behind them.
+      </p>
+    </div>
+    <div class="shimmer-line" style="margin-top:3rem;"></div>
+  </div>
+</section>
+
+<!-- Main layout -->
+<div style="max-width:1200px;margin:0 auto;padding:60px 1.5rem 120px;display:grid;grid-template-columns:200px 1fr;gap:60px;align-items:start;">
+
+  <!-- Sidebar -->
+  <aside class="hidden md:block">
+    <div class="sidebar-nav">
+      <p style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:#475569;font-family:'Inter',sans-serif;margin-bottom:1rem;">Techniques</p>
+      <a href="#hero-reveal" class="sidebar-link">01 — Hero Reveal</a>
+      <a href="#slow-motion" class="sidebar-link">02 — Slow Motion</a>
+      <a href="#aerial-establish" class="sidebar-link">03 — Aerial Establish</a>
+      <a href="#emotion-cut" class="sidebar-link">04 — Emotion Cut</a>
+      <a href="#product-float" class="sidebar-link">05 — Product Float</a>
+      <a href="#beat-sync" class="sidebar-link">06 — Beat Sync Edit</a>
+      <a href="#talent-swap" class="sidebar-link">07 — AI Talent Swap</a>
+      <a href="#loop-broll" class="sidebar-link">08 — Luxury B-Roll Loop</a>
+    </div>
+  </aside>
+
+  <!-- Techniques -->
+  <main>
+
+    <!-- 01 Hero Reveal -->
+    <section id="hero-reveal" class="technique-section reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:0.72rem;color:#475569;font-family:'Inter',sans-serif;letter-spacing:0.1em;">01</span>
+        <span class="tag">Cinematography</span>
+      </div>
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:#fff;margin-bottom:0.75rem;">Cinematic Product Reveal</h2>
+      <p style="color:#94A3B8;margin-bottom:2rem;max-width:580px;font-family:'Inter',sans-serif;">
+        A controlled slow push-in with dramatic lighting — the camera moves toward the product as light blooms across it, creating an instant premium feel. This technique drives a viewer's eye to what matters: the object, the detail, the desire.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <span class="effect-pill">Best for <span>Luxury / Beauty</span></span>
+        <span class="effect-pill">Avg. watch time boost <span>+34%</span></span>
+        <span class="effect-pill">Mood <span>Aspirational</span></span>
+      </div>
+      <div class="video-card" style="aspect-ratio:9/16;max-width:320px;margin-bottom:2rem;">
+        <video autoplay muted loop playsinline>
+          <source src="https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/Vitaflow.mp4" type="video/mp4"/>
+        </video>
+      </div>
+      <div class="prompt-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+          <span style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#475569;font-family:'Inter',sans-serif;">AI Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <pre>Cinematic product reveal, luxury perfume bottle on black marble surface, golden hour rim lighting, slow camera push-in 0.3x speed, ultra-shallow depth of field, lens flare on glass, 4K, ARRI Alexa look, no text</pre>
+      </div>
+    </section>
+
+    <!-- 02 Slow Motion -->
+    <section id="slow-motion" class="technique-section reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:0.72rem;color:#475569;font-family:'Inter',sans-serif;letter-spacing:0.1em;">02</span>
+        <span class="tag">Motion</span>
+      </div>
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:#fff;margin-bottom:0.75rem;">Ultra Slow Motion</h2>
+      <p style="color:#94A3B8;margin-bottom:2rem;max-width:580px;font-family:'Inter',sans-serif;">
+        Rendering motion at 4–8× slower than real time transforms ordinary action into something visceral. Liquid splashes, fabric movement, hair in wind — details invisible at normal speed become the entire story. Used in luxury FMCG and beauty ads to signal craftsmanship.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <span class="effect-pill">Best for <span>FMCG / Beauty</span></span>
+        <span class="effect-pill">Frame rate <span>120–240fps</span></span>
+        <span class="effect-pill">Mood <span>Sensory</span></span>
+      </div>
+      <div class="video-card" style="aspect-ratio:9/16;max-width:320px;margin-bottom:2rem;">
+        <video autoplay muted loop playsinline>
+          <source src="https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/ZachNoir.mp4" type="video/mp4"/>
+        </video>
+      </div>
+      <div class="prompt-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+          <span style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#475569;font-family:'Inter',sans-serif;">AI Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <pre>Ultra slow motion 240fps, woman's silk dress billowing in Dubai desert wind at golden hour, warm amber tones, back-lit rim light, cinematic grain, RED camera aesthetic, slow drift left to right</pre>
+      </div>
+    </section>
+
+    <!-- 03 Aerial Establish -->
+    <section id="aerial-establish" class="technique-section reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:0.72rem;color:#475569;font-family:'Inter',sans-serif;letter-spacing:0.1em;">03</span>
+        <span class="tag">Establishing Shot</span>
+      </div>
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:#fff;margin-bottom:0.75rem;">Dubai Aerial Establish</h2>
+      <p style="color:#94A3B8;margin-bottom:2rem;max-width:580px;font-family:'Inter',sans-serif;">
+        Opening with a sweeping aerial over Dubai skyline or desert instantly signals scale, ambition, and geography. This frames the brand as world-class before a single product is shown. It works as both a standalone brand moment and a bridge into product shots.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <span class="effect-pill">Best for <span>Real Estate / Events</span></span>
+        <span class="effect-pill">Duration <span>3–5 sec</span></span>
+        <span class="effect-pill">Mood <span>Monumental</span></span>
+      </div>
+      <div class="video-card" style="aspect-ratio:16/9;margin-bottom:2rem;">
+        <video autoplay muted loop playsinline style="aspect-ratio:16/9;">
+          <source src="https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/Stillwater.mp4" type="video/mp4"/>
+        </video>
+      </div>
+      <div class="prompt-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+          <span style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#475569;font-family:'Inter',sans-serif;">AI Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <pre>Aerial drone shot, Dubai skyline at blue hour, Burj Khalifa and Marina towers reflecting in still water, slow forward push 400m altitude, teal and orange grade, anamorphic lens flare, cinematic 2.39:1 aspect ratio</pre>
+      </div>
+    </section>
+
+    <!-- 04 Emotion Cut -->
+    <section id="emotion-cut" class="technique-section reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:0.72rem;color:#475569;font-family:'Inter',sans-serif;letter-spacing:0.1em;">04</span>
+        <span class="tag">Editing</span>
+      </div>
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:#fff;margin-bottom:0.75rem;">The Emotion Cut</h2>
+      <p style="color:#94A3B8;margin-bottom:2rem;max-width:580px;font-family:'Inter',sans-serif;">
+        Cutting on a micro-expression — a smile, a glance, a blink — at the exact moment a piece of music swells. The viewer doesn't notice the edit; they feel the emotion. This is the most underused technique in AI advertising, and the most powerful for conversion.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <span class="effect-pill">Best for <span>Brand Storytelling</span></span>
+        <span class="effect-pill">Cut timing <span>On the beat</span></span>
+        <span class="effect-pill">Mood <span>Human / Warm</span></span>
+      </div>
+      <div class="video-card" style="aspect-ratio:9/16;max-width:320px;margin-bottom:2rem;">
+        <video autoplay muted loop playsinline>
+          <source src="https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/Brandpositioning.mov" type="video/mp4"/>
+        </video>
+      </div>
+      <div class="prompt-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+          <span style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#475569;font-family:'Inter',sans-serif;">AI Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <pre>Close-up portrait, South Asian woman early 30s, soft smile building slowly, warm studio key light, shallow focus, shot on Sony FX3, natural skin tones, no makeup artificiality, genuine emotion, 4K</pre>
+      </div>
+    </section>
+
+    <!-- 05 Product Float -->
+    <section id="product-float" class="technique-section reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:0.72rem;color:#475569;font-family:'Inter',sans-serif;letter-spacing:0.1em;">05</span>
+        <span class="tag">AI Generation</span>
+      </div>
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:#fff;margin-bottom:0.75rem;">Product Float</h2>
+      <p style="color:#94A3B8;margin-bottom:2rem;max-width:580px;font-family:'Inter',sans-serif;">
+        The product appears suspended in mid-air, orbiting slowly against a dark infinite background. AI generation makes this trivially achievable for any object. It communicates a detachment from the mundane — this product exists on a different plane.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <span class="effect-pill">Best for <span>E-commerce / Tech</span></span>
+        <span class="effect-pill">Rotation <span>0.3 rpm</span></span>
+        <span class="effect-pill">Mood <span>Futuristic</span></span>
+      </div>
+      <div class="video-card" style="aspect-ratio:9/16;max-width:320px;margin-bottom:2rem;">
+        <video autoplay muted loop playsinline>
+          <source src="reel_portrait_1.mp4" type="video/mp4"/>
+        </video>
+      </div>
+      <div class="prompt-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+          <span style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#475569;font-family:'Inter',sans-serif;">AI Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <pre>Luxury skincare serum bottle levitating and slowly rotating in infinite black void, gold particle dust orbiting it, soft specular highlight on glass, cinematic product photography, 8K, no background, no shadows below</pre>
+      </div>
+    </section>
+
+    <!-- 06 Beat Sync -->
+    <section id="beat-sync" class="technique-section reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:0.72rem;color:#475569;font-family:'Inter',sans-serif;letter-spacing:0.1em;">06</span>
+        <span class="tag">Editing</span>
+      </div>
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:#fff;margin-bottom:0.75rem;">Beat Sync Edit</h2>
+      <p style="color:#94A3B8;margin-bottom:2rem;max-width:580px;font-family:'Inter',sans-serif;">
+        Every cut lands exactly on a musical beat. The viewer experiences the ad as a music video — not an advertisement. Dopamine fires. They watch to the end. Beat sync is one of the highest-retention editing techniques in social media ads, especially on Instagram Reels and TikTok.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <span class="effect-pill">Best for <span>Social / Reels</span></span>
+        <span class="effect-pill">Avg. completion rate <span>+61%</span></span>
+        <span class="effect-pill">Mood <span>Energetic</span></span>
+      </div>
+      <div class="video-card" style="aspect-ratio:9/16;max-width:320px;margin-bottom:2rem;">
+        <video autoplay muted loop playsinline>
+          <source src="reel_portrait_2.mp4" type="video/mp4"/>
+        </video>
+      </div>
+      <div class="prompt-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+          <span style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#475569;font-family:'Inter',sans-serif;">AI Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <pre>Fast-cut montage sequence, luxury lifestyle brand, 12 shots across Dubai city + product + model, each shot 0.5 seconds, high contrast moody grading, motion blur on transitions, vertical 9:16 format for Reels</pre>
+      </div>
+    </section>
+
+    <!-- 07 AI Talent Swap -->
+    <section id="talent-swap" class="technique-section reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:0.72rem;color:#475569;font-family:'Inter',sans-serif;letter-spacing:0.1em;">07</span>
+        <span class="tag">AI Generation</span>
+      </div>
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:#fff;margin-bottom:0.75rem;">AI Talent Localisation</h2>
+      <p style="color:#94A3B8;margin-bottom:2rem;max-width:580px;font-family:'Inter',sans-serif;">
+        The same ad, adapted for five different markets — with a different face, language, and cultural visual cue for each. What once required five separate shoots now happens in a single AI pipeline. This is how Zach Global Studio delivers global scale at Dubai speed.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <span class="effect-pill">Best for <span>Multi-market brands</span></span>
+        <span class="effect-pill">Cost saving <span>vs traditional: ~80%</span></span>
+        <span class="effect-pill">Mood <span>Targeted</span></span>
+      </div>
+      <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:2rem;">
+        <p style="font-size:0.82rem;color:#94A3B8;font-family:'Inter',sans-serif;line-height:1.7;">
+          <span style="color:var(--gold-light);font-weight:600;">How it works:</span> We shoot one hero video with a neutral model. AI face-swap and voice synthesis then adapts the talent for UAE, KSA, UK, and US markets simultaneously — with culturally accurate styling per region.
+        </p>
+      </div>
+      <div class="prompt-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+          <span style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#475569;font-family:'Inter',sans-serif;">AI Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <pre>Portrait video of a [South Asian / Arab / European] woman, mid 30s, professional but warm, speaking directly to camera in [Arabic / English / Hindi], luxury apartment background, soft key light, photorealistic, 4K</pre>
+      </div>
+    </section>
+
+    <!-- 08 Luxury B-Roll Loop -->
+    <section id="loop-broll" class="technique-section reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:0.72rem;color:#475569;font-family:'Inter',sans-serif;letter-spacing:0.1em;">08</span>
+        <span class="tag">Cinematography</span>
+      </div>
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:#fff;margin-bottom:0.75rem;">Luxury B-Roll Loop</h2>
+      <p style="color:#94A3B8;margin-bottom:2rem;max-width:580px;font-family:'Inter',sans-serif;">
+        A seamlessly looping 3–6 second clip of a tactile, premium detail — a wristwatch ticking, champagne bubbles rising, leather texture under fingertips. Used as filler between messaging moments, it keeps the viewer inside a sensory world. The loop itself becomes hypnotic.
+      </p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <span class="effect-pill">Best for <span>Luxury / Lifestyle</span></span>
+        <span class="effect-pill">Loop duration <span>3–6 sec</span></span>
+        <span class="effect-pill">Mood <span>Tactile / Immersive</span></span>
+      </div>
+      <div class="video-card" style="aspect-ratio:9/16;max-width:320px;margin-bottom:2rem;">
+        <video autoplay muted loop playsinline>
+          <source src="https://pub-d6e5600735a24ae18d106d6c6cd1df95.r2.dev/Moko.mov" type="video/mp4"/>
+        </video>
+      </div>
+      <div class="prompt-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+          <span style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#475569;font-family:'Inter',sans-serif;">AI Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <pre>Macro close-up, hand running slowly across embossed leather surface, moody side light, extreme shallow depth of field, warm amber cast, perfectly seamless 4-second loop, no camera movement, cinematic grain</pre>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="reveal" style="margin-top:60px;padding:60px 40px;background:linear-gradient(135deg,rgba(245,158,11,0.07),rgba(14,165,233,0.05));border:1px solid rgba(245,158,11,0.15);border-radius:16px;text-align:center;">
+      <h2 style="font-size:clamp(1.8rem,3vw,2.6rem);color:#fff;margin-bottom:1rem;">Want these techniques in your next ad?</h2>
+      <p style="color:#94A3B8;margin-bottom:2rem;font-family:'Inter',sans-serif;">We apply all of these — and more — in every campaign we deliver. 48-hour turnaround. Dubai-based. Global reach.</p>
+      <a href="https://wa.me/971551383940" target="_blank" rel="noopener" class="btn-gold" style="font-size:0.9rem;padding:0.8rem 2rem;">
+        Start Your Campaign on WhatsApp
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer style="border-top:1px solid var(--border);padding:48px 1.5rem;background:var(--navy-mid);">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;">
+    <a href="/" style="display:flex;align-items:center;gap:0.6rem;text-decoration:none;">
+      <img src="logo1.jpg" alt="ZG" style="width:34px;height:34px;border-radius:6px;object-fit:cover;"/>
+      <img src="logo2.jpg" alt="Zach Global Studio" style="height:20px;width:auto;object-fit:contain;"/>
+    </a>
+    <nav style="display:flex;flex-wrap:wrap;gap:1.5rem;font-size:0.82rem;">
+      <a href="https://www.instagram.com/zachglobalstudio/" target="_blank" rel="noopener" style="color:var(--gold-light);opacity:0.8;text-decoration:none;font-family:'Inter',sans-serif;">Our Work</a>
+      <a href="techniques.html" style="color:var(--gold-light);opacity:0.8;text-decoration:none;font-family:'Inter',sans-serif;">AI Techniques</a>
+      <a href="https://wa.me/971551383940" style="color:var(--gold-light);opacity:0.8;text-decoration:none;font-family:'Inter',sans-serif;">WhatsApp</a>
+      <a href="mailto:studio@zachglobalfzc.com" style="color:var(--gold-light);opacity:0.8;text-decoration:none;font-family:'Inter',sans-serif;">Email</a>
+    </nav>
+    <p style="font-size:0.75rem;color:#334155;font-family:'Inter',sans-serif;">© 2025 Zach Global FZC. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => io.observe(r));
+
+  // Active sidebar link on scroll
+  const sections = document.querySelectorAll('.technique-section[id]');
+  const sideLinks = document.querySelectorAll('.sidebar-link');
+  const scrollSpy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        sideLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sidebar-link[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => scrollSpy.observe(s));
+
+  // Copy prompt
+  function copyPrompt(btn) {
+    const pre = btn.closest('.prompt-box').querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
