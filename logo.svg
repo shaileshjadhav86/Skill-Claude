@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244 56" fill="none">
+  <defs>
+    <!-- Main gold gradient (top-left bright → bottom-right dark) -->
+    <linearGradient id="gd" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"  stop-color="#FFE168"/>
+      <stop offset="30%" stop-color="#D4A020"/>
+      <stop offset="70%" stop-color="#B8860B"/>
+      <stop offset="100%" stop-color="#7A5000"/>
+    </linearGradient>
+    <!-- Slightly lighter gradient for Z (matches logo where Z is brighter) -->
+    <linearGradient id="gz" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"  stop-color="#FFE97A"/>
+      <stop offset="40%" stop-color="#D4A020"/>
+      <stop offset="100%" stop-color="#8B6010"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ══ Z LETTERFORM ══ -->
+  <!-- Top horizontal bar -->
+  <polygon points="2,6  40,6  40,15  2,15" fill="url(#gz)"/>
+  <!-- Speed-line slash extending top-right (the tail on the real logo) -->
+  <polygon points="34,3  50,3  50,7  34,7" fill="url(#gz)" opacity="0.55"/>
+  <!-- Diagonal stroke (top-right → bottom-left) -->
+  <polygon points="34,15  40,15  8,45  2,45" fill="url(#gz)"/>
+  <!-- Bottom horizontal bar -->
+  <polygon points="2,45  40,45  40,54  2,54" fill="url(#gz)"/>
+
+  <!-- ══ G LETTERFORM ══ -->
+  <!--
+    Center (cx,cy) = (65, 30)
+    Outer radius  = 22   →  outer top-right (45°): (80.6, 14.4)   bottom-right (315°): (80.6, 45.6)
+    Inner radius  = 13   →  inner top-right (45°): (74.2, 20.8)   bottom-right (315°): (74.2, 39.2)
+    C-shape opening faces right.
+    Outer arc: CCW large arc (sweep=0, large=1)
+    Inner arc: CW  large arc (sweep=1, large=1) — traced in reverse to close the ring
+  -->
+  <path d="
+    M 80.6,14.4
+    A 22,22 0 1,0 80.6,45.6
+    L 74.2,39.2
+    A 13,13 0 1,1 74.2,20.8
+    Z
+  " fill="url(#gd)"/>
+
+  <!-- G crossbar — fills the inner hollow at mid-height to complete the G form -->
+  <rect x="63" y="24" width="18" height="12" rx="1" fill="url(#gd)"/>
+
+  <!-- ══ VERTICAL SEPARATOR ══ -->
+  <rect x="100" y="10" width="1" height="36" rx="0.5" fill="#C9921A" opacity="0.35"/>
+
+  <!-- ══ BRAND NAME ══ -->
+  <text
+    x="110" y="26"
+    font-family="'Arial','Helvetica',sans-serif"
+    font-weight="700"
+    font-size="13"
+    fill="#D4A020"
+    letter-spacing="2.5">ZACH GLOBAL</text>
+
+  <!-- Decorative lines flanking STUDIO -->
+  <line x1="110" y1="37" x2="131" y2="37" stroke="#B8860B" stroke-width="0.9" opacity="0.55"/>
+  <line x1="183" y1="37" x2="204" y2="37" stroke="#B8860B" stroke-width="0.9" opacity="0.55"/>
+
+  <!-- STUDIO label -->
+  <text
+    x="157" y="42"
+    font-family="'Arial','Helvetica',sans-serif"
+    font-weight="400"
+    font-size="9.5"
+    fill="#C9921A"
+    letter-spacing="4"
+    text-anchor="middle">STUDIO</text>
+</svg>
